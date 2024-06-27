@@ -1,0 +1,45 @@
+main {
+    // fix main
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; // Full viewport height to center vertically
+    background-image: url("../../assets/background-image-landing-page.jpg");
+    background-size: cover;
+    background-position: center;
+
+    .landing-title {
+        color: #fff;
+        font-weight: 520;
+        font-size: 2.7rem;
+    }
+  
+    .landing-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      .start-button {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        background-color: orange; // Example background color for the button
+        color: #fff; // Example text color for the button
+        border: none; // Remove default border
+        border-radius: 4px; // Rounded corners
+        cursor: pointer; // Change cursor to pointer on hover
+        transition: background-color 0.3s ease; // Smooth background color transition
+  
+        &:hover {
+          background-color: orangered; // Darker background color on hover
+        }
+      }
+    }
+  }
+  

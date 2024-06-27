@@ -1,0 +1,45 @@
+main {
+    // fix main
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../assets/login-page-background.jpg");
+    background-size: cover;
+    background-position: center;
+
+    .login-form-login-page {
+        width: 300px; /* Fixed width for the form */
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for better visual */
+        border-radius: 8px; /* Optional: Round corners */
+        background-color: #fff; /* Optional: Add background color */
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .login-title {
+            margin: 0;
+            font-size: 1.5em; /* Adjust as needed */
+            padding-bottom: 30px;
+            color: #E5788F; /* Use rose palette color */
+            font-family: 'Arial', sans-serif; /* Change font family if desired */
+            font-weight: bold; /* Make the text bold */
+            text-align: center; /* Center the text */
+        }
+
+        .input-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

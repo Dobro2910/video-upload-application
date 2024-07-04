@@ -14,7 +14,7 @@ export const AuthGuard: CanActivateFn = (route, state) => {
   } else {
     // Redirect to the login page if the token is missing or expired
     // The `queryParams` object contains a `returnUrl` key which is set to the URL the user attempted to access
-    router.navigate(['login'], { queryParams: { returnUrl: state.url } });
+    router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     return false; // Deny access
   }
 };

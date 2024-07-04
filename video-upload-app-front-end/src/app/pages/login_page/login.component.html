@@ -5,15 +5,18 @@
         <div class="input-form">
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Email" name="email">
+                <input matInput #email placeholder="Email" name="email">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="Password" name="password">
+                <input matInput #password placeholder="Password" name="password">
             </mat-form-field>
         </div>
 
         <p class="create-new-account">Create new account?</p>
-        <button mat-stroked-button>Login</button>
+        <button mat-stroked-button (click)="onLogin(email.value, password.value)">Login</button>
+        <div *ngIf="errorMessage$ | async as errorMessage">
+            <p>{{ errorMessage }}</p>
+        </div>
     </div>
 </main>

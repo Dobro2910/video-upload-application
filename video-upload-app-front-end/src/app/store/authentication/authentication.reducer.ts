@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import * as AuthActions from './authentication.action';
 import { UserLoginCredential, User } from '../model/user.model';
 
@@ -36,3 +36,5 @@ export const authReducer = createReducer(
 //     error: null // Clear any previous errors
 //   }))
 );
+
+export const authReducerFeatureKey = 'auth';

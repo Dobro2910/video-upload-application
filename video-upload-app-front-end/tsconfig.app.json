@@ -4,6 +4,10 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
+    "paths": {
+      "@angular/*": ["../node_modules/@angular/*"],
+      "@ngrx/*": ["../node_modules/@ngrx/*"]
+    },
     "types": [
       "node"
     ]

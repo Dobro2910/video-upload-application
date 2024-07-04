@@ -5,16 +5,9 @@ import { of } from 'rxjs';
 import { AuthenticationService } from '../../service/authentication.service';
 import * as AuthActions from '../authentication/authentication.action';
 import { tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
-
-  constructor(
-    private actions$: Actions,
-    private authService: AuthenticationService,
-    private router: Router
-  ) {}
 
   loginUser$ = createEffect(() =>
     this.actions$.pipe(
@@ -47,13 +40,18 @@ export class AuthEffects {
   loginFailure$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.userLoginFailure),
-      tap(() => {
+      tap(({ error }) => {
         // Optionally show error message or handle UI state
-        // Here, you might want to store the error in state or display a message
+        console.error('Login failed:', error); // You might want to display this in the UI
       })
     ),
     { dispatch: false } // We don't need to dispatch any new actions here
   );
+
+  constructor(
+    private actions$: Actions,
+    private authService: AuthenticationService,
+  ) {}
 
   // Add other effects if needed, such as registration, logout, etc.
 }

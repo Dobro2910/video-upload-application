@@ -17,6 +17,14 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/login_page/login.module').then((m) => m.LoginModule),
       },
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./pages/home_page/home.module').then((m) => m.HomeModule),
+      },
+      { 
+        path: '**', redirectTo: '' 
+      } // Default redirect to login if no route matches
     ],
   },
 ];

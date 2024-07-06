@@ -4,29 +4,28 @@ import { UserLoginCredential, User } from '../model/user.model';
 
 // Define the shape of the authentication state
 export interface AuthState {
-  loggedIn: boolean; // Indicates if the user is logged in
-  error: string | null; // Stores any authentication-related error message or null if no error
+  loggedIn: boolean;
+  error: string | null;
 }
 
 // Initial state of the authentication feature
 const initialState: AuthState = {
-  loggedIn: false, // Initial state: user is not logged in
-  error: null // Initial state: no errors
+  loggedIn: false,
+  error: null
 };
 
 // Reducer function using createReducer from @ngrx/store
 export const authReducer = createReducer(
-  initialState, // Initial state defined above
-  // Handling the userLogin action
+  initialState,
   on(AuthActions.userLoginSuccess, (state) => ({
     ...state, // Spread operator to create a shallow copy of current state
-    loggedIn: true, // User is now logged in
-    error: null // Clear any previous errors
+    loggedIn: true,
+    error: null
   })),
   on(AuthActions.userLoginFailure, (state, { error }) => ({
     ...state, // Spread operator to create a shallow copy of current state
-    loggedIn: false, // User is now logged in
-    error: error // Clear any previous errors
+    loggedIn: false,
+    error: error
   })),
   
 //   // Handling the registerNewUser action
@@ -36,5 +35,9 @@ export const authReducer = createReducer(
 //     error: null // Clear any previous errors
 //   }))
 );
+
+// export function reducer(state: AuthState | undefined, action: Action) {
+//   return authReducer(state, action);
+// }
 
 export const authReducerFeatureKey = 'auth';

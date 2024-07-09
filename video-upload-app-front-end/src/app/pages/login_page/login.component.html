@@ -1,22 +1,51 @@
-<main>
+<!-- <main>
     <div class="login-form-login-page">
         <p class="login-title">Video Upload Application</p>
 
         <div class="input-form">
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput #email placeholder="Email" name="email">
+                <input matInput #emailInput name="email">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput #password placeholder="Password" name="password">
+                <input matInput #passwordInput name="password">
             </mat-form-field>
         </div>
 
-        <p class="create-new-account">Create new account?</p>
-        <button mat-stroked-button (click)="onLogin(email.value, password.value)">Login</button>
-        <div *ngIf="errorMessage$ | async as errorMessage">
+        <p class="create-new-account" [routerLink]="['/register']">Create new account?</p>
+        <button mat-stroked-button (click)="onLogin(emailInput.value, passwordInput.value)">Login</button>
+
+        <div *ngIf="errorMessage$ | async as errorMessage" class="error-message">
             <p>{{ errorMessage }}</p>
         </div>
     </div>
-</main>
+</main> -->
+
+<main>
+    <div class="login-form-login-page">
+      <p class="login-title">Video Upload Application</p>
+  
+      <div class="input-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput #emailInput name="email">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput #passwordInput name="password" type="password">
+        </mat-form-field>
+      </div>
+  
+      <button mat-flat-button color="primary" (click)="onLogin(emailInput.value, passwordInput.value)">Login</button>
+  
+      <p class="create-new-account" [routerLink]="['/register']">Create new account?</p>
+      
+      <!-- Display error message -->
+      <div *ngIf="errorMessage$ | async as errorMessage" class="error-message">
+        <p>{{ errorMessage }}</p>
+      </div>
+    </div>
+  </main>
+  
+  

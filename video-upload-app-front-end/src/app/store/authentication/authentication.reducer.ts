@@ -1,43 +1,45 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as AuthActions from './authentication.action';
-import { UserLoginCredential, User } from '../model/user.model';
 
 // Define the shape of the authentication state
 export interface AuthState {
-  loggedIn: boolean;
   error: string | null;
+  isAuthenticated: boolean;
 }
 
 // Initial state of the authentication feature
 const initialState: AuthState = {
-  loggedIn: false,
+  isAuthenticated: false,
   error: null
 };
 
 // Reducer function using createReducer from @ngrx/store
 export const authReducer = createReducer(
   initialState,
-  on(AuthActions.userLoginSuccess, (state) => ({
+
+  on(AuthActions.userLoginActionFailure, (state, { error }) => ({
     ...state, // Spread operator to create a shallow copy of current state
-    loggedIn: true,
-    error: null
-  })),
-  on(AuthActions.userLoginFailure, (state, { error }) => ({
-    ...state, // Spread operator to create a shallow copy of current state
-    loggedIn: false,
+    isAuthenticated: false,
     error: error
   })),
-  
-//   // Handling the registerNewUser action
-//   on(AuthActions.registerNewUserAction, (state, { user }) => ({
-//     ...state, // Spread operator to create a shallow copy of current state
-//     loggedIn: true, // User is now logged in (assuming successful registration also logs in)
-//     error: null // Clear any previous errors
-//   }))
-);
 
-// export function reducer(state: AuthState | undefined, action: Action) {
-//   return authReducer(state, action);
-// }
+  on(AuthActions.userLoginActionSuccess, (state, action) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    isAuthenticated: true,
+    error: null,
+  })),
+
+  on(AuthActions.createUserActionFailure, (state, { error }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    isAuthenticated: false,
+    error: error
+  })),
+
+  on(AuthActions.createUserActionSuccess, (state, action) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    isAuthenticated: false,
+    error: null,
+  }))
+);
 
 export const authReducerFeatureKey = 'auth';

@@ -6,6 +6,8 @@ import { AuthenticationService } from '../../service/authentication.service';
 import * as AuthActions from '../authentication/authentication.action';
 import { tap } from 'rxjs/operators';
 
+import { Router } from '@angular/router';
+
 @Injectable()
 export class AuthEffects {
 
@@ -14,43 +16,61 @@ export class AuthEffects {
       ofType(AuthActions.userLoginAction), // Listen for user login action
       mergeMap(action =>
         this.authService.UserLogin(action.userlogincredential).pipe(
-          map((response: any) => {
-            // Assuming backend returns a token upon successful login
-            return AuthActions.userLoginSuccess({ token: response.token });
+          tap((response: any) => {
+            this.authService.storeToken(response.token); // Store token in local storage
+            this.router.navigate(['/home']); // Navigate to home on success
+
+            // return AuthActions.userLoginActionSuccess({ token: response.token });
           }),
+          map((response: any) => AuthActions.userLoginActionSuccess()),
           catchError(error => {
             // Handle login failure, return error message
-            return of(AuthActions.userLoginFailure({ error: error.message }));
+            console.error('Login failed:', error);
+
+            let errorMessage;
+            if (error.status === 401) {
+              errorMessage = "Invalid Credential";
+            } else {
+              errorMessage = "An Error Have Occur When Logging In";
+            }
+
+            return of(AuthActions.userLoginActionFailure({ error: errorMessage }));
           })
         )
       )
     )
   );
 
-  loginSuccess$ = createEffect(() =>
+  createUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.userLoginSuccess),
-      tap(() => {
-        this.authService.UserLoginSuccess();
-      })
-    ),
-    { dispatch: false }
-  );
+      ofType(AuthActions.createUserAction),
+        mergeMap(action =>
+          this.authService.UserRegister(action.user).pipe(
+            tap((response: any) => {
+              this.router.navigate(['/login']); // Navigate to home on success
+              // return AuthActions.createUserActionSuccess({ message: response.message });
+            }),
+            map((response: any) => AuthActions.createUserActionSuccess()),
+            catchError(error => {
+              console.error('Register failed:', error);
 
-  loginFailure$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.userLoginFailure),
-      tap(({ error }) => {
-        // Optionally show error message or handle UI state
-        console.error('Login failed:', error); // You might want to display this in the UI
-      })
-    ),
-    { dispatch: false } // We don't need to dispatch any new actions here
+              let errorMessage;
+              if (error.status === 401) {
+                errorMessage = "Email Already Exist";
+              } else {
+                errorMessage = "An Error Have Occur When Register";
+              }
+              return of(AuthActions.createUserActionFailure({ error: errorMessage }));
+            })  
+        )
+      )
+    )
   );
 
   constructor(
     private actions$: Actions,
     private authService: AuthenticationService,
+    private router: Router
   ) {}
 
   // Add other effects if needed, such as registration, logout, etc.

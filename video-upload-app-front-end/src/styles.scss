@@ -5,19 +5,13 @@
 // Define your custom theme
 $theme: mat.define-theme((
   color: (
-    theme-type: dark,
-    primary: mat.$rose-palette,
-  ),
-//   typography: (
-//     brand-family: 'Comic Sans',
-//     bold-weight: 900
-//   ),
-//   density: (
-//     scale: -1
-//   )
+    theme-type: light,
+    primary: mat.$rose-palette
+  )
 ));
 
 // Wrap the theme mixins within a selector
 :root {
     @include mat.all-component-themes($theme);
 }
+

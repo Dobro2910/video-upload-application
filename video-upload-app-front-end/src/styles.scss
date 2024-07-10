@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 @use '@angular/material' as mat;
 
 // Define your custom theme
@@ -12,6 +11,6 @@ $theme: mat.define-theme((
 
 // Wrap the theme mixins within a selector
 :root {
-    @include mat.all-component-themes($theme);
+  @include mat.all-component-themes($theme);
 }
 

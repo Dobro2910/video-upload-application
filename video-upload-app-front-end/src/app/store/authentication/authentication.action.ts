@@ -11,10 +11,8 @@ export const NEW_USER_REGISTER_SUCCESS ='[auth] register success'
 
 export const userLoginAction=createAction(USER_LOGIN, props<{userlogincredential:UserLoginCredential}>());
 export const userLoginActionFailure=createAction(USER_LOGIN_FAILURE, props<{error: any}>());
-
 export const userLoginActionSuccess = createAction(USER_LOGIN_SUCCESS);
 
 export const createUserAction=createAction(NEW_USER_REGISTER, props<{user:User}>());
 export const createUserActionFailure=createAction(NEW_USER_REGISTER_FAILURE, props<{error: any}>());
-
 export const createUserActionSuccess = createAction(NEW_USER_REGISTER_SUCCESS);

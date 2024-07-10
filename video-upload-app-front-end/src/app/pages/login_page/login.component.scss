@@ -29,7 +29,7 @@ main {
   
       .login-title {
         margin: 0;
-        font-size: 2em; /* Larger font size */
+        font-size: 1.8em; /* Larger font size */
         padding-bottom: 30px;
         color: #E5788F; /* Use rose palette color */
         font-family: 'Arial', sans-serif; /* Change font family if desired */
@@ -78,13 +78,13 @@ main {
     }
   }
   
-  /* Fade-in animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
   

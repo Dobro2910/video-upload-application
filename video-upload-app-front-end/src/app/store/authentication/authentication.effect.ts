@@ -22,7 +22,7 @@ export class AuthEffects {
 
             // return AuthActions.userLoginActionSuccess({ token: response.token });
           }),
-          map((response: any) => AuthActions.userLoginActionSuccess()),
+          map(() => AuthActions.userLoginActionSuccess()),
           catchError(error => {
             // Handle login failure, return error message
             console.error('Login failed:', error);
@@ -46,11 +46,11 @@ export class AuthEffects {
       ofType(AuthActions.createUserAction),
         mergeMap(action =>
           this.authService.UserRegister(action.user).pipe(
-            tap((response: any) => {
+            tap(() => {
               this.router.navigate(['/login']); // Navigate to home on success
               // return AuthActions.createUserActionSuccess({ message: response.message });
             }),
-            map((response: any) => AuthActions.createUserActionSuccess()),
+            map(() => AuthActions.createUserActionSuccess()),
             catchError(error => {
               console.error('Register failed:', error);
 

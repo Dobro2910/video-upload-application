@@ -18,6 +18,11 @@ export const routes: Routes = [
           import('./pages/login_page/login.module').then((m) => m.LoginModule),
       },
       {
+        path: 'register',
+        loadChildren: () =>
+          import('./pages/register_page/register.module').then((m) => m.RegisterModule),
+      },
+      {
         path: 'home',
         loadChildren: () =>
           import('./pages/home_page/home.module').then((m) => m.HomeModule),

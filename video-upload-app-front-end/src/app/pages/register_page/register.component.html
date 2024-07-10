@@ -1,0 +1,43 @@
+<main>
+  <div class="register-form-register-page">
+    <p class="register-title">Video Upload Application</p>
+
+    <form class="input-form" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="userName">
+        <mat-error *ngIf="userName?.invalid && (userName?.dirty || userName?.touched)">
+          <span *ngIf="userName?.errors?.['required']">User name is required.</span>
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="userEmail">
+        <mat-error *ngIf="userEmail?.invalid && (userEmail?.dirty || userEmail?.touched)">
+          <span *ngIf="userEmail?.errors?.['required']">Email is required.</span>
+          <span *ngIf="userEmail?.errors?.['email']">Invalid email format.</span>
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="userPassword" type="password">
+        <mat-error *ngIf="userPassword?.invalid && (userPassword?.dirty || userPassword?.touched)">
+          <span *ngIf="userPassword?.errors?.['required']">Password is required.</span>
+          <span *ngIf="userPassword?.errors?.['minlength']">Password must be at least 6 characters long.</span>
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit">Register</button>
+
+      <!-- Display error message -->
+      <div *ngIf="errorMessage$ | async as errorMessage" class="error-message">
+        <p>{{ errorMessage }}</p>
+      </div>
+    </form>
+  </div>
+</main>
+  
+  
+  

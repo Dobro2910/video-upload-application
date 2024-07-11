@@ -41,6 +41,15 @@ export class AuthEffects {
     )
   );
 
+  // logoutUser$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(AuthActions.userLogoutAction), // Listen for user login action
+  //     mergeMap(action =>
+  //       await this.authService.removeToken();
+  //     )
+  //   )
+  // );
+
   createUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.createUserAction),

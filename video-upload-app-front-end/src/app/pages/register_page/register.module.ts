@@ -7,8 +7,6 @@ import { RegisterRoutingModule } from "./register.routing";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthenticationService } from "../../service/authentication.service";
-
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -21,6 +19,5 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatButtonModule,
   ],
-  providers: [AuthenticationService],
 })
 export class RegisterModule {}

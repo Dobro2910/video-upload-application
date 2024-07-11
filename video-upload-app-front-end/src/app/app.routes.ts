@@ -27,6 +27,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/home_page/home.module').then((m) => m.HomeModule),
       },
+      {
+        path: 'product',
+        loadChildren: () =>
+          import('./pages/product_page/product.module').then((m) => m.ProductModule),
+      },
       { 
         path: '**', redirectTo: '' 
       } // Default redirect to login if no route matches

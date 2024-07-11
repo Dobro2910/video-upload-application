@@ -1,0 +1,55 @@
+.home-page {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background color for content area */
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333; /* Dark text color */
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    width: calc(33% - 40px); /* 3 cards per row with gap */
+}
+
+.product-card img {
+    max-width: 100%;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.product-card p {
+    font-size: 16px;
+    color: #666;
+}

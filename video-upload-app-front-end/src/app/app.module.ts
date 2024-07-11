@@ -10,10 +10,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from '../app/store/authentication/authentication.reducer';
 import { AuthEffects } from '../app/store/authentication/authentication.effect';
 
-// import { provideStore } from '@ngrx/store';
-// import { provideEffects } from '@ngrx/effects';
-// import { LoginModule } from './pages/login_page/login.module';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -21,9 +17,6 @@ import { AuthEffects } from '../app/store/authentication/authentication.effect';
     AppRoutingModule,
     BrowserAnimationsModule,
 
-    // StoreModule.forRoot({}),
-    // EffectsModule.forRoot([]),
-    // LoginModule,
     StoreModule.forRoot({auth:authReducer}),
     EffectsModule.forRoot(AuthEffects),
   ],

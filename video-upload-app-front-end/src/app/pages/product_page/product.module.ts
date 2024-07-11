@@ -1,14 +1,14 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { HomeRoutingModule } from "./home.routing";
-import { HomeComponent } from "./home.component";
+import { ProductRoutingModule } from "./product.routing";
+import { ProductComponent } from "./product.component";
 
 import { SideBarComponent } from "../shared/side_bar/sidebar.component";
 import { ShoppingCartComponent } from "../shared/shopping_cart/shoppingcart.component";
 
 @NgModule({
-  declarations: [HomeComponent, SideBarComponent, ShoppingCartComponent],
-  imports: [CommonModule, HomeRoutingModule],
+  declarations: [ProductComponent, SideBarComponent, ShoppingCartComponent],
+  imports: [CommonModule, ProductRoutingModule],
 })
 
-export class HomeModule {}
+export class ProductModule {}

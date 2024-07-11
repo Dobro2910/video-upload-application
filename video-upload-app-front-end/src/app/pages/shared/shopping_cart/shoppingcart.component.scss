@@ -1,0 +1,20 @@
+.shopping-cart {
+    position: fixed;
+    top: 22px;
+    right: 25px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1001; /* Ensure it's above other content */
+}
+
+.shopping-cart svg {
+    width: 40px;
+    height: 40px;
+    // stroke-width: 2px;
+    // stroke: #333;
+    // fill: none;
+}

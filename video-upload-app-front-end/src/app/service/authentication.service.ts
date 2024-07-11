@@ -29,5 +29,4 @@ export class AuthenticationService {
     removeToken() {
         localStorage.removeItem('token'); // or sessionStorage.removeItem('token')
     }
-
 }

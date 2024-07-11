@@ -20,22 +20,10 @@ export const authReducer = createReducer(
     error: error
   })),
 
-  // on(AuthActions.userLoginActionSuccess, (state) => ({
-  //   ...state, // Spread operator to create a shallow copy of current state
-  //   isAuthenticated: true,
-  //   error: null,
-  // })),
-
   on(AuthActions.createUserActionFailure, (state, { error }) => ({
     ...state, // Spread operator to create a shallow copy of current state
     error: error
   })),
-
-  // on(AuthActions.createUserActionSuccess, (state) => ({
-  //   ...state, // Spread operator to create a shallow copy of current state
-  //   isAuthenticated: false,
-  //   error: null,
-  // }))
 );
 
 export const authReducerFeatureKey = 'auth';

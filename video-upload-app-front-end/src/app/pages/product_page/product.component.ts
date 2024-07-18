@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as ProductReducer from '../../store/product/product.reducer';
+import * as ProductActions from '../../store/product/product.action';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,9 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-    constructor(private router: Router) { }
+    constructor(private store: Store<ProductReducer.ProductState>) { }
 
     ngOnInit(): void {
-        console.log('Product component initialized');
+      this.store.dispatch(ProductActions.getAllProductAction());
     }
 }

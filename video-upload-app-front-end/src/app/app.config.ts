@@ -7,8 +7,14 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+
+// Authentication
 import { authReducer, authReducerFeatureKey } from './store/authentication/authentication.reducer';
 import { AuthEffects } from './store/authentication/authentication.effect';
+
+// Product
+import { productReducer, productReducerFeatureKey } from './store/product/product.reducer';
+import { ProductEffects } from './store/product/product.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), 
@@ -17,7 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(), 
     provideHttpClient(),
 
-    provideStore({[authReducerFeatureKey]: authReducer}),
-    provideEffects(AuthEffects)
+    provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer}),
+    provideEffects(AuthEffects, ProductEffects)
   ]
 };

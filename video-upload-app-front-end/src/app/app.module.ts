@@ -23,7 +23,7 @@ import { ProductEffects } from './store/product/product.effect';
     BrowserAnimationsModule,
 
     StoreModule.forRoot({auth:authReducer, product:productReducer}),
-    EffectsModule.forRoot(AuthEffects, ProductEffects),
+    EffectsModule.forRoot([AuthEffects, ProductEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]

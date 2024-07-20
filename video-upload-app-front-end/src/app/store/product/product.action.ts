@@ -2,33 +2,31 @@ import { Product } from "../model/product.model";
 import { createAction, props } from "@ngrx/store"
 
 // all product load actions
-export const All_PRODUCT_LOAD ='[auth] begin product load'
-export const All_PRODUCT_LOAD_FAILURE ='[auth] product load fail'
-export const All_PRODUCT_LOAD_SUCCESS ='[Auth] product load success'
+export const All_PRODUCT_LOAD ='[product] begin product load'
+export const All_PRODUCT_LOAD_FAILURE ='[product] product load fail'
+export const All_PRODUCT_LOAD_SUCCESS ='[product] product load success'
 export const getAllProductAction=createAction(All_PRODUCT_LOAD);
 export const getAllProductFailure=createAction(All_PRODUCT_LOAD_FAILURE, props<{error: any}>());
 export const getAllProductSuccess = createAction(All_PRODUCT_LOAD_SUCCESS, props<{products: Product[]}>());
 
-// user login actions
-// export const USER_LOGIN ='[auth] begin login'
-// export const USER_LOGIN_FAILURE ='[auth] login fail'
-// export const USER_LOGIN_SUCCESS ='[Auth] login success'
-// export const userLoginAction=createAction(USER_LOGIN, props<{userlogincredential:UserLoginCredential}>());
-// export const userLoginActionFailure=createAction(USER_LOGIN_FAILURE, props<{error: any}>());
-// export const userLoginActionSuccess = createAction(USER_LOGIN_SUCCESS);
+// get paginated pages load actions
+export const GET_PAGINATED_LOAD ='[product] begin paginated load'
+export const GET_PAGINATED_LOAD_FAILURE ='[product] paginated load fail'
+export const GET_PAGINATED_SUCCESS ='[product] paginated load success'
+export const getPaginatedProductAction=createAction(GET_PAGINATED_LOAD, props<{ page: number }>());
+export const getPaginatedProductFailure=createAction(GET_PAGINATED_LOAD_FAILURE, props<{error: any}>());
+export const getPaginatedProductSuccess = createAction(GET_PAGINATED_SUCCESS, props<{products: Product[]}>());
 
-// user logout actions
-// export const USER_LOGOUT ='[auth] begin logout'
-// export const USER_LOGOUT_FAILURE ='[auth] logout fail'
-// export const USER_LOGOUT_SUCCESS ='[Auth] logout success'
-// export const userLogoutAction=createAction(USER_LOGOUT);
-// export const userLogoutActionFailure=createAction(USER_LOGOUT_FAILURE, props<{error: any}>());
-// export const userLogoutActionSuccess = createAction(USER_LOGOUT_SUCCESS);
-
-// user sign up actions
-// export const NEW_USER_REGISTER ='[auth] begin register'
-// export const NEW_USER_REGISTER_FAILURE ='[auth] register fail'
-// export const NEW_USER_REGISTER_SUCCESS ='[auth] register success'
-// export const createUserAction=createAction(NEW_USER_REGISTER, props<{user:User}>());
-// export const createUserActionFailure=createAction(NEW_USER_REGISTER_FAILURE, props<{error: any}>());
-// export const createUserActionSuccess = createAction(NEW_USER_REGISTER_SUCCESS);
+// load product by filter actions
+export const FILTER_LOAD ='[product] filter load'
+export const FILTER_LOAD_FAILURE ='[product] filter load fail'
+export const FILTER_LOAD_SUCCESS ='[product] filter load success'
+export const getFilterProductAction=createAction(FILTER_LOAD, props<{ 
+    // productPrice: number | undefined,
+    productSize?: string | null,
+    productCategory?: string | null,
+    productGender?: string | null,
+    productBrand?: string | null 
+}>());
+export const getFilterProductActionFailure=createAction(FILTER_LOAD_FAILURE, props<{error: any}>());
+export const getFilterProductActionSuccess = createAction(FILTER_LOAD_SUCCESS, props<{products: Product[]}>());

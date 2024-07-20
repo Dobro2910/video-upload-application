@@ -11,11 +11,17 @@ export class ProductService {
     constructor(private http: HttpClient) {}
 
     getAllProduct(): Observable<any> {
-        return this.http.get('http://localhost:3000/allproduct');
+        return this.http.get('http://localhost:3000/product/allproduct');
     }
 
     getProductInfo(productId: string): Observable<any> {
         return this.http.get('http://localhost:3000/product/${productId}');
+    }
+
+    getPaginatedProduct(page: number): Observable<any> {
+        let params = new HttpParams();
+        params = params.append('page', page);
+        return this.http.get('http://localhost:3000/product/getpaginatedproduct', { params });
     }
 
     findProductByFilter(filters: { [key: string]: any }): Observable<any> {

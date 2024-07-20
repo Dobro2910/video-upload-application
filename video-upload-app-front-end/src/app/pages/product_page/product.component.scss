@@ -20,6 +20,10 @@
     width: 100%;
 }
 
+.header a {
+    text-decoration: none;
+}
+
 .header h1 {
     margin: 0;
     font-family: 'Arial', sans-serif; /* Choose a clean, readable font */
@@ -92,3 +96,47 @@
 .product:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+  
+.pagination button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+    width: 100px;
+}
+  
+.pagination button:hover {
+    background-color: black;
+}
+
+.pagination span {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+// .pagination input[type="text"] {
+//     padding: 10px;
+//     border: 1px solid #ccc;
+//     border-radius: 4px;
+//     font-size: 1em;
+//     width: 80px; /* Adjust width as needed */
+//     text-align: center;
+//     margin: 0 10px;
+//     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better focus */
+// }
+
+// .pagination input[type="text"]::placeholder {
+//     color: #aaa; /* Placeholder text color */
+// }

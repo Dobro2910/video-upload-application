@@ -13,14 +13,17 @@ export class ProductEffects {
 
   getAllProduct$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ProductActions.getAllProductAction), // Listen for user login action
+      ofType(ProductActions.getAllProductAction),
       mergeMap(action =>
         this.productService.getAllProduct().pipe(
+          tap((response: any) => {
+            console.log(response.products);
+          }),
           map(response => ProductActions.getAllProductSuccess({ products: response.products })),
           catchError(error => {
             // Handle login failure, return error message
             console.error('get all products failed:', error);
-
+            
             let errorMessage;
             if (error.status === 404) {
               errorMessage = "No Product Available";
@@ -35,31 +38,65 @@ export class ProductEffects {
     )
   );
 
-//   createUser$ = createEffect(() =>
-//     this.actions$.pipe(
-//       ofType(AuthActions.createUserAction),
-//         mergeMap(action =>
-//           this.authService.UserRegister(action.user).pipe(
-//             tap(() => {
-//               this.router.navigate(['/login']); // Navigate to home on success
-//               // return AuthActions.createUserActionSuccess({ message: response.message });
-//             }),
-//             map(() => AuthActions.createUserActionSuccess()),
-//             catchError(error => {
-//               console.error('Register failed:', error);
+  getPaginatedProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductActions.getPaginatedProductAction),
+      mergeMap(action =>
+        this.productService.getPaginatedProduct(action.page).pipe(
+          tap((response: any) => {
+            console.log(response.products);
+          }),
+          map(response => ProductActions.getPaginatedProductSuccess({ products: response.products })),
+          catchError(error => {
+            // Handle login failure, return error message
+            console.error('get paginated products failed:', error);
+            
+            let errorMessage;
+            if (error.status === 404) {
+              errorMessage = "No Product Available";
+            } else {
+              errorMessage = "An Error Have Occur When Get Paginated Products";
+            }
 
-//               let errorMessage;
-//               if (error.status === 401) {
-//                 errorMessage = "Email Already Exist";
-//               } else {
-//                 errorMessage = "An Error Have Occur When Register";
-//               }
-//               return of(AuthActions.createUserActionFailure({ error: errorMessage }));
-//             })  
-//         )
-//       )
-//     )
-//   );
+            return of(ProductActions.getPaginatedProductFailure({ error: errorMessage }));
+          })
+        )
+      )
+    )
+  );
+
+  getFilterProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductActions.getFilterProductAction),
+      mergeMap(action =>
+        this.productService.findProductByFilter({
+          // productPrice: action.productPrice,
+          productBrand: action.productBrand,
+          productCategory: action.productCategory,
+          productGender: action.productGender,
+          productSize: action.productSize
+        }).pipe(
+          tap((response: any) => {
+            console.log(response.products);
+          }),
+          map(response => ProductActions.getFilterProductActionSuccess({ products: response.products })),
+          catchError(error => {
+            // Handle login failure, return error message
+            console.error('get products by filter failed:', error);
+            
+            let errorMessage;
+            if (error.status === 404) {
+              errorMessage = "No Product Available";
+            } else {
+              errorMessage = "An Error Have Occur When Get Products By Filter";
+            }
+
+            return of(ProductActions.getFilterProductActionFailure({ error: errorMessage }));
+          })
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions,

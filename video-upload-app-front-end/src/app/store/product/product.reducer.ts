@@ -18,12 +18,35 @@ const initialState: ProductState = {
 export const productReducer = createReducer(
   initialState,
 
+  // get all product state
   on(ProductActions.getAllProductFailure, (state, { error }) => ({
     ...state, // Spread operator to create a shallow copy of current state
     error: error
   })),
 
   on(ProductActions.getAllProductSuccess, (state, { products }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    products: products
+  })),
+
+  // get pagination product state
+  on(ProductActions.getPaginatedProductFailure, (state, { error }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    error: error
+  })),
+
+  on(ProductActions.getPaginatedProductSuccess, (state, { products }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    products: products
+  })),
+
+  // get product by filter state
+  on(ProductActions.getFilterProductActionFailure, (state, { error }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    error: error
+  })),
+
+  on(ProductActions.getFilterProductActionSuccess, (state, { products }) => ({
     ...state, // Spread operator to create a shallow copy of current state
     products: products
   })),

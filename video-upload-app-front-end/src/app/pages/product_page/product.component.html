@@ -3,59 +3,70 @@
     <app-shopping-cart></app-shopping-cart>
     <div class="main-content">
         <header class="header">
-            <h1>Clothes Store</h1>
+            <a href="/home">
+                <h1>Clothes Store</h1>
+            </a>
             <div class="filter">
                 <input type="text" id="search" placeholder="Search for clothes...">
-                <select id="gender">
-                    <option value="all">Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="unisex">Unisex</option>
+                <select id="gender" [(ngModel)]="productGender">
+                    <option value="All">Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Unisex">Unisex</option>
                 </select>
-                <select id="category">
-                    <option value="all">All Categories</option>
-                    <option value="men">Men</option>
-                    <option value="women">Women</option>
-                    <option value="kids">Kids</option>
+                <select id="category" [(ngModel)]="productCategory">
+                    <option value="All">All Categories</option>
+                    <option value="Shoes">Shoes</option>
+                    <option value="Shirt">Shirt</option>
                 </select>
-                <select id="size">
-                    <option value="all">All Sizes</option>
-                    <option value="s">S</option>
-                    <option value="m">M</option>
-                    <option value="l">L</option>
-                    <option value="xl">XL</option>
+                <select id="size" [(ngModel)]="productSize">
+                    <option value="All">All Sizes</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
                 </select>
-                <select id="price">
+                <!-- <select id="price">
                     <option value="all">Price</option>
                     <option value="lowtohigh">Low → High</option>
                     <option value="hightolow">High → Low</option>
-                    <!-- <option value="unisex">Unisex</option> -->
+                </select> -->
+                <select id="brand" [(ngModel)]="productBrand">
+                    <option value="All">Brands</option>
+                    <option value="Nike">Nike</option>
+                    <option value="Adidas">Adidas</option>
+                    <option value="Uniqlo">Uniqlo</option>
                 </select>
-                <select id="brand">
-                    <option value="all">Brands</option>
-                    <option value="nike">Nike</option>
-                    <option value="adidas">Adidas</option>
-                    <option value="uniqlo">Uniqlo</option>
-                </select>
-                <button id="searchButton">Search</button>
+                <button (click)="findProductsByFilter()" id="searchButton">Search</button>
             </div>
         </header>
-        <!-- <section class="products">
-            <div class="product">
-                <img src="path/to/image1.jpg" alt="Product 1">
-                <h2>Product 1</h2>
-                <p>$29.99</p>
+        <section>
+            <div *ngIf="products$ | async as products">
+              <div *ngIf="products && products.length > 0; else noProducts" class="products">
+                <div *ngFor="let product of products" class="product">
+                  <img [src]="product.productImage" alt="{{ product.productName }}" />
+                  <h3>{{ product.productName }}</h3>
+                  <p>{{ product.productDescription }}</p>
+                  <p>Price: {{ product.productPrice | currency }}</p>
+                </div>
+              </div>
+              <ng-template #noProducts>
+                <p>No products available.</p>
+              </ng-template>
             </div>
-            <div class="product">
-                <img src="path/to/image2.jpg" alt="Product 2">
-                <h2>Product 2</h2>
-                <p>$49.99</p>
-            </div>
-            <div class="product">
-                <img src="path/to/image3.jpg" alt="Product 3">
-                <h2>Product 3</h2>
-                <p>$39.99</p>
-            </div>
-        </section> -->
-        <section class="products" id="products"></section>
-    </div>
+        </section>
+
+        <div class="pagination">
+            <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+            <span>Page {{ currentPage }}</span>
+            <!-- <input 
+                type="number" 
+                [(ngModel)]="goToPageNumber" 
+                placeholder="Go to page" 
+                (keydown.enter)="goToPage()" 
+                min="1" 
+            />
+            <button (click)="goToPage()">Go</button> -->
+            <button (click)="nextPage()">Next</button>
+        </div>
+</div>

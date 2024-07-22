@@ -13,7 +13,9 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
+  // $ for observable variable
   products$: Observable<Product[] | null>;
+  filterCheck$: Observable<Boolean>;
   currentPage: number = 1;
 
   // filter variable
@@ -27,12 +29,28 @@ export class ProductComponent implements OnInit {
 
   constructor(private store: Store<{ product: ProductState }>) { 
     this.products$ = this.store.select(state => state.product.products);
+    this.filterCheck$ = this.store.select(state => state.product.filterCheck);
   }
 
   ngOnInit(): void {
     console.log('Product component initialized');
     // this.store.dispatch(ProductActions.getAllProductAction());
-    this.loadProducts();
+
+    // Handling filter check observable
+    this.filterCheck$.subscribe(filterCheck => {
+      if (filterCheck) {
+        console.log(filterCheck);
+        this.findProductsByFilter();
+      } else {
+        console.log(filterCheck);
+        this.loadProducts();
+      }
+    });
+
+    // The filter operator in the products$ observable pipeline is used to ensure that only non-null values are processed by the 
+    // subsequent subscribe block. This is important because the initial state of products$ might be null or undefined before the 
+    // products are loaded or fetched from the store. By filtering out null values, you avoid unnecessary or potentially erroneous 
+    // operations on the null values.
     this.products$.pipe(filter(products => products !== null)).subscribe(products => {
       if (products && products.length === 0 && this.currentPage > 1) {
         this.prevPage();
@@ -41,10 +59,6 @@ export class ProductComponent implements OnInit {
   }
 
   findProductsByFilter(): void {
-    console.log(this.productBrand)
-    console.log(this.productCategory)
-    console.log(this.productGender)
-    console.log(this.productSize)
     this.store.dispatch(ProductActions.getFilterProductAction({
       // productPrice: this.productPrice,
       productBrand: this.productBrand,

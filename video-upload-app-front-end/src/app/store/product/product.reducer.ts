@@ -6,12 +6,14 @@ import { Product } from '../model/product.model';
 export interface ProductState {
   products: Product[] | null;
   error: string | null;
+  filterCheck: boolean;
 }
 
 // Initial state of the authentication feature
 const initialState: ProductState = {
     products: null,
-    error: null
+    error: null,
+    filterCheck: false
 };
 
 // Reducer function using createReducer from @ngrx/store
@@ -37,6 +39,7 @@ export const productReducer = createReducer(
 
   on(ProductActions.getPaginatedProductSuccess, (state, { products }) => ({
     ...state, // Spread operator to create a shallow copy of current state
+    filterCheck: false,
     products: products
   })),
 
@@ -48,6 +51,7 @@ export const productReducer = createReducer(
 
   on(ProductActions.getFilterProductActionSuccess, (state, { products }) => ({
     ...state, // Spread operator to create a shallow copy of current state
+    filterCheck: true,
     products: products
   })),
 );

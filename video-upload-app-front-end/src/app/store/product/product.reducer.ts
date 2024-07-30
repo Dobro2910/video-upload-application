@@ -5,6 +5,7 @@ import { Product } from '../model/product.model';
 // Define the shape of the authentication state
 export interface ProductState {
   products: Product[] | null;
+  individualProduct: Product | null;
   error: string | null;
   filterCheck: boolean;
 }
@@ -12,6 +13,7 @@ export interface ProductState {
 // Initial state of the authentication feature
 const initialState: ProductState = {
     products: null,
+    individualProduct: null,
     error: null,
     filterCheck: false
 };
@@ -54,6 +56,17 @@ export const productReducer = createReducer(
     filterCheck: true,
     products: products
   })),
+
+  // get individual product
+  // on(ProductActions.getIndividualProductActionFailure, (state, { error }) => ({
+  //   ...state, // Spread operator to create a shallow copy of current state
+  //   error: error
+  // })),
+
+  // on(ProductActions.getIndividualProductActionSuccess, (state, { product }) => ({
+  //   ...state, // Spread operator to create a shallow copy of current state
+  //   individualProduct: product
+  // })),
 );
 
 export const productReducerFeatureKey = 'product';

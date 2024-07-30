@@ -22,6 +22,7 @@ export const FILTER_LOAD ='[product] filter load'
 export const FILTER_LOAD_FAILURE ='[product] filter load fail'
 export const FILTER_LOAD_SUCCESS ='[product] filter load success'
 export const getFilterProductAction=createAction(FILTER_LOAD, props<{ 
+    filterPage: number,
     // productPrice: number | undefined,
     productSize?: string | null,
     productCategory?: string | null,
@@ -30,3 +31,11 @@ export const getFilterProductAction=createAction(FILTER_LOAD, props<{
 }>());
 export const getFilterProductActionFailure=createAction(FILTER_LOAD_FAILURE, props<{error: any}>());
 export const getFilterProductActionSuccess = createAction(FILTER_LOAD_SUCCESS, props<{products: Product[]}>());
+
+// get Individual product actions
+// export const PRODUCT_LOAD ='[product] product load'
+// export const PRODUCT_LOAD_FAILURE ='[product] product load fail'
+// export const PRODUCT_LOAD_SUCCESS ='[product] product load success'
+// export const getIndividualProductAction=createAction(FILTER_LOAD, props<{ productId: string,}>());
+// export const getIndividualProductActionFailure=createAction(FILTER_LOAD_FAILURE, props<{error: any}>());
+// export const getIndividualProductActionSuccess = createAction(FILTER_LOAD_SUCCESS, props<{product: Product}>());

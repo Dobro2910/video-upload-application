@@ -6,8 +6,6 @@ import { tap } from 'rxjs/operators';
 import { ProductService } from '../../service/product.service';
 import * as ProductActions from '../product/product.action';
 
-import { Router } from '@angular/router';
-
 @Injectable()
 export class ProductEffects {
 
@@ -70,6 +68,7 @@ export class ProductEffects {
       ofType(ProductActions.getFilterProductAction),
       mergeMap(action =>
         this.productService.findProductByFilter({
+          filterPage: action.filterPage,
           // productPrice: action.productPrice,
           productBrand: action.productBrand,
           productCategory: action.productCategory,
@@ -100,8 +99,7 @@ export class ProductEffects {
 
   constructor(
     private actions$: Actions,
-    private productService: ProductService,
-    private router: Router
+    private productService: ProductService
   ) {}
 
   // Add other effects if needed, such as registration, logout, etc.

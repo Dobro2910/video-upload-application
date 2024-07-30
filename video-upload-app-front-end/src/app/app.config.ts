@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
@@ -21,7 +21,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideAnimations(), 
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
+    
 
     provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer}),
     provideEffects(AuthEffects, ProductEffects)

@@ -76,6 +76,8 @@
     padding: 20px;
     text-align: center;
     transition: box-shadow 0.3s ease;
+
+    cursor: pointer;
 }
 
 .product img {
@@ -126,17 +128,14 @@
     font-weight: bold;
 }
 
-// .pagination input[type="text"] {
-//     padding: 10px;
-//     border: 1px solid #ccc;
-//     border-radius: 4px;
-//     font-size: 1em;
-//     width: 80px; /* Adjust width as needed */
-//     text-align: center;
-//     margin: 0 10px;
-//     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better focus */
-// }
-
-// .pagination input[type="text"]::placeholder {
-//     color: #aaa; /* Placeholder text color */
-// }
+.no-products {
+    font-size: 1.5em; /* Increase the font size */
+    color: #333; /* Use a softer, pleasant color */
+    text-align: center; /* Center the text */
+    margin-top: 20px; /* Add some spacing at the top */
+    padding: 20px; /* Add some padding for better spacing */
+    border: 1px solid #ccc; /* Add a border to distinguish it */
+    border-radius: 4px; /* Round the corners */
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}

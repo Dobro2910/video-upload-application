@@ -6,45 +6,38 @@
             <h1>Welcome to Our Shop</h1>
         </header>
         <section class="product-list-gender">
-            <a href="/product" class="product-card-man">
+            <a (click)="setValue('Male', '', '', '')" class="product-card-man">
                 <h3>Men</h3>
             </a>
-            <a href="/product" class="product-card-woman">
+            <a (click)="setValue('Female', '', '', '')" class="product-card-woman">
                 <h3>Women</h3>
             </a>
-            <a href="/product" class="product-card-kid">
+            <a (click)="setValue('', '', '', '')" class="product-card-kid">
                 <h3>Kids</h3>
             </a>
         </section>
         <p class="shop-by-category-title">Shop by Category</p>
         <section class="product-list-category">
-            <a href="/product" class="product-card-clothes">
+            <a (click)="setValue('', 'Shirt', '', '')" class="product-card-clothes">
                 <h3>Clothes</h3>
             </a>
-            <a href="/product" class="product-card-shoes">
+            <a (click)="setValue('', 'Shoes', '', '')" class="product-card-shoes">
                 <h3>Shoes</h3>
             </a>
-            <a href="/product" class="product-card-accessories">
+            <a (click)="setValue('', '', '', '')" class="product-card-accessories">
                 <h3>Accessories</h3>
             </a>
-            <a href="/product" class="product-card-sport">
+            <a (click)="setValue('', '', '', '')" class="product-card-sport">
                 <h3>Sport</h3>
             </a>
         </section>
         <p class="shop-by-brands-title">Shop by Brands</p>
         <section class="product-list-brands">
-            <a href="/product" class="product-card-famous1"></a>
-            <a href="/product" class="product-card-famous2"></a>
-            <a href="/product" class="product-card-famous3"></a>
-            <a href="/product" class="product-card-famous4"></a>
-            <a href="/product" class="product-card-famous5"></a>
-        </section>
-        <section class="product-list-brands">
-            <a href="/product" class="product-card-famous1"></a>
-            <a href="/product" class="product-card-famous2"></a>
-            <a href="/product" class="product-card-famous3"></a>
-            <a href="/product" class="product-card-famous4"></a>
-            <a href="/product" class="product-card-famous5"></a>
+            <a (click)="setValue('', '', '', 'Nike')" class="product-card-famous1"></a>
+            <a (click)="setValue('', '', '', 'Adidas')" class="product-card-famous2"></a>
+            <a (click)="setValue('', '', '', 'Puma')" class="product-card-famous3"></a>
+            <a (click)="setValue('', '', '', 'Reebok')" class="product-card-famous4"></a>
+            <a (click)="setValue('', '', '', 'H&M')" class="product-card-famous5"></a>
         </section>
     </div>
 </main>

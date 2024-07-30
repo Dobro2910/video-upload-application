@@ -1,0 +1,32 @@
+<!-- <div class="product-detail-dialog">
+    <img [src]="data.productImage" alt="{{ data.productName }}" />
+    <h2>{{ data.productName }}</h2>
+    <p>{{ data.productDescription }}</p>
+    <p>Price: {{ data.productPrice | currency }}</p>
+    <p>Size: {{ data.productSize }}</p>
+    <p>Color: {{ data.productColor }}</p>
+    <div>
+        <label for="quantity">Qty</label>
+        <input id="quantity" type="number" min="1" max="10"/>
+    </div>
+    <button mat-button>Add to Cart</button>
+</div>
+   -->
+
+<div class="product-detail-dialog">
+    <button mat-icon-button class="close-button" (click)="onClose()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <img [src]="data.productImage" alt="{{ data.productName }}" />
+    <h2>{{ data.productName }}</h2>
+    <p>{{ data.productDescription }}</p>
+    <p>Price: {{ data.productPrice | currency }}</p>
+    <p>Size: {{ data.productSize }}</p>
+    <p>Color: {{ data.productColor }}</p>
+    <div>
+        <label for="quantity">Qty</label>
+        <input id="quantity" type="number" min="1" max="10"/>
+    </div>
+    <button mat-button>Add to Cart</button>
+</div>
+  

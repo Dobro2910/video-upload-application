@@ -45,6 +45,8 @@
     height: 60vh;
     position: relative; /* Needed for positioning the text */
     overflow: hidden;
+
+    cursor: pointer;
 }
 
 .product-card-man h3, .product-card-woman h3, .product-card-kid h3 {
@@ -128,6 +130,8 @@
     height: 20vh;
     position: relative; /* Needed for positioning the text */
     overflow: hidden;
+
+    cursor: pointer;
 }
 
 .product-card-clothes h3, .product-card-shoes h3, .product-card-accessories h3, .product-card-sport h3 {
@@ -209,6 +213,8 @@
     height: 20vh;
     position: relative; /* Needed for positioning the text */
     overflow: hidden;
+
+    cursor: pointer;
 }
 
 .product-card-famous1 h3, .product-card-famous2 h3, .product-card-famous3 h3, .product-card-famous4 h3, .product-card-famous5 h3 {
@@ -222,31 +228,40 @@
     animation: fadeIn 2s forwards;
 }
 
-/* Specific background images */
-.product-card-famous1, .product-card-famous2, .product-card-famous3, .product-card-famous4, .product-card-famous5 {
-    background-image: url("../../assets/famous1.jpg");
+.product-card-famous1 {
+    background-image: url("../../assets/nike-logo.png");
     background-position: center;
+    background-size: contain; /* Ensures the entire image fits within the container */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
 }
 
-// .product-card-famous2 {
-//     background-image: url("../../assets/shoes-model.jpeg");
-//     background-position: center;
-// }
+.product-card-famous2 {
+    background-image: url("../../assets/adidas-logo.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
-// .product-card-famous3 {
-//     background-image: url("../../assets/accessories-model.jpg");
-//     background-position: center;
-// }
+.product-card-famous3 {
+    background-image: url("../../assets/puma-logo.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
-// .product-card-famous4 {
-//     background-image: url("../../assets/sport-model.jpg");
-//     background-position: center;
-// }
+.product-card-famous4 {
+    background-image: url("../../assets/reebok-logo.jpg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
-// .product-card-famous5 {
-//     background-image: url("../../assets/sport-model.jpg");
-//     background-position: center;
-// }
+.product-card-famous5 {
+    background-image: url("../../assets/h&m-logo.jpg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
 .product-card-famous1 h3 {
     animation-delay: 1s;

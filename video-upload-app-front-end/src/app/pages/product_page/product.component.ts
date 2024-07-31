@@ -210,7 +210,6 @@ export class ProductComponent implements OnInit {
 
   displayProduct(product: Product): void {
     this.dialog.open(ProductDialogComponent, {
-      width: '600px',
       data: product
     });
   }
@@ -235,7 +234,6 @@ export class ProductComponent implements OnInit {
     this.filterCheck$.pipe(
       tap(filterCheck => {
         if (filterCheck) {
-          // this.filterSevice.increasePage();
           this.filterVar.currentPage++;
           this.findProductsByFilter();
         } else if (!filterCheck) {
@@ -250,11 +248,9 @@ export class ProductComponent implements OnInit {
     this.filterCheck$.pipe(
       tap(filterCheck => {
         if (filterCheck && this.filterVar.currentPage > 1) {
-          // this.filterSevice.decreasePage();
           this.filterVar.currentPage--;
           this.findProductsByFilter();
         } else if (!filterCheck && this.filterVar.currentPage > 1) {
-          // this.filterSevice.decreasePage();
           this.filterVar.currentPage--;
           this.loadProducts();
         }

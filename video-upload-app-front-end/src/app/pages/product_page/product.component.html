@@ -1,3 +1,69 @@
-<div>
-    <p>Welcome to product page</p>
+<main class="product-page">
+    <app-sidebar></app-sidebar>
+    <app-shopping-cart></app-shopping-cart>
+    <div class="main-content">
+        <header class="header">
+            <a href="/home">
+                <h1>Clothes Store</h1>
+            </a>
+            <div class="filter">
+                <input type="text" id="search" placeholder="Search for clothes...">
+                <select id="gender" [(ngModel)]="filterVar.productGender">
+                    <option value="">All</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Unisex">Unisex</option>
+                </select>
+                <select id="category" [(ngModel)]="filterVar.productCategory">
+                    <option value="">All</option>
+                    <option value="Shoes">Shoes</option>
+                    <option value="Shirt">Shirt</option>
+                    <option value="Jacket">Jacket</option>
+                    <option value="Hat">Hat</option>
+                </select>
+                <select id="size" [(ngModel)]="filterVar.productSize">
+                    <option value="">All</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+                <!-- <select id="price">
+                    <option value="all">Price</option>
+                    <option value="lowtohigh">Low → High</option>
+                    <option value="hightolow">High → Low</option>
+                </select> -->
+                <select id="brand" [(ngModel)]="filterVar.productBrand">
+                    <option value="">All</option>
+                    <option value="Nike">Nike</option>
+                    <option value="Adidas">Adidas</option>
+                    <option value="Uniqlo">Uniqlo</option>
+                    <option value="Puma">Puma</option>
+                    <option value="Reebok">Reebok</option>
+                    <option value="H&M">H&M</option>
+                </select>
+                <button (click)="findProductsByFilter()" id="searchButton">Search</button>
+            </div>
+        </header>
+        <section>
+            <div *ngIf="products$ | async as products">
+              <div *ngIf="products && products.length > 0; else noProducts" class="products">
+                <div *ngFor="let product of products" class="product" (click)="displayProduct(product)">
+                  <img [src]="product.productImage" alt="{{ product.productName }}" />
+                  <h3>{{ product.productName }}</h3>
+                  <p>{{ product.productDescription }}</p>
+                  <p>Price: {{ product.productPrice | currency }}</p>
+                </div>
+              </div>
+              <ng-template #noProducts>
+                <p class="no-products">No products available.</p>
+              </ng-template>
+            </div>
+        </section>
+
+        <div class="pagination">
+            <button (click)="prevPage()" [disabled]="(filterVar.currentPage === 1)">Previous</button>
+            <span>Page {{ filterVar.currentPage }}</span>
+            <button (click)="nextPage()">Next</button>
+        </div>
 </div>

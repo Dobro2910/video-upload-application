@@ -18,7 +18,7 @@
     <p class="create-new-account" [routerLink]="['/register']">Create new account?</p>
     
     <!-- Display error message -->
-    <div *ngIf="errorMessage$ | async as errorMessage" class="error-message">
+    <div *ngIf="errorMessage$ | async as errorMessage">
       <p>{{ errorMessage }}</p>
     </div>
   </div>

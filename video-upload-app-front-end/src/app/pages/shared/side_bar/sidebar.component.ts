@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../service/authentication.service';
+import { Router } from '@angular/router';
+import { FilterService } from '../../../service/filter.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,7 +9,12 @@ import { AuthenticationService } from '../../../service/authentication.service';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SideBarComponent implements OnInit {
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService, private router: Router, private filterService: FilterService) { }
+
+  productGender: string = '';
+  productCategory: string = '';
+  productBrand: string = '';
+  productSize: string = '';
 
   ngOnInit(): void {
     console.log('Side Bar component initialized');
@@ -31,5 +38,16 @@ export class SideBarComponent implements OnInit {
 
   toggleLogout() {
     this.authService.removeToken();
+  }
+
+  setValue(gender: string, category: string, size: string, brand: string): void {
+    this.filterService.setFilters(gender, category, size, brand);
+    this.navigateToProductPage();
+  }
+
+  navigateToProductPage(): void {
+    this.router.navigateByUrl('/dummy', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/product']);
+    });
   }
 }

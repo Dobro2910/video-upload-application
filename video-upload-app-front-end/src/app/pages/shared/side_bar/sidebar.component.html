@@ -5,12 +5,12 @@
     <div class="app-sidebar" id="sidebar">
         <div class="close-icon" (click)="toggleSidebar()">×</div>
         <ul class="top-menu">
-            <li><a href="/product">New In</a></li>
-            <li><a href="/product">Clothing</a></li>
-            <li><a href="/product">Shoes</a></li>
-            <li><a href="/product">Accessories</a></li>
-            <li><a href="/product">Sport</a></li>
-            <li><a href="/product">Brand</a></li>
+            <li><a (click)="setValue('', '', '', '')">New In</a></li>
+            <li><a (click)="setValue('', 'Shirt', '', '')">Clothing</a></li>
+            <li><a (click)="setValue('', 'Shoes', '', '')">Shoes</a></li>
+            <li><a (click)="setValue('', '', '', '')">Accessories</a></li>
+            <li><a (click)="setValue('', '', '', '')">Sport</a></li>
+            <li><a (click)="setValue('', '', '', 'Nike')">Brand</a></li>
         </ul>
         <ul class="top-menu bottom-menu" (click)="toggleLogout()">
             <li>

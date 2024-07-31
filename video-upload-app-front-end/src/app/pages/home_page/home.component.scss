@@ -1,12 +1,14 @@
 .home-page {
     display: flex;
-    height: 100vh; /* Full viewport height */
+    min-height: 100%;
 }
 
 .main-content {
     flex: 1;
     padding: 20px;
-    background-color: #f9f9f9; /* Light background color for content area */
+    padding-top: 0px;
+    height: 100%;
+    background-color: #fff; /* Light background color for content area */
 }
 
 .header {
@@ -15,41 +17,268 @@
 }
 
 .header h1 {
-    font-size: 36px;
-    font-weight: bold;
-    color: #333; /* Dark text color */
+    font-family: 'Arial', sans-serif; /* Choose a clean, readable font */
+    font-size: 2.5em; /* Increase the font size */
+    font-weight: bold; /* Make the text bold */
+    color: #333; /* Use a pleasant color */
+    text-align: center; /* Center the text */
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
+    letter-spacing: 2px; /* Add some spacing between letters */
 }
 
-.product-list {
+.product-list-gender {
+    padding-bottom: 100px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
 }
 
-.product-card {
-    background-color: #fff;
+.product-card-man, .product-card-woman, .product-card-kid {
+    background-size: cover; /* Ensures the image covers the entire card */
+    background-position: center; /* Centers the image */
     border: 1px solid #ddd;
-    border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 15px;
-    text-align: center;
-    width: calc(33% - 40px); /* 3 cards per row with gap */
+    width: calc(25% - 40px); /* 3 cards per row with gap */
+    height: 60vh;
+    position: relative; /* Needed for positioning the text */
+    overflow: hidden;
+
+    cursor: pointer;
 }
 
-.product-card img {
-    max-width: 100%;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
+.product-card-man h3, .product-card-woman h3, .product-card-kid h3 {
+    font-size: 30px;
+    color: #fff;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    margin: 0;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
 }
 
-.product-card h3 {
-    font-size: 18px;
+.product-card-man h3 {
+    animation-delay: 1s;
+}
+
+.product-card-woman h3 {
+    animation-delay: 1s;
+}
+
+.product-card-kid h3 {
+    animation-delay: 1s;
+}
+
+// .product-card-man p, .product-card-woman p, .product-card-kid p {
+//     font-size: 16px;
+//     color: #666;
+// }
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Specific background images */
+.product-card-man {
+    background-image: url("../../assets/man-model.jpg");
+    background-position: center;
+}
+
+.product-card-woman {
+    background-image: url("../../assets/woman-model.jpg");
+    background-position: center;
+}
+
+.product-card-kid {
+    background-image: url("../../assets/kid-model.jpg");
+    background-position: center;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+.shop-by-category-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
     color: #333;
-    margin-bottom: 10px;
+    text-align: center;
+    margin: 40px 0 30px 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
 }
 
-.product-card p {
-    font-size: 16px;
-    color: #666;
+.product-list-category {
+    padding-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.product-card-clothes, .product-card-shoes, .product-card-accessories, .product-card-sport {
+    background-size: cover; /* Ensures the image covers the entire card */
+    background-position: center; /* Centers the image */
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: calc(18.75% - 43.75px); /* 4 cards per row with gap */
+    height: 20vh;
+    position: relative; /* Needed for positioning the text */
+    overflow: hidden;
+
+    cursor: pointer;
+}
+
+.product-card-clothes h3, .product-card-shoes h3, .product-card-accessories h3, .product-card-sport h3 {
+    font-size: 30px;
+    color: #fff;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    margin: 0;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+/* Specific background images */
+.product-card-clothes {
+    background-image: url("../../assets/clothes.jpg");
+    background-position: center;
+}
+
+.product-card-shoes {
+    background-image: url("../../assets/shoes-model.jpeg");
+    background-position: center;
+}
+
+.product-card-accessories {
+    background-image: url("../../assets/accessories-model.jpg");
+    background-position: center;
+}
+
+.product-card-sport {
+    background-image: url("../../assets/sport-model.jpg");
+    background-position: center;
+}
+
+.product-card-clothes h3 {
+    animation-delay: 1s;
+}
+
+.product-card-shoes h3 {
+    animation-delay: 1s;
+}
+
+.product-card-accessories h3 {
+    animation-delay: 1s;
+}
+
+.product-card-sport h3 {
+    animation-delay: 1s;
+}
+
+/////////////////////////////////////////////////////////////////////////
+
+.shop-by-brands-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin: 40px 0 30px 0;
+    text-shadow: 1px 1px 3px #00000033;
+    letter-spacing: 1px;
+}
+
+.product-list-brands {
+    padding-bottom: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    justify-content: center;
+}
+
+.product-card-famous1, .product-card-famous2, .product-card-famous3, .product-card-famous4, .product-card-famous5 {
+    background-size: cover; /* Ensures the image covers the entire card */
+    background-position: center; /* Centers the image */
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: calc(15% - 77.75px); /* 4 cards per row with gap */
+    height: 20vh;
+    position: relative; /* Needed for positioning the text */
+    overflow: hidden;
+
+    cursor: pointer;
+}
+
+.product-card-famous1 h3, .product-card-famous2 h3, .product-card-famous3 h3, .product-card-famous4 h3, .product-card-famous5 h3 {
+    font-size: 30px;
+    color: #fff;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    margin: 0;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+.product-card-famous1 {
+    background-image: url("../../assets/nike-logo.png");
+    background-position: center;
+    background-size: contain; /* Ensures the entire image fits within the container */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.product-card-famous2 {
+    background-image: url("../../assets/adidas-logo.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.product-card-famous3 {
+    background-image: url("../../assets/puma-logo.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.product-card-famous4 {
+    background-image: url("../../assets/reebok-logo.jpg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.product-card-famous5 {
+    background-image: url("../../assets/h&m-logo.jpg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.product-card-famous1 h3 {
+    animation-delay: 1s;
+}
+
+.product-card-famous2 h3 {
+    animation-delay: 1s;
+}
+
+.product-card-famous3 h3 {
+    animation-delay: 1s;
+}
+
+.product-card-famous4 h3 {
+    animation-delay: 1s;
+}
+
+.product-card-famous5 h3 {
+    animation-delay: 1s;
 }

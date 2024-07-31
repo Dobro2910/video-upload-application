@@ -1,0 +1,104 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    backdrop-filter: blur(5px); /* Apply blur effect */
+    z-index: 999; /* Ensure it's below the dialog but above other content */
+}
+
+.product-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Adds a more prominent shadow for better visibility */
+    z-index: 1000; /* Ensure the dialog is above the overlay */
+    max-height: 90vh; /* Ensure the dialog does not exceed the viewport height */
+    overflow-y: auto; /* Allows scrolling if content exceeds the dialog height */
+}
+
+.product-dialog img {
+    width: 100%;
+    max-height: auto;
+    max-height: 80vh; /* Ensure the image maintains its aspect ratio and fits within 50% of the viewport height */
+    object-fit: cover; /* Ensure the image maintains its aspect ratio and covers the container */
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.product-dialog-detail {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+.product-dialog-detail h2 {
+    margin: 16px 0;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.product-dialog-detail h3 {
+    font-size: 1em;
+    color: #555; /* Slightly darker text for better readability */
+    text-align: center;
+}
+
+.product-dialog-detail p {
+    margin: 8px 0;
+    font-size: 1em;
+    display: flex;
+    justify-content: space-between;
+    color: #555; /* Slightly darker text for better readability */
+}
+
+.product-dialog-detail .quantity-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.product-dialog-detail input {
+    width: 50px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.product-dialog button {
+    margin-top: 24px;
+    padding: 12px 24px;
+    // background-color: #007bff;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.product-dialog button:hover {
+    background-color: #0056b3;
+}
+
+.close-button {
+    position: absolute;
+    // width: 10px;
+    // height: 10px;
+    top: 4px;
+    right: 8px;
+    font-size: 16px;
+    background-color: red;
+    text-align: center;
+}

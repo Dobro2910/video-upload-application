@@ -32,6 +32,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/product_page/product.module').then((m) => m.ProductModule),
       },
+      {
+        path: 'payment',
+        loadChildren: () =>
+          import('./pages/payment_page/payment.module').then((m) => m.PaymentModule),
+      },
       { 
         path: '**', redirectTo: '' 
       } // Default redirect to login if no route matches

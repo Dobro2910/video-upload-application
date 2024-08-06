@@ -1,3 +1,19 @@
+<!-- <div (click)="onClose()" class="overlay"></div>
+<div class="product-dialog">
+    <button mat-button class="close-button" (click)="onClose()">X</button>
+    <img [src]="data.productImage" alt="{{ data.productName }}" />
+    <div class="product-dialog-detail">
+        <h2>{{ data.productName }}</h2>
+        <h3>{{ data.productDescription }}</h3>
+        <p><strong>Price:</strong> {{ data.productPrice | currency }}</p>
+        <div class="quantity-input">
+            <p><strong>Qty:</strong></p>
+            <input id="quantity" type="number" min="1" max="10"/>
+        </div>
+    </div>
+    <button mat-button>Add to Cart</button>
+</div> -->
+
 <div (click)="onClose()" class="overlay"></div>
 <div class="product-dialog">
     <button mat-button class="close-button" (click)="onClose()">X</button>
@@ -6,8 +22,8 @@
         <h2>{{ data.productName }}</h2>
         <h3>{{ data.productDescription }}</h3>
         <p><strong>Price:</strong> {{ data.productPrice | currency }}</p>
-        <p><strong>Size:</strong> {{ data.productSize }}</p>
-        <p><strong>Color:</strong> {{ data.productColor }}</p>
+        <!-- <p><strong>Size:</strong> {{ data.productSize }}</p>
+        <p><strong>Color:</strong> {{ data.productColor }}</p> -->
         <div class="quantity-input">
             <p><strong>Qty:</strong></p>
             <input id="quantity" type="number" min="1" max="10"/>

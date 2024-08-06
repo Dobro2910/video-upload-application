@@ -1,6 +1,6 @@
 // import { Component, Inject } from '@angular/core';
-// import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-// import { Product } from '../../../store/model/product.model';
+// import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+// import { ProductDisplay } from '../../../store/model/product.model';
 
 // @Component({
 //   selector: 'app-product_dialog',
@@ -9,7 +9,14 @@
 // })
 
 // export class ProductDialogComponent {
-//   constructor(@Inject(MAT_DIALOG_DATA) public data: Product) { }
+//   constructor(
+//     public dialogRef: MatDialogRef<ProductDialogComponent>,
+//     @Inject(MAT_DIALOG_DATA) public data: ProductDisplay
+//   ) {}
+
+//   onClose(): void {
+//     this.dialogRef.close();
+//   }
 // }
 
 import { Component, Inject } from '@angular/core';
@@ -32,4 +39,3 @@ export class ProductDialogComponent {
     this.dialogRef.close();
   }
 }
-

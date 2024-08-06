@@ -6,13 +6,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-// Authentication
-import { authReducer } from '../app/store/authentication/authentication.reducer';
-import { AuthEffects } from '../app/store/authentication/authentication.effect';
+// // Authentication
+// import { authReducer } from '../app/store/authentication/authentication.reducer';
+// import { AuthEffects } from '../app/store/authentication/authentication.effect';
 
-// Product
-import { productReducer } from './store/product/product.reducer';
-import { ProductEffects } from './store/product/product.effect';
+// // Product
+// import { productReducer } from './store/product/product.reducer';
+// import { ProductEffects } from './store/product/product.effect';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,8 +21,8 @@ import { ProductEffects } from './store/product/product.effect';
     AppRoutingModule,
     BrowserAnimationsModule,
 
-    StoreModule.forRoot({auth:authReducer, product:productReducer}),
-    EffectsModule.forRoot([AuthEffects, ProductEffects]),
+    // StoreModule.forRoot({auth:authReducer, product:productReducer}),
+    // EffectsModule.forRoot([AuthEffects, ProductEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -14,6 +14,6 @@ export class LandingComponent implements OnInit {
     }
 
     navigateToLogin(): void {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/home']);
     }
 }

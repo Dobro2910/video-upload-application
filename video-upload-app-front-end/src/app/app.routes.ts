@@ -39,7 +39,7 @@ export const routes: Routes = [
       },
       { 
         path: '**', redirectTo: '' 
-      } // Default redirect to login if no route matches
+      } // Default redirect to landing page if no route matches
     ],
   },
 ];

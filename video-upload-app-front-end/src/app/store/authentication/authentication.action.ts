@@ -9,14 +9,6 @@ export const userLoginAction=createAction(USER_LOGIN, props<{userlogincredential
 export const userLoginActionFailure=createAction(USER_LOGIN_FAILURE, props<{error: any}>());
 export const userLoginActionSuccess = createAction(USER_LOGIN_SUCCESS);
 
-// user logout actions
-// export const USER_LOGOUT ='[auth] begin logout'
-// export const USER_LOGOUT_FAILURE ='[auth] logout fail'
-// export const USER_LOGOUT_SUCCESS ='[Auth] logout success'
-// export const userLogoutAction=createAction(USER_LOGOUT);
-// export const userLogoutActionFailure=createAction(USER_LOGOUT_FAILURE, props<{error: any}>());
-// export const userLogoutActionSuccess = createAction(USER_LOGOUT_SUCCESS);
-
 // user sign up actions
 export const NEW_USER_REGISTER ='[auth] begin register'
 export const NEW_USER_REGISTER_FAILURE ='[auth] register fail'

@@ -1,10 +1,14 @@
 import { UserLoginCredential, User } from "../model/user.model";
 import { createAction, props } from "@ngrx/store"
 
+// reset auth state action
+export const RESET_AUTH_ERROR ='[auth] reset auth error'
+export const resetAuthError = createAction(RESET_AUTH_ERROR);
+
 // user login actions
 export const USER_LOGIN ='[auth] begin login'
 export const USER_LOGIN_FAILURE ='[auth] login fail'
-export const USER_LOGIN_SUCCESS ='[Auth] login success'
+export const USER_LOGIN_SUCCESS ='[auth] login success'
 export const userLoginAction=createAction(USER_LOGIN, props<{userlogincredential:UserLoginCredential}>());
 export const userLoginActionFailure=createAction(USER_LOGIN_FAILURE, props<{error: any}>());
 export const userLoginActionSuccess = createAction(USER_LOGIN_SUCCESS);

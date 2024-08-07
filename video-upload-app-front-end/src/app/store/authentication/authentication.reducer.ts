@@ -24,6 +24,11 @@ export const authReducer = createReducer(
     ...state, // Spread operator to create a shallow copy of current state
     error: error
   })),
+
+  on(AuthActions.resetAuthError, (state) => ({
+    ...state,
+    error: null
+  })),
 );
 
 export const authReducerFeatureKey = 'auth';

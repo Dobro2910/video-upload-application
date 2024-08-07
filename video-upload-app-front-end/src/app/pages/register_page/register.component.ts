@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import * as AuthActions from '../../store/authentication/authentication.action';
 import { User, UserRole } from '../../store/model/user.model';
 import { AuthState } from '../../store/authentication/authentication.reducer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage$: Observable<string | null>;
 
-  constructor(private fb: FormBuilder, private store: Store<{ auth: AuthState }>) {
+  constructor(private router: Router, private fb: FormBuilder, private store: Store<{ auth: AuthState }>) {
     this.errorMessage$ = this.store.select(state => state.auth.error);
 
     this.registerForm = this.fb.group({
@@ -27,6 +28,11 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Register component initialized');
+  }
+
+  navigateToLogin(): void {
+    this.store.dispatch(AuthActions.resetAuthError());
+    this.router.navigate(['/login']);
   }
 
   onRegister() {

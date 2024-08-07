@@ -5,44 +5,83 @@ import { AppComponent } from './app.component';
 export const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () =>
-          import('./pages/landing_page/landing.module').then((m) => m.LandingModule),
-      },
-      {
-        path: 'login',
-        loadChildren: () =>
-          import('./pages/login_page/login.module').then((m) => m.LoginModule),
-      },
-      {
-        path: 'register',
-        loadChildren: () =>
-          import('./pages/register_page/register.module').then((m) => m.RegisterModule),
-      },
-      {
-        path: 'home',
-        loadChildren: () =>
-          import('./pages/home_page/home.module').then((m) => m.HomeModule),
-      },
-      {
-        path: 'product',
-        loadChildren: () =>
-          import('./pages/product_page/product.module').then((m) => m.ProductModule),
-      },
-      {
-        path: 'payment',
-        loadChildren: () =>
-          import('./pages/payment_page/payment.module').then((m) => m.PaymentModule),
-      },
-      { 
-        path: '**', redirectTo: '' 
-      } // Default redirect to landing page if no route matches
-    ],
+    loadChildren: () => import('./pages/landing_page/landing.module').then((m) => m.LandingModule),
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login_page/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register_page/register.module').then((m) => m.RegisterModule),
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./pages/home_page/home.module').then((m) => m.HomeModule),
+  },
+  {
+    path: 'product',
+    loadChildren: () => import('./pages/product_page/product.module').then((m) => m.ProductModule),
+  },
+  {
+    path: 'payment',
+    loadChildren: () => import('./pages/payment_page/payment.module').then((m) => m.PaymentModule),
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile_page/profile.module').then((m) => m.ProfileModule),
+  },
+  {
+    path: '**', redirectTo: ''
+  }, // Default redirect to landing page if no route matches
 ];
+
+// export const routes: Routes = [
+//   {
+//     path: '',
+//     component: AppComponent,
+//     children: [
+//       {
+//         path: '',
+//         loadChildren: () =>
+//           import('./pages/landing_page/landing.module').then((m) => m.LandingModule),
+//       },
+//       {
+//         path: 'login',
+//         loadChildren: () =>
+//           import('./pages/login_page/login.module').then((m) => m.LoginModule),
+//       },
+//       {
+//         path: 'register',
+//         loadChildren: () =>
+//           import('./pages/register_page/register.module').then((m) => m.RegisterModule),
+//       },
+//       {
+//         path: 'home',
+//         loadChildren: () =>
+//           import('./pages/home_page/home.module').then((m) => m.HomeModule),
+//       },
+//       {
+//         path: 'product',
+//         loadChildren: () =>
+//           import('./pages/product_page/product.module').then((m) => m.ProductModule),
+//       },
+//       {
+//         path: 'payment',
+//         loadChildren: () =>
+//           import('./pages/payment_page/payment.module').then((m) => m.PaymentModule),
+//       },
+//       {
+//         path: 'profile',
+//         loadChildren: () =>
+//           import('./pages/profile_page/profile.module').then((m) => m.ProfileModule),
+//       },
+//       { 
+//         path: '**', redirectTo: '' 
+//       } // Default redirect to landing page if no route matches
+//     ],
+//   },
+// ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

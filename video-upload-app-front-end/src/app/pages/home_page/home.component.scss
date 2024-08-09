@@ -8,7 +8,7 @@
     padding: 20px;
     padding-top: 0px;
     height: 100%;
-    background-color: #fff; /* Light background color for content area */
+    background-color: white; /* Light background color for content area */
 }
 
 .header {
@@ -35,21 +35,20 @@
     justify-content: center;
 }
 
-.product-card-man, .product-card-woman, .product-card-kid {
+.product-card-man, .product-card-woman, .product-card-unisex {
     background-size: cover; /* Ensures the image covers the entire card */
     background-position: center; /* Centers the image */
     border: 1px solid #ddd;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 15px;
     width: calc(25% - 40px); /* 3 cards per row with gap */
-    height: 60vh;
+    height: 65vh;
     position: relative; /* Needed for positioning the text */
     overflow: hidden;
-
     cursor: pointer;
 }
 
-.product-card-man h3, .product-card-woman h3, .product-card-kid h3 {
+.product-card-man h3, .product-card-woman h3, .product-card-unisex h3 {
     font-size: 30px;
     color: #fff;
     position: absolute;
@@ -68,14 +67,9 @@
     animation-delay: 1s;
 }
 
-.product-card-kid h3 {
+.product-card-unisex h3 {
     animation-delay: 1s;
 }
-
-// .product-card-man p, .product-card-woman p, .product-card-kid p {
-//     font-size: 16px;
-//     color: #666;
-// }
 
 @keyframes fadeIn {
     to {
@@ -86,16 +80,22 @@
 /* Specific background images */
 .product-card-man {
     background-image: url("../../assets/man-model.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
 .product-card-woman {
     background-image: url("../../assets/woman-model.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
-.product-card-kid {
-    background-image: url("../../assets/kid-model.jpg");
+.product-card-unisex {
+    background-image: url("../../assets/unisex-model.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
@@ -148,21 +148,29 @@
 /* Specific background images */
 .product-card-clothes {
     background-image: url("../../assets/clothes.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
 .product-card-shoes {
     background-image: url("../../assets/shoes-model.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
 .product-card-accessories {
     background-image: url("../../assets/accessories-model.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
 .product-card-sport {
     background-image: url("../../assets/sport-model.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
@@ -257,7 +265,7 @@
 }
 
 .product-card-famous5 {
-    background-image: url("../../assets/h&m-logo.jpg");
+    background-image: url("../../assets/h&m-logo.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -281,4 +289,70 @@
 
 .product-card-famous5 h3 {
     animation-delay: 1s;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .product-card-man, .product-card-woman, .product-card-unisex {
+        width: calc(35% - 20px); /* 2 cards per row */
+        height: 70vh;
+    }
+
+    .product-card-clothes, .product-card-shoes, .product-card-accessories, .product-card-sport,
+    .product-card-famous1, .product-card-famous2, .product-card-famous3, .product-card-famous4, .product-card-famous5 {
+        width: calc(33.33% - 20px); /* 3 cards per row */
+        height: 25vh;
+    }
+
+    .header h1 {
+        font-size: 2em; /* Adjust font size */
+    }
+
+    .shop-by-category-title, .shop-by-brands-title {
+        font-size: 1.8em; /* Adjust font size */
+    }
+}
+
+@media (max-width: 768px) {
+    .product-card-man, .product-card-woman, .product-card-unisex {
+        width: calc(50% - 20px);
+        height: 65vh;
+    }
+
+    .product-card-clothes, .product-card-shoes, .product-card-accessories, .product-card-sport,
+    .product-card-famous1, .product-card-famous2, .product-card-famous3, .product-card-famous4, .product-card-famous5 {
+        width: calc(50% - 20px);
+        height: 30vh;
+    }
+
+    .header h1 {
+        font-size: 1.8em; /* Adjust font size */
+        margin-top: 50px;
+    }
+
+    .shop-by-category-title, .shop-by-brands-title {
+        font-size: 1.6em; /* Adjust font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card-man, .product-card-woman, .product-card-unisex {
+        width: calc(50% - 20px);
+        height: 65vh;
+    }
+
+    .product-card-clothes, .product-card-shoes, .product-card-accessories, .product-card-sport,
+    .product-card-famous1, .product-card-famous2, .product-card-famous3, .product-card-famous4, .product-card-famous5 {
+        width: calc(50% - 20px);
+        height: 30vh;
+    }
+
+    .header h1 {
+        font-size: 1.8em; /* Adjust font size */
+        margin-top: 50px;
+    }
+
+    .shop-by-category-title, .shop-by-brands-title {
+        font-size: 1.6em; /* Adjust font size */
+    }
 }

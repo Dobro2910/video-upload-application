@@ -1,4 +1,4 @@
-<main class="home-page">
+<!-- <main class="home-page">
     <app-sidebar></app-sidebar>
     <app-shopping-cart></app-shopping-cart>
     <app-user-profile></app-user-profile>
@@ -41,5 +41,49 @@
             <a (click)="setValue('', '', '', 'H&M')" class="product-card-famous5"></a>
         </section>
     </div>
-</main>
+</main> -->
 
+<main class="home-page">
+    <app-sidebar></app-sidebar>
+    <app-shopping-cart></app-shopping-cart>
+    <app-user-profile></app-user-profile>
+    <div class="main-content">
+        <header class="header">
+            <h1>Welcome to Our Shop</h1>
+        </header>
+        <section class="product-list-gender">
+            <a (click)="setValue('Male', '', '', '')" class="product-card-man">
+                <h3>Men</h3>
+            </a>
+            <a (click)="setValue('Female', '', '', '')" class="product-card-woman">
+                <h3>Women</h3>
+            </a>
+            <a (click)="setValue('Unisex', '', '', '')" class="product-card-unisex">
+                <h3>Unisex</h3>
+            </a>
+        </section>
+        <p class="shop-by-category-title">Shop by Category</p>
+        <section class="product-list-category">
+            <a (click)="setValue('', 'Shirt', '', '')" class="product-card-clothes">
+                <h3>Clothes</h3>
+            </a>
+            <a (click)="setValue('', 'Shoes', '', '')" class="product-card-shoes">
+                <h3>Shoes</h3>
+            </a>
+            <a (click)="setValue('', '', '', '')" class="product-card-accessories">
+                <h3>Accessories</h3>
+            </a>
+            <a (click)="setValue('', '', '', '')" class="product-card-sport">
+                <h3>Sport</h3>
+            </a>
+        </section>
+        <p class="shop-by-brands-title">Shop by Brands</p>
+        <section class="product-list-brands">
+            <a (click)="setValue('', '', '', 'Nike')" class="product-card-famous1"></a>
+            <a (click)="setValue('', '', '', 'Adidas')" class="product-card-famous2"></a>
+            <a (click)="setValue('', '', '', 'Puma')" class="product-card-famous3"></a>
+            <a (click)="setValue('', '', '', 'Reebok')" class="product-card-famous4"></a>
+            <a (click)="setValue('', '', '', 'H&M')" class="product-card-famous5"></a>
+        </section>
+    </div>
+</main>

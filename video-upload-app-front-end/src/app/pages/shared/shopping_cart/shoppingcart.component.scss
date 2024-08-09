@@ -12,6 +12,43 @@
 }
 
 .shopping-cart svg {
-    width: 40px;
-    height: 40px;
+    width: 100%; /* Adjust the width and height to be 100% of the container */
+    height: 100%;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 1200px) {
+    .shopping-cart {
+        top: 20px;
+        width: 35px;
+        height: 35px;
+    }
+
+    .shopping-cart {
+        right: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .shopping-cart {
+        top: 28px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .shopping-cart {
+        right: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .shopping-cart {
+        top: 16px;
+        width: 25px;
+        height: 25px;
+    }
+
+    .shopping-cart {
+        right: 60px;
+    }
 }

@@ -14,7 +14,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 90%;
+    max-width: 800px; /* Limit the width on larger screens */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,8 +29,8 @@
 }
 
 .product-dialog img {
-    width: 100%;
-    max-height: 50vh; /* Ensure the image maintains its aspect ratio and fits within 50% of the viewport height */
+    width: 90%;
+    height: 45%;
     object-fit: cover; /* Ensure the image maintains its aspect ratio and covers the container */
     border-radius: 8px;
     margin-bottom: 16px;
@@ -142,4 +143,40 @@
 .product-color-details div {
     flex: 1 1 45%;
     margin: 4px 0;
+}
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+    .product-dialog {
+        width: 75%;
+        max-width: 90%;
+        padding: 16px;
+    }
+
+    .product-dialog-detail h2 {
+        font-size: 1.5em;
+    }
+
+    .product-dialog-detail p {
+        font-size: 1em;
+    }
+
+    .product-dialog button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-dialog {
+        width: 75%;
+        padding: 12px;
+    }
+
+    .product-dialog-detail h2 {
+        font-size: 1.25em;
+    }
+
+    .product-dialog-detail p {
+        font-size: 0.9em;
+    }
 }

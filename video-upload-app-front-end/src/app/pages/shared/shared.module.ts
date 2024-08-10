@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SideBarComponent } from './side_bar/sidebar.component';
 import { ShoppingCartComponent } from './shopping_cart/shoppingcart.component';
-import { UserProfileComponent } from './user_profile/userprofile.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     SideBarComponent,
     ShoppingCartComponent,
-    UserProfileComponent
+    ProfileComponent
   ],
   imports: [
     CommonModule
@@ -17,7 +17,8 @@ import { UserProfileComponent } from './user_profile/userprofile.component';
   exports: [
     SideBarComponent,
     ShoppingCartComponent,
-    UserProfileComponent
+    ProfileComponent
   ]
 })
+
 export class SharedModule {}

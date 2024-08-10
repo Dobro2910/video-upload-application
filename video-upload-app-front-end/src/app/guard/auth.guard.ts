@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthenticationService } from '../service/authentication.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserRole } from '../store/model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,17 @@ export class AuthGuard implements CanActivate {
     const jwtHelper = new JwtHelperService(); // Create an instance of JwtHelperService to manage JWT tokens
     const token = this.authService.getToken(); // Retrieve the JWT token from local storage
 
-    console.log(token);
-
     if (token && !jwtHelper.isTokenExpired(token)) {
+      const decodedToken = jwtHelper.decodeToken(token);
+      const userRole = decodedToken.role;
+      console.log(userRole);
+      // if (userRole == UserRole.Admin) {
+
+      // } else if (userRole == UserRole.Seller) {
+
+      // } else if (userRole == UserRole.User) {
+
+      // }
       return true; // Allow access if the token is valid and not expired
     } else {
       // Redirect to the login page if the token is missing or expired

@@ -19,8 +19,6 @@ export class AuthEffects {
           tap((response: any) => {
             this.authService.storeToken(response.token); // Store token in local storage
             this.router.navigate(['/home']); // Navigate to home on success
-
-            // return AuthActions.userLoginActionSuccess({ token: response.token });
           }),
           map(() => AuthActions.userLoginActionSuccess()),
           catchError(error => {
@@ -41,15 +39,6 @@ export class AuthEffects {
     )
   );
 
-  // logoutUser$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AuthActions.userLogoutAction), // Listen for user login action
-  //     mergeMap(action =>
-  //       await this.authService.removeToken();
-  //     )
-  //   )
-  // );
-
   createUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.createUserAction),
@@ -57,7 +46,6 @@ export class AuthEffects {
           this.authService.UserRegister(action.user).pipe(
             tap(() => {
               this.router.navigate(['/login']); // Navigate to home on success
-              // return AuthActions.createUserActionSuccess({ message: response.message });
             }),
             map(() => AuthActions.createUserActionSuccess()),
             catchError(error => {

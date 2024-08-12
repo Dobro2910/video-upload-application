@@ -1,3 +1,101 @@
+// /* Container for burger sidebar */
+// .burger-sidebar {
+//     position: relative;
+// }
+
+// /* Burger icon */
+// .burger-icon {
+//     font-size: 40px;
+//     cursor: pointer;
+//     color: #333;
+//     position: fixed;
+//     top: 15px;
+//     left: 25px;
+//     z-index: 1000;
+// }
+
+// /* Sidebar styles */
+// .app-sidebar {
+//     width: 200px; /* Adjust width as needed */
+//     height: 100vh; /* Full viewport height */
+//     background-color: #333; /* Dark background color */
+//     padding: 20px;
+//     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sidebar box shadow */
+//     color: #fff; /* White text color */
+//     position: fixed;
+//     top: 0;
+//     left: -300px; /* Initially hidden */
+//     transition: left 0.3s ease;
+//     z-index: 999;
+// }
+
+// /* Close button inside sidebar */
+// .close-icon {
+//     font-size: 30px;
+//     cursor: pointer;
+//     padding: 10px;
+//     padding-bottom: 0;
+//     padding-top: 0;
+//     color: #fff;
+//     text-align: right;
+// }
+
+// /* Active class for showing sidebar */
+// .app-sidebar.active {
+//     left: 0; /* Show sidebar */
+// }
+
+// .top-menu {
+//     list-style-type: none;
+//     margin: 0; /* Remove margin */
+//     padding: 10px;
+//     padding-top: 0px;
+//     padding-bottom: 0px;
+//     cursor: pointer;
+// }
+
+// .top-menu li {
+//     margin-bottom: 10px;
+// }
+
+// .top-menu li a {
+//     display: block;
+//     padding: 10px;
+//     color: #fff; /* White text color */
+//     text-decoration: none;
+//     border-radius: 4px; /* Rounded corners */
+//     transition: background-color 0.3s ease;
+// }
+
+// .top-menu li a:hover {
+//     background-color: #444; /* Darker hover background color */
+// }
+
+// .bottom-menu {
+//     display: block;
+//     position: absolute;
+//     bottom: 70px;
+//     width: 74%;
+//     cursor: pointer;
+// }
+
+// .bottom-menu :hover{
+//     background-color: #444;
+// }
+
+// .bottom-menu li {
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+//     border-radius: 4px;
+// }
+
+// .bottom-menu li svg {
+//     width: 13px;
+//     height: 13px;
+//     fill: #fff;
+// }
+
 /* Container for burger sidebar */
 .burger-sidebar {
     position: relative;
@@ -79,7 +177,7 @@
     cursor: pointer;
 }
 
-.bottom-menu :hover{
+.bottom-menu :hover {
     background-color: #444;
 }
 
@@ -94,4 +192,66 @@
     width: 13px;
     height: 13px;
     fill: #fff;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 1200px) {
+    .burger-icon {
+        font-size: 35px;
+        top: 12px;
+        left: 20px;
+    }
+    .app-sidebar {
+        width: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .burger-icon {
+        font-size: 30px;
+        top: 20px;
+        left: 25px;
+    }
+    .app-sidebar {
+        width: 160px;
+        padding: 15px;
+    }
+    .close-icon {
+        font-size: 25px;
+    }
+    .top-menu li a {
+        padding: 8px;
+    }
+    .bottom-menu {
+        bottom: 60px;
+    }
+    .bottom-menu li svg {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .burger-icon {
+        font-size: 25px;
+        top: 8px;
+        left: 10px;
+    }
+    .app-sidebar {
+        width: 140px;
+        padding: 10px;
+    }
+    .close-icon {
+        font-size: 20px;
+    }
+    .top-menu li a {
+        padding: 6px;
+    }
+    .bottom-menu {
+        bottom: 50px;
+    }
+    .bottom-menu li svg {
+        width: 10px;
+        height: 10px;
+    }
 }

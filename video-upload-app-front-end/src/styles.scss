@@ -5,7 +5,7 @@
 $theme: mat.define-theme((
   color: (
     theme-type: light,
-    primary: mat.$rose-palette
+    // primary: mat.$rose-palette
   )
 ));
 
@@ -21,4 +21,5 @@ body, html {
   width: 100%;
   height: 100%;
 }
+
 

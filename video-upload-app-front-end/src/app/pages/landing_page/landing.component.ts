@@ -13,7 +13,7 @@ export class LandingComponent implements OnInit {
         console.log('Landing component initialized');
     }
 
-    navigateToLogin(): void {
-        this.router.navigate(['/login']);
+    navigateToHome(): void {
+        this.router.navigate(['/home']);
     }
 }

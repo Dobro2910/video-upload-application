@@ -1,6 +1,7 @@
 <main class="home-page">
     <app-sidebar></app-sidebar>
     <app-shopping-cart></app-shopping-cart>
+    <app-profile></app-profile>
     <div class="main-content">
         <header class="header">
             <h1>Welcome to Our Shop</h1>
@@ -12,8 +13,8 @@
             <a (click)="setValue('Female', '', '', '')" class="product-card-woman">
                 <h3>Women</h3>
             </a>
-            <a (click)="setValue('', '', '', '')" class="product-card-kid">
-                <h3>Kids</h3>
+            <a (click)="setValue('Unisex', '', '', '')" class="product-card-unisex">
+                <h3>Unisex</h3>
             </a>
         </section>
         <p class="shop-by-category-title">Shop by Category</p>
@@ -41,4 +42,3 @@
         </section>
     </div>
 </main>
-

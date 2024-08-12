@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import * as AuthActions from '../../store/authentication/authentication.action'
 import { UserLoginCredential } from '../../store/model/user.model';
 import { AuthState } from '../../store/authentication/authentication.reducer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +14,17 @@ import { AuthState } from '../../store/authentication/authentication.reducer';
 export class LoginComponent implements OnInit {
   errorMessage$: Observable<string | null>;
 
+  constructor(private router: Router, private store: Store<{ auth: AuthState }>) {
+    this.errorMessage$ = this.store.select(state => state.auth.error);
+  }
+
   ngOnInit(): void {
     console.log('Login component initialized');
   }
 
-  constructor(private store: Store<{ auth: AuthState }>) {
-    this.errorMessage$ = this.store.select(state => state.auth.error);
+  navigateToRegister(): void {
+    this.store.dispatch(AuthActions.resetAuthError());
+    this.router.navigate(['/register']);
   }
 
   onLogin(emailInput: string, passwordInput: string) {

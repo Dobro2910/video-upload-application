@@ -9,42 +9,15 @@ import * as ProductActions from '../product/product.action';
 @Injectable()
 export class ProductEffects {
 
-  getAllProduct$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ProductActions.getAllProductAction),
-      mergeMap(action =>
-        this.productService.getAllProduct().pipe(
-          tap((response: any) => {
-            console.log(response.products);
-          }),
-          map(response => ProductActions.getAllProductSuccess({ products: response.products })),
-          catchError(error => {
-            // Handle login failure, return error message
-            console.error('get all products failed:', error);
-            
-            let errorMessage;
-            if (error.status === 404) {
-              errorMessage = "No Product Available";
-            } else {
-              errorMessage = "An Error Have Occur When Get All Products";
-            }
-
-            return of(ProductActions.getAllProductFailure({ error: errorMessage }));
-          })
-        )
-      )
-    )
-  );
-
   getPaginatedProduct$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ProductActions.getPaginatedProductAction),
+      ofType(ProductActions.getPaginatedProductsAction),
       mergeMap(action =>
-        this.productService.getPaginatedProduct(action.page).pipe(
-          tap((response: any) => {
-            console.log(response.products);
-          }),
-          map(response => ProductActions.getPaginatedProductSuccess({ products: response.products })),
+        this.productService.getPaginatedProducts(action.page).pipe(
+          // tap((response: any) => {
+          //   console.log(response.products);
+          // }),
+          map(response => ProductActions.getPaginatedProductsSuccess({ productsDisplay: response.products })),
           catchError(error => {
             // Handle login failure, return error message
             console.error('get paginated products failed:', error);
@@ -56,7 +29,7 @@ export class ProductEffects {
               errorMessage = "An Error Have Occur When Get Paginated Products";
             }
 
-            return of(ProductActions.getPaginatedProductFailure({ error: errorMessage }));
+            return of(ProductActions.getPaginatedProductsFailure({ error: errorMessage }));
           })
         )
       )
@@ -65,9 +38,9 @@ export class ProductEffects {
 
   getFilterProduct$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ProductActions.getFilterProductAction),
+      ofType(ProductActions.getPaginatedProductsByFilterAction),
       mergeMap(action =>
-        this.productService.findProductByFilter({
+        this.productService.getPaginatedProductsByFilter({
           filterPage: action.filterPage,
           // productPrice: action.productPrice,
           productBrand: action.productBrand,
@@ -78,7 +51,7 @@ export class ProductEffects {
           tap((response: any) => {
             console.log(response.products);
           }),
-          map(response => ProductActions.getFilterProductActionSuccess({ products: response.products })),
+          map(response => ProductActions.getPaginatedProductsByFilterActionSuccess({ productsDisplay: response.products })),
           catchError(error => {
             // Handle login failure, return error message
             console.error('get products by filter failed:', error);
@@ -90,12 +63,39 @@ export class ProductEffects {
               errorMessage = "An Error Have Occur When Get Products By Filter";
             }
 
-            return of(ProductActions.getFilterProductActionFailure({ error: errorMessage }));
+            return of(ProductActions.getPaginatedProductsByFilterActionFailure({ error: errorMessage }));
           })
         )
       )
     )
   );
+
+  // getAllProduct$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(ProductActions.getAllProductAction),
+  //     mergeMap(action =>
+  //       this.productService.getAllProduct().pipe(
+  //         tap((response: any) => {
+  //           console.log(response.products);
+  //         }),
+  //         map(response => ProductActions.getAllProductSuccess({ products: response.products })),
+  //         catchError(error => {
+  //           // Handle login failure, return error message
+  //           console.error('get all products failed:', error);
+            
+  //           let errorMessage;
+  //           if (error.status === 404) {
+  //             errorMessage = "No Product Available";
+  //           } else {
+  //             errorMessage = "An Error Have Occur When Get All Products";
+  //           }
+
+  //           return of(ProductActions.getAllProductFailure({ error: errorMessage }));
+  //         })
+  //       )
+  //     )
+  //   )
+  // );
 
   constructor(
     private actions$: Actions,

@@ -1,6 +1,7 @@
 <main class="product-page">
     <app-sidebar></app-sidebar>
     <app-shopping-cart></app-shopping-cart>
+    <app-profile></app-profile>
     <div class="main-content">
         <header class="header">
             <a href="/home">
@@ -28,11 +29,6 @@
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                 </select>
-                <!-- <select id="price">
-                    <option value="all">Price</option>
-                    <option value="lowtohigh">Low → High</option>
-                    <option value="hightolow">High → Low</option>
-                </select> -->
                 <select id="brand" [(ngModel)]="filterVar.productBrand">
                     <option value="">All</option>
                     <option value="Nike">Nike</option>
@@ -42,23 +38,23 @@
                     <option value="Reebok">Reebok</option>
                     <option value="H&M">H&M</option>
                 </select>
-                <button (click)="findProductsByFilter()" id="searchButton">Search</button>
+                <button (click)="getPaginatedProductsByFilter()" id="searchButton">Search</button>
             </div>
         </header>
         <section>
-            <div *ngIf="products$ | async as products">
-              <div *ngIf="products && products.length > 0; else noProducts" class="products">
-                <div *ngFor="let product of products" class="product" (click)="displayProduct(product)">
-                  <img [src]="product.productImage" alt="{{ product.productName }}" />
-                  <h3>{{ product.productName }}</h3>
-                  <p>{{ product.productDescription }}</p>
-                  <p>Price: {{ product.productPrice | currency }}</p>
+            <div *ngIf="productsDisplay$ | async as productsDisplay; else noProductsDisplay">
+                <div class="products">
+                <div *ngFor="let productDisplay of productsDisplay" class="product" (click)="displayProduct(productDisplay)">
+                    <img [src]="productDisplay.productImage" alt="{{ productDisplay.productName }}" />
+                    <h3>{{ productDisplay.productName }}</h3>
+                    <p>{{ productDisplay.productDescription }}</p>
+                    <p>Price: {{ productDisplay.productPrice | currency }}</p>
                 </div>
-              </div>
-              <ng-template #noProducts>
-                <p class="no-products">No products available.</p>
-              </ng-template>
+                </div>
             </div>
+            <ng-template #noProductsDisplay>
+                <p class="no-products">No products available.</p>
+            </ng-template>
         </section>
 
         <div class="pagination">

@@ -28,8 +28,16 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/payment_page/payment.module').then((m) => m.PaymentModule),
   },
   {
-    path: 'profile',
+    path: 'userprofile',
     loadChildren: () => import('./pages/user_profile_page/user_profile.module').then((m) => m.UserProfileModule),
+  },
+  {
+    path: 'sellerprofile',
+    loadChildren: () => import('./pages/seller_profile_page/seller_profile.module').then((m) => m.SellerProfileModule),
+  },
+  {
+    path: 'adminprofile',
+    loadChildren: () => import('./pages/admin_profile_page/admin_profile.module').then((m) => m.AdminProfileModule),
   },
   {
     path: '**', redirectTo: ''

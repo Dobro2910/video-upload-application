@@ -23,16 +23,14 @@ export class AuthGuard implements CanActivate {
 
     if (token && !jwtHelper.isTokenExpired(token)) {
       const decodedToken = jwtHelper.decodeToken(token);
-      const userRole = decodedToken.role;
-      console.log(userRole);
-      // if (userRole == UserRole.Admin) {
-
-      // } else if (userRole == UserRole.Seller) {
-
-      // } else if (userRole == UserRole.User) {
-
-      // }
-      return true; // Allow access if the token is valid and not expired
+      const userRole = decodedToken.role as UserRole;
+      const allowedRoles = route.data['roles'] as UserRole[];
+        if (allowedRoles && allowedRoles.includes(userRole)) {
+          return true; // Allow access if the user's role is in the list of allowed roles
+        } else {
+          this.router.navigate(['/login']); // Redirect to unauthorized page if role doesn't match
+          return false; // Deny access
+        }
     } else {
       // Redirect to the login page if the token is missing or expired
       // The `queryParams` object contains a `returnUrl` key which is set to the URL the user attempted to access

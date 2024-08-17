@@ -1,3 +1,4 @@
+/* Overlay */
 .overlay {
     position: fixed;
     top: 0;
@@ -9,174 +10,263 @@
     z-index: 999; /* Ensure it's below the dialog but above other content */
 }
 
+/* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+.product-dialog::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+/* Hide scrollbar for Firefox */
+.product-dialog {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Product Dialog */
 .product-dialog {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
     width: 90%;
-    max-width: 800px; /* Limit the width on larger screens */
+    max-width: 1200px;
+    height: 90vh;
+
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 24px;
+    flex-direction: row;
+
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Adds a more prominent shadow for better visibility */
-    z-index: 1000; /* Ensure the dialog is above the overlay */
-    max-height: 90vh; /* Ensure the dialog does not exceed the viewport height */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+
+    overflow: hidden;
     overflow-y: auto; /* Allows scrolling if content exceeds the dialog height */
 }
 
-.product-dialog img {
-    width: 90%;
-    height: 45%;
-    object-fit: cover; /* Ensure the image maintains its aspect ratio and covers the container */
-    border-radius: 8px;
-    margin-bottom: 16px;
+/* Image Section */
+.product-image-section {
+    flex: 1;
+    min-width: 60%;
+    max-width: 60%;
+    // min-height: 100%;
+    border-right: 1px solid #ddd;
 }
 
-.product-dialog-detail {
+.product-image-section img {
     width: 100%;
-    padding: 0 16px;
-    box-sizing: border-box;
+    height: 100%;
 }
 
-.product-dialog-detail h2 {
-    margin: 16px 0;
-    font-size: 1.75em;
-    text-align: center;
-    color: #333; /* Darker text for better readability */
+/* Product Details */
+.product-dialog-detail {
+    flex: 1;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
 }
 
-.product-dialog-detail h3 {
-    font-size: 1.25em;
-    color: #666; /* Slightly darker text for better readability */
-    text-align: center;
+.product-dialog-detail h1 {
+    font-size: 2em;
+    color: #333;
 }
 
 .product-dialog-detail p {
-    margin: 8px 0;
-    font-size: 1.1em;
-    display: flex;
-    justify-content: space-between;
-    color: #555; /* Slightly darker text for better readability */
+    font-size: 1.2em;
+    color: #666;
 }
 
-.product-dialog-detail .quantity-input {
+.product-color-options h3 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.color-swatch-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.color-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+.color-swatch:hover, 
+.color-swatch.active {
+    border: 2px solid #007bff;
+}
+
+/* Size and Stock Display */
+.product-size-stock-display {
     margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
 }
 
-.product-dialog-detail input {
-    width: 50px;
-    padding: 4px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    text-align: center;
+.size-stock-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: border 0.3s ease;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    color: #666;
 }
 
-.product-dialog button {
-    margin-top: 24px;
-    padding: 12px 24px;
+.size-stock-swatch.selected {
+    background-color: #007bff; /* Change to your desired color */
+    color: #fff; /* Change text color if necessary */
+}
+
+.product-info h3 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.product-info p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Add to Bag Button */
+.add-to-bag {
+    width: 40%;
+    padding: 12px;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    align-self: center; /* Center the button horizontally */
+    margin-top: auto; /* Ensure it stays at the bottom */
 }
 
-.product-dialog button:hover {
+.add-to-bag:hover {
     background-color: #0056b3;
-}
-
-.product-dialog-detail ul {
-    padding: 0;
-    list-style: none;
-    text-align: left;
-}
-
-.product-dialog-detail ul ul {
-    margin-top: 8px;
-    margin-left: 16px;
-}
-
-.product-dialog-detail li {
-    margin: 8px 0;
-}
-
-.product-color-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-}
-
-.product-color-card:hover {
-    transform: scale(1.02);
-}
-
-.product-color-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.product-color-header h4 {
-    margin: 0;
-    font-size: 1.25em;
-    color: #333;
-}
-
-.product-color-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px; /* Adjust the gap as needed */
-}
-
-.product-color-details div {
-    flex: 1 1 45%;
-    margin: 4px 0;
 }
 
 /* Media Queries for Smaller Screens */
 @media (max-width: 768px) {
     .product-dialog {
-        width: 75%;
-        max-width: 90%;
-        padding: 16px;
+        flex-direction: column;
+        width: 95%;
     }
 
-    .product-dialog-detail h2 {
+    .product-image-section {
+        max-width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .product-dialog-detail {
+        max-width: 100%;
+    }
+
+    .product-dialog-detail h1 {
         font-size: 1.5em;
+        color: #333;
     }
 
-    .product-dialog-detail p {
-        font-size: 1em;
+    .product-color-options h3 {
+        font-size: 1.1em;
+        color: #333;
+    }
+    
+    .product-info h3 {
+        font-size: 1.1em;
+        color: #333;
     }
 
-    .product-dialog button {
+    .product-size-stock-display {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-size-stock-display select {
         width: 100%;
     }
+
+    // .product-dialog-detail h3 {
+    //     font-size: 1.1em;
+    //     color: #333;
+    // }
+
+    // .product-size-stock-display p {
+    //     font-size: 1.1em;
+    //     color: #333;
+    // }
 }
 
 @media (max-width: 480px) {
     .product-dialog {
-        width: 75%;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transform: none;
+        border-radius: 0;
+    }
+
+    .product-dialog-detail {
         padding: 12px;
     }
 
-    .product-dialog-detail h2 {
+    .product-dialog-detail h1 {
         font-size: 1.25em;
+        color: #333;
     }
 
     .product-dialog-detail p {
         font-size: 0.9em;
+        color: #666;
     }
+
+    .product-color-options h3 {
+        font-size: 1em;
+        color: #333;
+    }
+
+    .product-info h3 {
+        font-size: 1em;
+        color: #333;
+    }
+
+    .product-info p {
+        font-size: 0.9em;
+        color: #666;
+    }
+
+    .add-to-bag {
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    // .product-size-stock-display p {
+    //     font-size: 0.9em;
+    //     color: #333;
+    // }
+
+    // .product-dialog-detail h3 {
+    //     font-size: 1em;
+    //     color: #333;
+    // }
 }

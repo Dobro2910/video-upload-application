@@ -23,6 +23,18 @@ export interface ProductColorVarietyDetail {
     productStock: number[];
 }
 
+export interface ProductInCart {
+    productId?: string;
+    productName: string;
+    productDescription: string;
+    productPrice: number;
+    productGender: string;
+    productImage: string;
+    productAmountSold: number;
+    productColor: string | null;
+    productSize: string | null;
+}
+
 export interface ProductDisplay {
     productId?: string;
     productName: string;

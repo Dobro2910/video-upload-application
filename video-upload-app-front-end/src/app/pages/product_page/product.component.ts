@@ -9,6 +9,7 @@ import { FilterService } from '../../service/filter.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDialogComponent } from './product_dialog/product_dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -16,7 +17,7 @@ import { ProductDialogComponent } from './product_dialog/product_dialog.componen
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  constructor(private store: Store<{ product: ProductState }>, private filterSevice: FilterService, private dialog: MatDialog) { 
+  constructor(private router: Router, private store: Store<{ product: ProductState }>, private filterSevice: FilterService, private dialog: MatDialog) { 
     this.productsDisplay$ = this.store.select(state => state.product.productsDisplay);
     this.filterCheck$ = this.store.select(state => state.product.filterCheck);
   }
@@ -107,5 +108,9 @@ export class ProductComponent implements OnInit {
         }
       })
     ).subscribe();
+  }
+
+  goToHomePage(): void {
+    this.router.navigate(['/home']);
   }
 }

@@ -1,34 +1,55 @@
 <div (click)="onClose()" class="overlay"></div>
 <div class="product-dialog">
-    <img [src]="data.productImage" alt="{{ data.productName }}" />
-    <div class="product-dialog-detail">
-        <h2>{{ data.productName }}</h2>
-        <div>
-            <h4>Product Details</h4>
-            <ul>
-                <li *ngFor="let colorDetail of data.productColorVarietyDetail" class="product-color-card">
-                    <div class="product-color-header">
-                        <h4>{{ colorDetail.productColor }}</h4>
-                    </div>
-                    <div class="product-color-details">
-                        <div *ngFor="let i of getIndexes(colorDetail.productSize.length)">
-                            Size: {{ colorDetail.productSize[i] }} - Stock: {{ colorDetail.productStock[i] }}
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <h3>{{ data.productDescription }}</h3>
-        <p><strong>Price:</strong> {{ data.productPrice | currency }}</p>
-        <p><strong>Gender:</strong> {{ data.productGender }}</p>
-        <p><strong>Amount Sold:</strong> {{ data.productAmountSold }}</p>
-        <div class="quantity-input">
-            <p><strong>Qty:</strong></p>
-            <input id="quantity" type="number" min="1" max="10"/>
-        </div>
+    <div class="product-image-section">
+        <img [src]="data.productImage" alt="{{ data.productName }}" />
     </div>
-    <button mat-button>Add to Cart</button>
-</div>
+    <div class="product-dialog-detail">
+        <h1>{{ data.productName }}</h1>
+        <p>{{ data.productDescription }}</p>
 
+        <div class="product-color-options">
+            <h3>Colour and Size</h3>
+            <div class="color-swatch-container">
+                <div 
+                    *ngFor="let colorDetail of data.productColorVarietyDetail"
+                    class="color-swatch" 
+                    [style.backgroundColor]="colorDetail.productColor"
+                    (click)="selectColor(colorDetail)"
+                >
+                </div>
+            </div>
+        </div>
+
+        <div class="product-size-stock-display" *ngIf="selectedColorDetails">
+            <div 
+                *ngFor="let size of selectedColorDetails.productSize"
+                class="size-stock-swatch"
+                [ngClass]="{'selected': selectedSize === size}"
+                (click)="selectSize(size)"
+            >{{ size }}
+            </div>
+        </div>
+        
+        <!-- <div class="product-size-stock-display" *ngIf="selectedColorDetails">
+            <div 
+                *ngFor="let size of selectedColorDetails.productSize; let i = index"
+                class="size-stock-swatch"
+                [ngClass]="{'selected': selectedSize === size}"
+                (click)="selectSize(size)"
+            >{{ size }} - {{ selectedColorDetails.productStock[i] }}
+            </div>
+        </div> -->
+
+        <div class="product-info">
+            <h3>Price</h3>
+            <p>{{ data.productPrice | currency }}</p>
+            <h3>Gender</h3>
+            <p>{{ data.productGender }}</p>
+            <h3>AmountSold</h3>
+            <p>{{ data.productAmountSold }}</p>
+        </div>
+
+        <button (click)="addToCart()" mat-button class="add-to-bag">Add to Bag</button>
+    </div>
+</div>
 

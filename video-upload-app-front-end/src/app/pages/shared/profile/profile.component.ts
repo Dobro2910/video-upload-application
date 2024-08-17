@@ -10,31 +10,31 @@ import { UserRole } from '../../../store/model/user.model';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-    constructor(private router: Router, private authService: AuthenticationService,) { }
+  constructor(private router: Router, private authService: AuthenticationService) { }
 
-    token: string | null = null;
+  token: string | null = null;
 
-    ngOnInit(): void {
-      console.log('Profile component initialized');
-    }
+  ngOnInit(): void {
+    console.log('Profile component initialized');
+  }
 
-    goToProfilePage(): void {
-      const jwtHelper = new JwtHelperService(); // Create an instance of JwtHelperService to manage JWT tokens
-      const token = this.authService.getToken(); // Retrieve the JWT token from local storage
+  goToProfilePage(): void {
+    const jwtHelper = new JwtHelperService(); // Create an instance of JwtHelperService to manage JWT tokens
+    const token = this.authService.getToken(); // Retrieve the JWT token from local storage
 
-      if (token && !jwtHelper.isTokenExpired(token)) {
-        const decodedToken = jwtHelper.decodeToken(token);
-        const userRole = decodedToken.role as UserRole;
+    if (token && !jwtHelper.isTokenExpired(token)) {
+      const decodedToken = jwtHelper.decodeToken(token);
+      const userRole = decodedToken.role as UserRole;
 
-        if (userRole == UserRole.User) {
-          this.router.navigate(['/userprofile']);
-        } else if (userRole == UserRole.Seller) {
-          this.router.navigate(['/sellerprofile']);
-        } else if (userRole == UserRole.Admin) {
-          this.router.navigate(['/adminprofile']);
-        }
-      } else {
-        this.router.navigate(['/login']);
+      if (userRole == UserRole.User) {
+        this.router.navigate(['/userprofile']);
+      } else if (userRole == UserRole.Seller) {
+        this.router.navigate(['/sellerprofile']);
+      } else if (userRole == UserRole.Admin) {
+        this.router.navigate(['/adminprofile']);
       }
+    } else {
+      this.router.navigate(['/login']);
     }
+  }
 }

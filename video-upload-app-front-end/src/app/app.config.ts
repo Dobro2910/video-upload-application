@@ -16,6 +16,9 @@ import { AuthEffects } from './store/authentication/authentication.effect';
 import { productReducer, productReducerFeatureKey } from './store/product/product.reducer';
 import { ProductEffects } from './store/product/product.effect';
 
+// Product
+import { shoppingCartReducer, shoppingCartReducerFeatureKey } from './store/shopping_cart/shopping_cart.reducer';
+
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
@@ -24,7 +27,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     
 
-    provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer}),
+    provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer, [shoppingCartReducerFeatureKey]: shoppingCartReducer}),
     provideEffects(AuthEffects, ProductEffects)
   ]
 };

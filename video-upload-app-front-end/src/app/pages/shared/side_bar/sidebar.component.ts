@@ -11,6 +11,8 @@ import { FilterService } from '../../../service/filter.service';
 export class SideBarComponent implements OnInit {
   constructor(private authService: AuthenticationService, private router: Router, private filterService: FilterService) { }
 
+  isLoggedIn: boolean = false; // Property to track if user is logged in
+
   productGender: string = '';
   productCategory: string = '';
   productBrand: string = '';
@@ -18,6 +20,9 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Side Bar component initialized');
+    if (this.authService.getToken()) {
+      this.isLoggedIn = true;
+    }
   }
 
   toggleSidebar() {
@@ -38,6 +43,7 @@ export class SideBarComponent implements OnInit {
 
   toggleLogout() {
     this.authService.removeToken();
+    this.router.navigate(['/']);
   }
 
   setValue(gender: string, category: string, size: string, brand: string): void {

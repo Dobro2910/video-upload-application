@@ -8,7 +8,7 @@
         <p>{{ data.productDescription }}</p>
 
         <div class="product-color-options">
-            <h3>Colour</h3>
+            <h3>Colour and Size</h3>
             <div class="color-swatch-container">
                 <div 
                     *ngFor="let colorDetail of data.productColorVarietyDetail"
@@ -20,28 +20,25 @@
             </div>
         </div>
 
-        <!-- <div 
-            *ngFor="let stock of selectedColorDetails.productStock"
-            class="size-swatch"
-            (click)="selectSize($event)"
-        >{{ stock }}
-        </div> -->
-        
         <div class="product-size-stock-display" *ngIf="selectedColorDetails">
             <div 
                 *ngFor="let size of selectedColorDetails.productSize"
                 class="size-stock-swatch"
+                [ngClass]="{'selected': selectedSize === size}"
+                (click)="selectSize(size)"
             >{{ size }}
             </div>
         </div>
-
-        <div class="product-size-stock-display" *ngIf="selectedColorDetails">
+        
+        <!-- <div class="product-size-stock-display" *ngIf="selectedColorDetails">
             <div 
-                *ngFor="let stock of selectedColorDetails.productStock"
+                *ngFor="let size of selectedColorDetails.productSize; let i = index"
                 class="size-stock-swatch"
-            >{{ stock }}
+                [ngClass]="{'selected': selectedSize === size}"
+                (click)="selectSize(size)"
+            >{{ size }} - {{ selectedColorDetails.productStock[i] }}
             </div>
-        </div>
+        </div> -->
 
         <div class="product-info">
             <h3>Price</h3>
@@ -52,7 +49,7 @@
             <p>{{ data.productAmountSold }}</p>
         </div>
 
-        <button mat-button class="add-to-bag">Add to Bag</button>
+        <button (click)="addToCart()" mat-button class="add-to-bag">Add to Bag</button>
     </div>
 </div>
 

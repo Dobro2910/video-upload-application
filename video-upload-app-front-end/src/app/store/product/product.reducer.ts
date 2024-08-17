@@ -2,14 +2,14 @@ import { createReducer, on } from '@ngrx/store';
 import * as ProductActions from './product.action';
 import { ProductDisplay } from '../model/product.model';
 
-// Define the shape of the authentication state
+// Define the shape of the product state
 export interface ProductState {
   productsDisplay: ProductDisplay[] | null;
   error: string | null;
   filterCheck: boolean;
 }
 
-// Initial state of the authentication feature
+// Initial state of the product feature
 const initialState: ProductState = {
     productsDisplay: null,
     error: null,

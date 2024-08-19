@@ -13,6 +13,5 @@ export interface UserLoginCredential {
 export enum UserRole {
     Admin = 'Admin',
     User = 'User',
-    // Guest = 'Guest',
     Seller = 'Seller'
 }

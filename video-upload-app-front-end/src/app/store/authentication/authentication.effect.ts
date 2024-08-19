@@ -59,8 +59,8 @@ export class AuthEffects {
               }
               return of(AuthActions.createUserActionFailure({ error: errorMessage }));
             })  
+          )
         )
-      )
     )
   );
 

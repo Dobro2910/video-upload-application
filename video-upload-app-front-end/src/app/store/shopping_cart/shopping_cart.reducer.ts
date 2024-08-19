@@ -36,48 +36,27 @@ export const shoppingCartReducer = createReducer(
         ), // Filter out the removed product
     })),
 
-    // // Remove product from cart success
-    // on(ShoppingCartActions.removeProductAction, (state, { product }) => ({
-    //     ...state,
-    //     error: null,
-    //     productsInCart: state.productsInCart.filter(p => p.productId === product.productId && p.productColor === product.productColor && p.productSize === product.productSize), // Filter out the removed product
-    // })),
+    on(ShoppingCartActions.increaseProductQuantityAction, (state, { product }) => ({
+        ...state, // Spread the existing state to maintain immutability
+        productsInCart: state.productsInCart.map(p => 
+            (p.productId === product.productId && 
+             p.productColor === product.productColor && 
+             p.productSize === product.productSize) // Check if all product attributes match
+            ? { ...p, productQuantity: p.productQuantity + 1 } // If it matches, update the productQuantity field
+            : p // If it doesn't match, return the product unchanged
+        )
+    })),
+
+    on(ShoppingCartActions.decreaseProductQuantityAction, (state, { product }) => ({
+        ...state, // Spread the existing state to maintain immutability
+        productsInCart: state.productsInCart.map(p => 
+            (p.productId === product.productId && 
+             p.productColor === product.productColor && 
+             p.productSize === product.productSize) // Check if all product attributes match
+            ? { ...p, productQuantity: Math.max(p.productQuantity - 1, 1) } // Ensure productQuantity doesn't go below 1
+            : p // If it doesn't match, return the product unchanged
+        )
+    })),
 );
-
-//   // Add product to cart failure
-//   on(ShoppingCartActions.addProductFailure, (state, { error }) => ({
-//     ...state, // Spread operator to create a shallow copy of current state
-//     error: error,
-//   })),
-
-//   // Add product to cart success
-//   on(ShoppingCartActions.addProductSuccess, (state, { product }) => ({
-//     ...state, // Spread operator to create a shallow copy of current state
-//     error: null,
-//     productsInCart: state.productsInCart
-//       ? [...state.productsInCart, product]
-//       : [product], // Handle null case by creating a new array
-//   })),
-
-//   // Remove product from cart failure
-//   on(ShoppingCartActions.removeProductFailure, (state, { error }) => ({
-//     ...state, // Spread operator to create a shallow copy of current state
-//     error: error,
-//   })),
-
-//   // Remove product from cart success
-//   on(ShoppingCartActions.removeProductSuccess, (state, { product }) => ({
-//     ...state, // Spread operator to create a shallow copy of current state
-//     error: null,
-//     productsInCart: state.productsInCart
-//       ? state.productsInCart.filter(p => p.productId !== product.productId) // Remove the product by filtering it out
-//       : null, // If no products in the cart, remain null
-//   })),
-
-//   on(ShoppingCartActions.loadShoppingCartProductsActionSuccess, (state, { productsDisplay }) => ({
-//     ...state, // Spread operator to create a shallow copy of current state
-//     filterCheck: true,
-//     productsDisplay: productsDisplay
-//   })),
 
 export const shoppingCartReducerFeatureKey = 'shoppingCart';

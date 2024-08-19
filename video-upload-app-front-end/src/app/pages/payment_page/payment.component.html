@@ -18,43 +18,28 @@
                     <img [src]="product.productImage" alt="{{ product.productName }}">
                     <div class="product-details">
                         <h3>{{ product.productName }}</h3>
-                        <p>Price: {{ product.productPrice }}</p>
+                        <p>Price: {{ product.productPrice | currency }}</p>
                         <p>Color: {{ product.productColor }}</p>
                         <p>Size: {{ product.productSize }}</p>
 
                         <!-- Quantity Selector -->
-                        <div class="quantity-selector">
-                            <label for="quantity">Quantity:</label>
-                            <input type="number" id="quantity" name="quantity" min="1">
+                        <div class="quantity-control">
+                            <button type="button" (click)="decreaseQuantity(product)">-</button>
+                            <input type="number" [value]="product.productQuantity || 1" readonly>
+                            <button type="button" (click)="increaseQuantity(product)">+</button>
                         </div>
                     </div>
                     <!-- Remove Button -->
                     <button (click)="removeItemFromCart(product)" class="remove-button">Remove</button>
                 </div>
             </div>
-            
-            <!-- Payment Method -->
-            <div class="payment-method">
-                <h2>Select Payment Method</h2>
-                <div class="payment-options">
-                    <label>
-                        <input type="radio" name="paymentMethod" value="creditCard">
-                        Credit Card
-                    </label>
-                    <label>
-                        <input type="radio" name="paymentMethod" value="paypal">
-                        PayPal
-                    </label>
-                    <label>
-                        <input type="radio" name="paymentMethod" value="bankTransfer">
-                        Bank Transfer
-                    </label>
-                </div>
+
+            <div class="total-price">
+                <h2>Total Price: {{ totalPrice | currency }}</h2>
             </div>
             
             <!-- Payment Button -->
-            <!-- <button (click)="makePayment()" [disabled]="!selectedPaymentMethod">Complete Payment</button> -->
-            <button>Complete Payment</button>
+            <button (click)="displayPaymentMethod()">Complete Payment</button>
         </div>
     </div> 
 </main>

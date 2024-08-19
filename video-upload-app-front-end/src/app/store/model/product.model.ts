@@ -33,6 +33,7 @@ export interface ProductInCart {
     productAmountSold: number;
     productColor: string | null;
     productSize: string | null;
+    productQuantity: number;  // Add this field
 }
 
 export interface ProductDisplay {

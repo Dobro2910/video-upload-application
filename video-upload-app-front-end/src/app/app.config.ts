@@ -12,11 +12,15 @@ import { provideEffects } from '@ngrx/effects';
 import { authReducer, authReducerFeatureKey } from './store/authentication/authentication.reducer';
 import { AuthEffects } from './store/authentication/authentication.effect';
 
+// Payment
+import { paymentReducer, paymentReducerFeatureKey } from './store/payment/payment.reducer';
+import { PaymentEffects } from './store/payment/payment.effect';
+
 // Product
 import { productReducer, productReducerFeatureKey } from './store/product/product.reducer';
 import { ProductEffects } from './store/product/product.effect';
 
-// Product
+// Shopping Cart
 import { shoppingCartReducer, shoppingCartReducerFeatureKey } from './store/shopping_cart/shopping_cart.reducer';
 
 export const appConfig: ApplicationConfig = {
@@ -27,7 +31,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     
 
-    provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer, [shoppingCartReducerFeatureKey]: shoppingCartReducer}),
-    provideEffects(AuthEffects, ProductEffects)
+    provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer, [paymentReducerFeatureKey]: paymentReducer, [shoppingCartReducerFeatureKey]: shoppingCartReducer}),
+    provideEffects(AuthEffects, ProductEffects, PaymentEffects)
   ]
 };

@@ -60,7 +60,6 @@ export class ProductDialogComponent {
             productPrice: this.data.productPrice,
             productGender: this.data.productGender,
             productImage: this.data.productImage,
-            productAmountSold: this.data.productAmountSold,
             productColor: this.selectedColor,
             productSize: this.selectedSize,
             productQuantity: 1

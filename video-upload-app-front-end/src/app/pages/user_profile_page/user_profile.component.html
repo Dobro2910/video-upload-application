@@ -1,3 +1,42 @@
-<div>
-  <p>Welcome to user profile page</p>
-</div>
+<body>
+  <app-sidebar></app-sidebar>
+  <app-shopping-cart></app-shopping-cart>
+  <app-profile></app-profile>
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="profile-image">
+        <img src="https://via.placeholder.com/150" alt="User Profile Picture">
+      </div>
+      <div class="profile-details">
+        <h2 class="profile-name">John Doe</h2>
+        <p class="profile-username">johndoe</p>
+        <p class="profile-bio">Web Developer | Tech Enthusiast | Music Lover</p>
+      </div>
+    </div>
+  
+    <div class="profile-info">
+      <div class="profile-info-item">
+        <h3>Email</h3>
+        <p>example.com</p>
+      </div>
+      <div class="profile-info-item">
+        <h3>Location</h3>
+        <p>New York, USA</p>
+      </div>
+      <div class="profile-info-item">
+        <h3>Joined</h3>
+        <p>January 2020</p>
+      </div>
+      <div class="profile-info-item">
+        <h3>Website</h3>
+        <p><a href="https://example.com">www.example.com</a></p>
+      </div>
+    </div>
+  
+    <div class="profile-actions">
+      <button class="btn edit-btn">Edit Profile</button>
+      <button class="btn logout-btn">Logout</button>
+    </div>
+  </div>
+</body>
+

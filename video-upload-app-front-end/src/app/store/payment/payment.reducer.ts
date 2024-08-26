@@ -3,6 +3,8 @@ import {
   initiatePaymentActionSuccess,
   initiatePaymentActionFailure,
   updatePaymentDetailAction,
+  savePaymentOrderActionSuccess,
+  savePaymentOrderActionFailure,
 } from './payment.action';
 import { PaymentDetail } from '../model/payment.model';
 
@@ -22,15 +24,30 @@ const initialState: PaymentState = {
 
 export const paymentReducer = createReducer(
   initialState,
-  on(initiatePaymentActionSuccess, (state, { paymentIntentId }) => ({
+  // create payment intent
+  on(initiatePaymentActionSuccess, (state, { clientSecret }) => ({
     ...state,
-    paymentIntentId: paymentIntentId,
-    errorMessage: null,
+    clientSecret: clientSecret
   })),
+
   on(initiatePaymentActionFailure, (state, { error }) => ({
     ...state,
-    errorMessage: error,
+    errorMessage: error
   })),
+
+  // save the product order into the database
+  on(savePaymentOrderActionSuccess, state => {
+    // No state changes; just return the current state as is.
+    return { ...state };
+  }),
+
+  on(savePaymentOrderActionFailure, (state, { error }) => ({
+    ...state,
+    errorMessage: error
+  })),
+
+  // update the payment detail (calculate total price) action everytime new 
+  // product is added into the cart or increase or decrease in quantity order
   on(updatePaymentDetailAction, (state, { total }) => ({
     ...state,
     paymentDetail: {

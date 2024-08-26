@@ -1,6 +1,12 @@
 export interface User {
     userName: string,
     userEmail: string,
+    userPassword: string
+}
+
+export interface UserWithRole {
+    userName: string,
+    userEmail: string,
     userPassword: string,
     userRole: string
 }

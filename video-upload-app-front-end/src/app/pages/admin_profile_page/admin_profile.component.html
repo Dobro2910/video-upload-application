@@ -1,3 +1,60 @@
-<div>
-  <p>Welcome to admin profile page</p>
-</div>
+<body>
+  <app-sidebar></app-sidebar>
+  <app-shopping-cart></app-shopping-cart>
+  <app-profile></app-profile>
+  <div class="admin-container">
+    <div class="admin-header">
+      <div class="admin-image">
+        <img src="https://via.placeholder.com/150" alt="Admin Profile Picture">
+      </div>
+      <div class="admin-details">
+        <h2 class="admin-name">Admin Name</h2>
+        <p class="admin-username">adminuser</p>
+        <p class="admin-bio">Administrator | Managing Sellers and Products</p>
+      </div>
+    </div>
+  
+    <div class="admin-info">
+      <div class="admin-info-item">
+        <h3>Email</h3>
+        <p>example.com</p>
+      </div>
+      <div class="admin-info-item">
+        <h3>Role</h3>
+        <p>Administrator</p>
+      </div>
+      <div class="admin-info-item">
+        <h3>Joined</h3>
+        <p>January 2020</p>
+      </div>
+    </div>
+  
+    <div class="create-seller">
+      <h3>Create New Seller Account</h3>
+      <form>
+        <div class="form-group">
+          <label for="sellerName">Seller Name</label>
+          <input type="text" id="sellerName" placeholder="Enter seller name" required>
+        </div>
+        <div class="form-group">
+          <label for="sellerEmail">Seller Email</label>
+          <input type="email" id="sellerEmail" placeholder="Enter seller email" required>
+        </div>
+        <!-- <div class="form-group">
+          <label for="storeName">Store Name</label>
+          <input type="text" id="storeName" placeholder="Enter store name" required>
+        </div> -->
+        <div class="form-group">
+          <label for="sellerPassword">Password</label>
+          <input type="password" id="sellerPassword" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn create-seller-btn">Create Seller Account</button>
+      </form>
+    </div>
+  
+    <div class="admin-actions"> 
+      <button class="btn edit-btn">Edit Profile</button>
+      <!-- <button class="btn logout-btn">Logout</button> -->
+    </div>
+  </div>
+</body>

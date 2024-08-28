@@ -37,6 +37,7 @@ export class ProductDialogComponent {
 
   }
 
+  // close the product dialog
   onClose(): void {
     this.dialogRef.close();
   }
@@ -59,9 +60,9 @@ export class ProductDialogComponent {
             productPrice: this.data.productPrice,
             productGender: this.data.productGender,
             productImage: this.data.productImage,
-            productAmountSold: this.data.productAmountSold,
             productColor: this.selectedColor,
-            productSize: this.selectedSize
+            productSize: this.selectedSize,
+            productQuantity: 1
           };
           console.log(this.productInCart);
           this.store.dispatch(addProductAction({ product: this.productInCart }));

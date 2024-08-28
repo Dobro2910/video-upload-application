@@ -24,19 +24,19 @@ export interface ProductColorVarietyDetail {
 }
 
 export interface ProductInCart {
-    productId?: string;
+    productId: string;
     productName: string;
     productDescription: string;
     productPrice: number;
     productGender: string;
     productImage: string;
-    productAmountSold: number;
     productColor: string | null;
     productSize: string | null;
+    productQuantity: number;
 }
 
 export interface ProductDisplay {
-    productId?: string;
+    productId: string;
     productName: string;
     productDescription: string;
     productPrice: number;

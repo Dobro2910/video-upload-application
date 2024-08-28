@@ -1,6 +1,12 @@
 export interface User {
     userName: string,
     userEmail: string,
+    userPassword: string
+}
+
+export interface UserWithRole {
+    userName: string,
+    userEmail: string,
     userPassword: string,
     userRole: string
 }
@@ -13,6 +19,5 @@ export interface UserLoginCredential {
 export enum UserRole {
     Admin = 'Admin',
     User = 'User',
-    // Guest = 'Guest',
     Seller = 'Seller'
 }

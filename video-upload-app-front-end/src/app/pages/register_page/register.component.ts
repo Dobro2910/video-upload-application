@@ -38,8 +38,7 @@ export class RegisterComponent implements OnInit {
   onRegister() {
     if (this.registerForm.valid) {
       const { userName, userEmail, userPassword } = this.registerForm.value;
-      const userRole = UserRole.User;
-      const newUser: User = { userName, userEmail, userPassword, userRole };
+      const newUser: User = { userName, userEmail, userPassword };
       this.store.dispatch(AuthActions.createUserAction({ user: newUser }));
     } else {
       this.registerForm.markAllAsTouched(); // Mark all fields as touched to display errors

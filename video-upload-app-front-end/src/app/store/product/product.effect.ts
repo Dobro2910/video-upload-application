@@ -8,6 +8,10 @@ import * as ProductActions from '../product/product.action';
 
 @Injectable()
 export class ProductEffects {
+  constructor(
+    private actions$: Actions,
+    private productService: ProductService
+  ) {}
 
   getPaginatedProduct$ = createEffect(() =>
     this.actions$.pipe(
@@ -96,11 +100,6 @@ export class ProductEffects {
   //     )
   //   )
   // );
-
-  constructor(
-    private actions$: Actions,
-    private productService: ProductService
-  ) {}
 
   // Add other effects if needed, such as registration, logout, etc.
 }

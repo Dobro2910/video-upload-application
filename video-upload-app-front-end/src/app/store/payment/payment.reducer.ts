@@ -36,10 +36,13 @@ export const paymentReducer = createReducer(
   })),
 
   // save the product order into the database
-  on(savePaymentOrderActionSuccess, state => {
-    // No state changes; just return the current state as is.
-    return { ...state };
-  }),
+  on(savePaymentOrderActionSuccess, (state) => ({
+    ...state,
+    clientSecret: null,
+    errorMessage: null,
+    paymentIntentId: null,
+    paymentDetail: null
+  })),
 
   on(savePaymentOrderActionFailure, (state, { error }) => ({
     ...state,

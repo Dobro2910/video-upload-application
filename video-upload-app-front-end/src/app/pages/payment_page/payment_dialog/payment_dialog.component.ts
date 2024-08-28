@@ -37,65 +37,59 @@ export class PaymentDialogComponent implements OnInit {
     }
   }
 
-    // async handleSubmit(): Promise<void> {
-    //     if (this.stripe && this.card) {
-    //         try {
-    //             // Step 1: Get paymentDetail and productsInCart from the store
-    //             const paymentDetail = await firstValueFrom(this.store.select(state => state.payment.paymentDetail).pipe(take(1)));
-
-    //             if (paymentDetail) {
-    //                 // Step 2: Convert the payment amount from dollars to cents
-    //                 const convertedPaymentDetail = {
-    //                     ...paymentDetail,
-    //                     amount: paymentDetail.amount * 100 // Convert from dollars to cents
-    //                 };
-
-    //                 // Step 3: Dispatch the action to initiate the payment
-    //                 this.store.dispatch(initiatePaymentAction({ paymentDetail: convertedPaymentDetail }));
-    //             }
-                
-    //             // Step 4: Select the clientSecret from the store
-    //             const clientSecret = await firstValueFrom(
-    //                 this.store.select(state => state.payment.clientSecret).pipe(
-    //                     filter(secret => !!secret),  // Wait until clientSecret is not null or undefined
-    //                     take(1)  // Take the first emitted value that meets the filter condition
-    //                 )
-    //             );
-
-    //             if (clientSecret) {
-    //                 // Step 5: Confirm the payment using Stripe
-    //                 const { error, paymentIntent } = await this.stripe.confirmCardPayment(clientSecret, {
-    //                     payment_method: {
-    //                         card: this.card,
-    //                         billing_details: {
-    //                             name: 'test',
-    //                         },
-    //                     },
-    //                 });
-
-    //                 if (error) {
-    //                     console.log("Error during payment process: ", error);
-    //                 } else if (paymentIntent?.id && paymentIntent.status === 'succeeded') {
-    //                     const productsInCart = await firstValueFrom(this.store.select(state => state.shoppingCart.productsInCart).pipe(take(1)));
-    //                     console.log('Dispatching savePaymentOrderAction:', productsInCart);
-
-    //                     // Step 6: Save product order into the database
-    //                     this.store.dispatch(savePaymentOrderAction({ productsInCart: productsInCart }));
-    //                 } 
-    //             } 
-    //         } catch (error) {
-    //             console.error("Error during payment process:", error);
-    //         }
-    //     } 
-    // }
-
     async handleSubmit(): Promise<void> {
-        const productsInCart = await firstValueFrom(this.store.select(state => state.shoppingCart.productsInCart).pipe(take(1)));
-        console.log('Dispatching savePaymentOrderAction:', productsInCart);
-        // Step 6: Save product order into the database
-        this.store.dispatch(savePaymentOrderAction({ productsInCart: productsInCart }));
-    }
+        if (this.stripe && this.card) {
+            try {
+                // Step 1: Get paymentDetail and productsInCart from the store
+                const paymentDetail = await firstValueFrom(this.store.select(state => state.payment.paymentDetail).pipe(take(1)));
 
+                if (paymentDetail) {
+                    // Step 2: Convert the payment amount from dollars to cents
+                    const convertedPaymentDetail = {
+                        ...paymentDetail,
+                        amount: paymentDetail.amount * 100 // Convert from dollars to cents
+                    };
+
+                    // Step 3: Dispatch the action to initiate the payment
+                    this.store.dispatch(initiatePaymentAction({ paymentDetail: convertedPaymentDetail }));
+                }
+                
+                // Step 4: Select the clientSecret from the store
+                const clientSecret = await firstValueFrom(
+                    this.store.select(state => state.payment.clientSecret).pipe(
+                        filter(secret => !!secret),  // Wait until clientSecret is not null or undefined
+                        take(1)  // Take the first emitted value that meets the filter condition
+                    )
+                );
+
+                if (clientSecret) {
+                    // Step 5: Confirm the payment using Stripe
+                    const { error, paymentIntent } = await this.stripe.confirmCardPayment(clientSecret, {
+                        payment_method: {
+                            card: this.card,
+                            billing_details: {
+                                name: 'test',
+                            },
+                        },
+                    });
+
+                    if (error) {
+                        console.log("Error during payment process: ", error);
+                    } else if (paymentIntent?.id && paymentIntent.status === 'succeeded') {
+                        const productsInCart = await firstValueFrom(this.store.select(state => state.shoppingCart.productsInCart).pipe(take(1)));
+                        console.log('Dispatching savePaymentOrderAction:', productsInCart);
+
+                        // Step 6: Save product order into the database
+                        this.store.dispatch(savePaymentOrderAction({ productsInCart: productsInCart }));
+                    } 
+                } 
+            } catch (error) {
+                console.error("Error during payment process:", error);
+            }
+        }
+
+        this.onClose();
+    }
 
   onClose(): void {
     if (this.dialogRef) {

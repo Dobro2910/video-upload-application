@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { switchMap, catchError, map, mergeMap, tap } from 'rxjs/operators';
-import { of, Observable, from } from 'rxjs';
+import { of, take } from 'rxjs';
 import { PaymentService } from '../../service/payment.service';
 import {
   initiatePaymentAction,
@@ -47,43 +47,27 @@ export class PaymentEffects {
     )
   );
 
-  // Effect to handle saving the payment order
-  // savePaymentOrder$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(savePaymentOrderAction),
-  //     mergeMap(action => {
-  //       console.log("wtf");
-  //       console.log('Save Payment Order Action:', action);
-  //       return this.paymentService.savePaymentOrder(action.productsInCart).pipe(
-  //         map(() => {
-  //           console.log('Payment Order Saved Successfully');
-  //           return savePaymentOrderActionSuccess();
-  //         }),
-  //         catchError(error => {
-  //           console.error('Saving Payment Order Failed:', error);
-  //           return of(savePaymentOrderActionFailure({ error: error.message }));
-  //         })
-  //       );
-  //     })
-  //   )
-  // );
 
-  savePaymentOrder$ = createEffect((): Observable<Action> =>
+  // Effect to handle saving the payment order
+  savePaymentOrder$ = createEffect(() =>
     this.actions$.pipe(
       ofType(savePaymentOrderAction),
-      tap(action => console.log('Save Payment Order Action Triggered:', action)),
-      mergeMap(action => {
-        return this.paymentService.savePaymentOrder(action.productsInCart).pipe(
+      take(1),
+      mergeMap(action =>
+        this.paymentService.savePaymentOrder(action.productsInCart).pipe(
+          tap((response: any) => {
+            console.log('Finalizing after save');
+          }),
           map(() => {
-            console.log('Payment Order Saved Successfully');
+            console.log('Saving Payment Order Success');
             return savePaymentOrderActionSuccess();
           }),
           catchError(error => {
             console.error('Saving Payment Order Failed:', error);
             return of(savePaymentOrderActionFailure({ error: error.message }));
           })
-        );
-      })
+        )
+      )
     )
   );
 }

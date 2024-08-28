@@ -7,6 +7,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools'; // Import for Redux DevTools
+import { environment } from '../environment'; // Import environment configuration
 
 // Authentication
 import { authReducer, authReducerFeatureKey } from './store/authentication/authentication.reducer';
@@ -32,6 +34,15 @@ export const appConfig: ApplicationConfig = {
     
 
     provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer, [paymentReducerFeatureKey]: paymentReducer, [shoppingCartReducerFeatureKey]: shoppingCartReducer}),
-    provideEffects(AuthEffects, ProductEffects, PaymentEffects)
+    provideEffects(AuthEffects, ProductEffects, PaymentEffects),
+
+    // Provide Redux DevTools
+    provideStoreDevtools({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode in production
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+      trace: true, // Enable trace feature
+      traceLimit: 1000, // Optionally set the maximum stack trace steps
+    }),
   ]
 };

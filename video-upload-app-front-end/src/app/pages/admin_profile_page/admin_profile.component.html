@@ -29,31 +29,71 @@
       </div>
     </div>
   
-    <div class="create-seller">
+    <div class="create-fields">
       <h3>Create New Seller Account</h3>
-      <form>
-        <div class="form-group">
-          <label for="sellerName">Seller Name</label>
-          <input type="text" id="sellerName" placeholder="Enter seller name" required>
+      <label for="sellerName">Seller Name</label>
+      <input type="text" [(ngModel)]="newUser.userName" placeholder="Enter seller name" required>
+      <label for="sellerEmail">Seller Email</label>
+      <input type="email" [(ngModel)]="newUser.userEmail" placeholder="Enter seller email" required>
+      <label for="sellerPassword">Password</label>
+      <input type="password" [(ngModel)]="newUser.userPassword" placeholder="Enter password" required>
+      <label for="sellerRole">Role</label>
+      <select [(ngModel)]="newUser.userRole" required>
+        <option value="" disabled selected>Select a role</option>
+        <option value="Admin">Admin</option>
+        <option value="Seller">Seller</option>
+      </select>
+      <button type="submit" class="btn create-seller-btn" (click)="createNewUserWithRole()">Create Seller Account</button>
+    
+      <h3>Create New Product</h3>
+      <label for="productName">Product Name</label>
+      <input type="text" [(ngModel)]="newProduct.productName" placeholder="Enter product name" required>
+      <label for="productDescription">Product Description</label>
+      <input type="text" [(ngModel)]="newProduct.productDescription" placeholder="Enter product description" required>
+      <label for="productPrice">Product Price</label>
+      <input type="number" [(ngModel)]="newProduct.productPrice" placeholder="Enter product price" required>
+      <label for="productGender">Product Gender</label>
+      <input type="text" [(ngModel)]="newProduct.productGender" placeholder="Enter product gender" required>
+      <label for="productCategory">Product Category</label>
+      <input type="text" [(ngModel)]="newProduct.productCategory" placeholder="Enter product category" required>
+      <label for="productBrand">Product Brand</label>
+      <input type="text" [(ngModel)]="newProduct.productBrand" placeholder="Enter product brand" required>
+      <label for="productImage">Product Image</label>
+      <input type="text" [(ngModel)]="newProduct.productImage" placeholder="Enter product image" required>
+      
+      <div *ngFor="let productColorVarietyDetail of productColorVarietiesDetail; let i = index" class="color-size-stock">
+        <h3>Color {{ i + 1 }}</h3>
+        <label for="productColor">Product Color</label>
+        <input type="text" [(ngModel)]="productColorVarietyDetail.productColor" placeholder="Enter product color" required>
+        
+        <div class="add-button">
+          <button class="btn" (click)="addSizeStock(i)">+ Add Size and Stock</button>
         </div>
-        <div class="form-group">
-          <label for="sellerEmail">Seller Email</label>
-          <input type="email" id="sellerEmail" placeholder="Enter seller email" required>
+
+        <div *ngFor="let size of productColorVarietyDetail.productSize; let j = index" class="color-size-stock">
+          <label for="productSize-{{ j }}">Product Size</label>
+          <!-- <input type="text" [(ngModel)]="productColorVarietyDetail.productSize[j]" (ngModelChange)="updateProductSize($event, i, j)" placeholder="Enter product size" required> -->
+          <select [(ngModel)]="productColorVarietyDetail.productSize[j]" (ngModelChange)="updateProductSize($event, i, j)" required>
+            <option value="" disabled selected>Select a size</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+          </select>
+
+          <label for="productStock-{{ j }}">Product Stock</label>
+          <input type="number" [(ngModel)]="productColorVarietyDetail.productStock[j]" placeholder="Enter product stock" required>
         </div>
-        <!-- <div class="form-group">
-          <label for="storeName">Store Name</label>
-          <input type="text" id="storeName" placeholder="Enter store name" required>
-        </div> -->
-        <div class="form-group">
-          <label for="sellerPassword">Password</label>
-          <input type="password" id="sellerPassword" placeholder="Enter password" required>
-        </div>
-        <button type="submit" class="btn create-seller-btn">Create Seller Account</button>
-      </form>
+      </div>
+
+      <div class="add-button">
+        <button class="btn" (click)="addVariety()">+ New Variety</button>
+      </div>
+
+      <button class="btn create-product-btn" (click)="createNewProduct()">Create Product</button>
     </div>
   
     <div class="admin-actions"> 
-      <button class="btn edit-btn">Edit Profile</button>
+      <button class="btn">Edit Profile</button>
       <!-- <button class="btn logout-btn">Logout</button> -->
     </div>
   </div>

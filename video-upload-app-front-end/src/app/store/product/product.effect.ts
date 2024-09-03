@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, take } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ProductService } from '../../service/product.service';
@@ -71,6 +71,37 @@ export class ProductEffects {
           })
         )
       )
+    )
+  );
+
+  createProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductActions.createProductAction),
+        // mergeMap(action =>
+        //   this.productService.createProduct(action.newProduct).pipe(
+        //     // tap(() => {
+        //     //   this.router.navigate(['/login']); // Navigate to home on success
+        //     // }),
+        //     map(() => ProductActions.createProductActionSuccess()),
+        //     catchError(error => {
+        //       console.error('Create product failed:', error);
+        //       return of(ProductActions.createProductActionFailure({ error }));
+        //     })  
+        //   )
+        // )
+        take(1),
+        mergeMap(action =>
+          this.productService.createProduct(action.newProduct).pipe(
+            tap((response: any) => {
+              console.log('Create Product Success');
+            }),
+            map(() => ProductActions.createProductActionSuccess()),
+            catchError(error => {
+              console.error('Create Product Failed:', error);
+              return of(ProductActions.createProductActionFailure({ error: error.message }));
+            })
+          )
+        )
     )
   );
 

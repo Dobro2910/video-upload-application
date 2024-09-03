@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Product, ProductColorVarietyDetail } from '../../store/model/product.model';
+import { Store } from '@ngrx/store';
+import { createProductAction } from '../../store/product/product.action';
+import { User, UserWithRole } from '../../store/model/user.model';
+import { createUserWithRoleAction } from '../../store/authentication/authentication.action';
 
 @Component({
   selector: 'app-admin-profile',
@@ -7,9 +11,62 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin_profile.component.scss'],
 })
 export class AdminProfileComponent implements OnInit {
-    constructor(private router: Router) { }
+  newProduct: Product;
+  newUser: UserWithRole;
+  productColorVarietiesDetail: ProductColorVarietyDetail[] = [];
 
-    ngOnInit(): void {
-        console.log('Admin profile component initialized');
+  // an unique set of size to store all size when the customer use filter
+  productSizeSet: Set<string> = new Set();
+  updateProductSize(newSize: string, varietyIndex: number, sizeIndex: number): void {
+    // Update the product size at the specific index
+    this.productColorVarietiesDetail[varietyIndex].productSize[sizeIndex] = newSize;
+    // Add the new size to the Set (automatically handles uniqueness)
+    this.productSizeSet.add(newSize);
+  }
+
+  constructor(private store: Store) { 
+    this.newUser = {
+      userEmail: '',
+      userName: '',
+      userPassword: '',
+      userRole: ''
     }
+
+    this.newProduct = {
+      productCategory: '',
+      productBrand: '',
+      productName: '',
+      productDescription: '',
+      productPrice: 0,
+      productGender: '',
+      productImage: '',
+      productAmountSold: 0,
+      productColorVarietyDetail: []
+    };
+  }
+
+  ngOnInit(): void {
+    console.log('Admin profile component initialized');
+  }
+
+  addVariety(): void {
+    console.log(this.productColorVarietiesDetail);
+    this.productColorVarietiesDetail.push({ productColor: '', productSize: [], productStock: [] });
+  }
+
+  addSizeStock(varietyIndex: number): void {
+    this.productColorVarietiesDetail[varietyIndex].productSize.push('');
+    this.productColorVarietiesDetail[varietyIndex].productStock.push(0);
+  }
+
+  createNewProduct() {
+    const productSizeArray: string[] = Array.from(this.productSizeSet);
+    this.newProduct.productColorVarietyDetail = this.productColorVarietiesDetail;
+    this.newProduct.productSize = productSizeArray;
+    this.store.dispatch(createProductAction({ newProduct: this.newProduct }));
+  }
+
+  createNewUserWithRole() {
+    this.store.dispatch(createUserWithRoleAction({ newUser: this.newUser } ));
+  }
 }

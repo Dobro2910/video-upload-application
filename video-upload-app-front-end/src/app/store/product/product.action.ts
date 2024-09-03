@@ -1,4 +1,4 @@
-import { ProductDisplay } from "../model/product.model";
+import { ProductDisplay, Product } from "../model/product.model";
 import { createAction, props } from "@ngrx/store"
 
 // get paginated pages load actions
@@ -22,6 +22,14 @@ export const getPaginatedProductsByFilterAction=createAction(FILTER_LOAD, props<
 }>());
 export const getPaginatedProductsByFilterActionFailure=createAction(FILTER_LOAD_FAILURE, props<{error: any}>());
 export const getPaginatedProductsByFilterActionSuccess = createAction(FILTER_LOAD_SUCCESS, props<{productsDisplay: ProductDisplay[]}>());
+
+// create new product actions
+export const CREATE_PRODUCT ='[product] create product'
+export const CREATE_PRODUCT_FAILURE ='[product] create product fail'
+export const CREATE_PRODUCT_SUCCESS ='[product] create product success'
+export const createProductAction=createAction(CREATE_PRODUCT, props<{ newProduct: Product }>());
+export const createProductActionFailure=createAction(CREATE_PRODUCT_FAILURE, props<{error: any}>());
+export const createProductActionSuccess = createAction(CREATE_PRODUCT_SUCCESS);
 
 // get Individual product actions
 // export const PRODUCT_LOAD ='[product] product load'

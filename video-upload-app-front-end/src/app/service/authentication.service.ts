@@ -3,11 +3,10 @@ import {
     Injectable, 
     // Inject  
 } from '@angular/core';
-import { User, UserLoginCredential } from '../store/model/user.model';
+import { User, UserLoginCredential, UserWithRole } from '../store/model/user.model';
 import { Observable } from 'rxjs'
 
-// import { isPlatformBrowser } from '@angular/common';
-// import { PLATFORM_ID } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +23,15 @@ export class AuthenticationService {
 
     UserLogin(userlogincredential: UserLoginCredential): Observable<any> {
         return this.http.post('http://localhost:3000/authentication/login', userlogincredential)
+    }
+
+    CreateUserWithRole(newUser: UserWithRole): Observable<any> {
+        const token = this.getToken(); // Adjust this if you store the token elsewhere
+
+        // Create the headers object and include the Authorization header with the JWT token
+        const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+
+        return this.http.post('http://localhost:3000/authentication/createadminrole', newUser, { headers });
     }
 
     storeToken(token: string) {

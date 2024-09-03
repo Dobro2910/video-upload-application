@@ -46,6 +46,12 @@ export const productReducer = createReducer(
     productsDisplay: productsDisplay
   })),
 
+  // create new product
+  on(ProductActions.createProductActionFailure, (state, { error }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    error: error,
+  })),
+
   // // get all product state
   // on(ProductActions.getAllProductFailure, (state, { error }) => ({
   //   ...state, // Spread operator to create a shallow copy of current state

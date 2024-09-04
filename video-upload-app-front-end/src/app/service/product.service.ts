@@ -3,12 +3,15 @@ import { Injectable } from '@angular/core';
 import { Product } from '../store/model/product.model';
 import { Observable } from 'rxjs'
 
+import { HttpHeaders } from '@angular/common/http';
+import { AuthenticationService } from './authentication.service';
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class ProductService {
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private authService: AuthenticationService) {}
 
     getPaginatedProducts(page: number): Observable<any> {
         let params = new HttpParams();
@@ -27,7 +30,12 @@ export class ProductService {
     }
 
     createProduct(product: Product): Observable<any> {
-        return this.http.post('http://localhost:3000/product/createproduct', product);
+        const token = this.authService.getToken(); // Adjust this if you store the token elsewhere
+
+        // Create the headers object and include the Authorization header with the JWT token
+        const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+
+        return this.http.post('http://localhost:3000/product/createproduct', product, { headers });
     }
 
     updateproductColorVarietyDetail(productId: string, productStock: number): Observable<any> {

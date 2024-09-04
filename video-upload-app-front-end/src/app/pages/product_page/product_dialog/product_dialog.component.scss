@@ -104,7 +104,7 @@
 
 .color-swatch:hover, 
 .color-swatch.active {
-    border: 2px solid #007bff;
+    border: 2px solid #333;
 }
 
 /* Size and Stock Display */
@@ -132,7 +132,7 @@
 }
 
 .size-stock-swatch.selected {
-    background-color: #007bff; /* Change to your desired color */
+    background-color: #333; /* Change to your desired color */
     color: #fff; /* Change text color if necessary */
 }
 
@@ -150,7 +150,7 @@
 .add-to-bag {
     width: 40%;
     padding: 12px;
-    background-color: #007bff;
+    background-color: #333;
     color: white;
     border: none;
     border-radius: 4px;
@@ -162,7 +162,7 @@
 }
 
 .add-to-bag:hover {
-    background-color: #0056b3;
+    background-color: black;
 }
 
 /* Media Queries for Smaller Screens */

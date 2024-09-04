@@ -25,6 +25,11 @@ export const authReducer = createReducer(
     error: error
   })),
 
+  on(AuthActions.createUserWithRoleActionFailure, (state, { error }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    error: error
+  })),
+
   on(AuthActions.resetAuthError, (state) => ({
     ...state,
     error: null

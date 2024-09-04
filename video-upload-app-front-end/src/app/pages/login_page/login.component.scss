@@ -50,7 +50,7 @@ main {
 
     .create-new-account {
       margin-top: 20px;
-      color: #007BFF;
+      color: #333;
       text-decoration: none;
       font-size: 1em;
       font-weight: bold;
@@ -58,7 +58,7 @@ main {
       transition: color 0.3s ease;
 
       &:hover {
-        color: #0056b3;
+        color: black;
       }
     }
 

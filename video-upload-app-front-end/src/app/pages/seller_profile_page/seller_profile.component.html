@@ -8,9 +8,9 @@
         <img src="https://via.placeholder.com/150" alt="Seller Profile Picture">
       </div>
       <div class="seller-details">
-        <h2 class="seller-name">Jane Doe</h2>
-        <p class="seller-username">janedoe</p>
-        <p class="seller-bio">Entrepreneur | Seller | Fashion Enthusiast</p>
+        <h2 class="seller-name">Seller Name</h2>
+        <p class="seller-username">Seller User</p>
+        <p class="seller-bio">Seller | Managing Products</p>
       </div>
     </div>
   
@@ -20,49 +20,71 @@
         <p>example.com</p>
       </div>
       <div class="seller-info-item">
-        <h3>Location</h3>
-        <p>Los Angeles, USA</p>
-      </div>
-      <div class="seller-info-item">
-        <h3>Store Name</h3>
-        <p>Jane's Boutique</p>
+        <h3>Role</h3>
+        <p>Seller</p>
       </div>
       <div class="seller-info-item">
         <h3>Joined</h3>
-        <p>March 2021</p>
-      </div>
-      <div class="seller-info-item">
-        <h3>Website</h3>
-        <p><a href="https://example.com">www.janesboutique.com</a></p>
+        <p>January 2020</p>
       </div>
     </div>
   
-    <div class="add-product">
-      <h3>Add New Product</h3>
-      <form>
-        <div class="form-group">
-          <label for="productName">Product Name</label>
-          <input type="text" id="productName" placeholder="Enter product name" required>
+    <div class="create-fields">
+      <h3>Create New Product</h3>
+      <label for="productName">Product Name</label>
+      <input type="text" [(ngModel)]="newProduct.productName" placeholder="Enter product name" required>
+      <label for="productDescription">Product Description</label>
+      <input type="text" [(ngModel)]="newProduct.productDescription" placeholder="Enter product description" required>
+      <label for="productPrice">Product Price</label>
+      <input type="number" [(ngModel)]="newProduct.productPrice" placeholder="Enter product price" required>
+      <label for="productGender">Product Gender</label>
+      <input type="text" [(ngModel)]="newProduct.productGender" placeholder="Enter product gender" required>
+      <label for="productCategory">Product Category</label>
+      <input type="text" [(ngModel)]="newProduct.productCategory" placeholder="Enter product category" required>
+      <label for="productBrand">Product Brand</label>
+      <input type="text" [(ngModel)]="newProduct.productBrand" placeholder="Enter product brand" required>
+      <label for="productImage">Product Image</label>
+      <input type="text" [(ngModel)]="newProduct.productImage" placeholder="Enter product image" required>
+      
+      <div *ngFor="let productColorVarietyDetail of productColorVarietiesDetail; let i = index" class="color-size-stock">
+        <div class="add-title-container">
+          <h3>Color {{ i + 1 }}</h3>
+          <p class="close-window" (click)="closeVariety(i)">X</p>
         </div>
-        <div class="form-group">
-          <label for="productPrice">Product Price</label>
-          <input type="number" id="productPrice" placeholder="Enter product price" required>
+        <label for="productColor">Product Color</label>
+        <input type="text" [(ngModel)]="productColorVarietyDetail.productColor" placeholder="Enter product color" required>
+        
+        <div class="add-button">
+          <button class="btn" (click)="addSizeStock(i)">+ Add Size and Stock</button>
         </div>
-        <div class="form-group">
-          <label for="productDescription">Product Description</label>
-          <textarea id="productDescription" placeholder="Enter product description" required></textarea>
+
+        <div *ngFor="let size of productColorVarietyDetail.productSize; let j = index" class="color-size-stock">
+          <div class="add-title-container">
+            <h3>Size and Stock</h3>
+            <p class="close-window" (click)="closeSizeAndStock(i,j)">X</p>
+          </div>
+          <label for="productSize-{{ j }}">Product Size</label>
+          <select [(ngModel)]="productColorVarietyDetail.productSize[j]" (ngModelChange)="updateProductSize($event, i, j)" required>
+            <option value="" disabled selected>Select the product sizes</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+          </select>
+
+          <label for="productStock-{{ j }}">Product Stock</label>
+          <input type="number" [(ngModel)]="productColorVarietyDetail.productStock[j]" placeholder="Enter product stock" required>
         </div>
-        <div class="form-group">
-          <label for="productImage">Product Image</label>
-          <input type="file" id="productImage" required>
-        </div>
-        <button type="submit" class="btn add-product-btn">Add Product</button>
-      </form>
+      </div>
+
+      <div class="add-button">
+        <button class="btn" (click)="addVariety()">+ New Variety</button>
+      </div>
+
+      <button class="btn create-product-btn" (click)="createNewProduct()">Create Product</button>
     </div>
   
-    <div class="seller-actions">
+    <div class="seller-actions"> 
       <button class="btn edit-btn">Edit Profile</button>
-      <button class="btn logout-btn">Logout</button>
     </div>
   </div>
 </body>

@@ -64,6 +64,31 @@ export class AuthEffects {
     )
   );
 
+  createUserWithRole$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.createUserWithRoleAction),
+        mergeMap(action =>
+          this.authService.CreateUserWithRole(action.newUser).pipe(
+            // tap(() => {
+            //   this.router.navigate(['/login']); // Navigate to home on success
+            // }),
+            map(() => AuthActions.createUserWithRoleActionSuccess()),
+            catchError(error => {
+              console.error('Register failed:', error);
+
+              let errorMessage;
+              if (error.status === 401) {
+                errorMessage = "Email Already Exist";
+              } else {
+                errorMessage = "An Error Have Occur When Creating New User With Role";
+              }
+              return of(AuthActions.createUserWithRoleActionFailure({ error: errorMessage }));
+            })  
+          )
+        )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private authService: AuthenticationService,

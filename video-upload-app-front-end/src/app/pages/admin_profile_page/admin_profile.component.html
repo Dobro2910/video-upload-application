@@ -62,7 +62,10 @@
       <input type="text" [(ngModel)]="newProduct.productImage" placeholder="Enter product image" required>
       
       <div *ngFor="let productColorVarietyDetail of productColorVarietiesDetail; let i = index" class="color-size-stock">
-        <h3>Color {{ i + 1 }}</h3>
+        <div class="add-title-container">
+          <h3>Color {{ i + 1 }}</h3>
+          <p class="close-window" (click)="closeVariety(i)">X</p>
+        </div>
         <label for="productColor">Product Color</label>
         <input type="text" [(ngModel)]="productColorVarietyDetail.productColor" placeholder="Enter product color" required>
         
@@ -71,10 +74,13 @@
         </div>
 
         <div *ngFor="let size of productColorVarietyDetail.productSize; let j = index" class="color-size-stock">
+          <div class="add-title-container">
+            <h3>Size and Stock</h3>
+            <p class="close-window" (click)="closeSizeAndStock(i,j)">X</p>
+          </div>
           <label for="productSize-{{ j }}">Product Size</label>
-          <!-- <input type="text" [(ngModel)]="productColorVarietyDetail.productSize[j]" (ngModelChange)="updateProductSize($event, i, j)" placeholder="Enter product size" required> -->
           <select [(ngModel)]="productColorVarietyDetail.productSize[j]" (ngModelChange)="updateProductSize($event, i, j)" required>
-            <option value="" disabled selected>Select a size</option>
+            <option value="" disabled selected>Select the product sizes</option>
             <option value="S">S</option>
             <option value="M">M</option>
             <option value="L">L</option>

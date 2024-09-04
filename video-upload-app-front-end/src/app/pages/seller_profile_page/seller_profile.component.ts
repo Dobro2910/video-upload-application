@@ -36,6 +36,15 @@ export class SellerProfileComponent implements OnInit {
     };
   }
 
+  closeVariety(varietyIndex: number) {
+    this.productColorVarietiesDetail.splice(varietyIndex, 1);
+  }
+
+  closeSizeAndStock(varietyIndex: number, sizeAndStockIndex: number) {
+    this.productColorVarietiesDetail[varietyIndex].productSize.splice(sizeAndStockIndex, 1);
+    this.productColorVarietiesDetail[varietyIndex].productStock.splice(sizeAndStockIndex, 1);
+  }
+
   ngOnInit(): void {
       console.log('Seller profile component initialized');
   }

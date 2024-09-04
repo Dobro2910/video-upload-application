@@ -67,11 +67,11 @@ body {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-.seller-info-item h3 {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #333;
-}
+// .seller-info-item h3 {
+//     margin-bottom: 10px;
+//     font-size: 18px;
+//     color: #333;
+// }
 
 .create-fields {
     display: flex;
@@ -98,12 +98,42 @@ body {
     margin-bottom: 15px;
 }
 
+.create-fields select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
 /////////////////////////////////////////////////////////////////////
 
 .color-size-stock {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
+
+    .add-title-container {
+        display: flex;
+        align-items: center; /* Ensures both items are vertically centered */
+        justify-content: space-between; /* Keeps the elements on the same line */
+    }
+    
+    .close-window {
+        cursor: pointer;
+        font-weight: bold;
+        color: #ff5c5c;
+        background-color: transparent;
+        border: none;
+        font-size: 16px;
+        margin-left: 10px; /* Adds space between the Color text and the X button */
+    }
+    
+    .color-container h3 {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+    }
 }
 
 .add-button {

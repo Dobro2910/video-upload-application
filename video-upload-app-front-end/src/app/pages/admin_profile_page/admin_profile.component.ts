@@ -4,7 +4,6 @@ import { User } from '../../store/model/user.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { createProductAction } from '../../store/product/product.action';
-// import { User } from '../../store/model/user.model';
 import { createUserWithRoleAction } from '../../store/authentication/authentication.action';
 
 import { AuthenticationService } from '../../service/authentication.service';

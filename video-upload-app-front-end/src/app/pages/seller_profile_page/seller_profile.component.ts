@@ -4,12 +4,22 @@ import { Store } from '@ngrx/store';
 import { Product } from '../../store/model/product.model';
 import { createProductAction } from '../../store/product/product.action';
 
+import { Observable } from 'rxjs';
+import { User } from '../../store/model/user.model';
+import { AuthenticationService } from '../../service/authentication.service';
+import * as ProfileActions from '../../store/profile/profile.action';
+import { ProfileState } from '../../store/profile/profile.reducer';
+
 @Component({
   selector: 'app-seller-profile',
   templateUrl: './seller_profile.component.html',
   styleUrls: ['./seller_profile.component.scss'],
 })
 export class SellerProfileComponent implements OnInit {
+  // Observable Variables
+  currentUser$: Observable<User| null>;
+
+  // Normal Variables
   newProduct: Product;
   productColorVarietiesDetail: ProductColorVarietyDetail[] = [];
 
@@ -22,7 +32,9 @@ export class SellerProfileComponent implements OnInit {
     this.productSizeSet.add(newSize);
   }
 
-  constructor(private store: Store) { 
+  constructor(private store: Store<{ profile: ProfileState }>, private authService: AuthenticationService) { 
+    this.currentUser$ = this.store.select(state => state.profile.currentUser);
+
     this.newProduct = {
       productCategory: '',
       productBrand: '',
@@ -46,7 +58,15 @@ export class SellerProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      console.log('Seller profile component initialized');
+    const userEmail = this.authService.getUserEmailFromToken();
+
+    if (userEmail) {
+      this.store.dispatch(ProfileActions.getProfileAction({userEmail: userEmail}));
+    } else {
+      this.store.dispatch(ProfileActions.getProfileActionFailure({error: "Cannot find current session token"}));
+    }
+
+    console.log('Seller profile component initialized');
   }
 
   addVariety(): void {

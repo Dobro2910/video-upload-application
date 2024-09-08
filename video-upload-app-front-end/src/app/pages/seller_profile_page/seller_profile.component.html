@@ -3,7 +3,7 @@
   <app-shopping-cart></app-shopping-cart>
   <app-profile></app-profile>
   <div class="seller-container">
-    <div class="seller-header">
+    <!-- <div class="seller-header">
       <div class="seller-image">
         <img src="https://via.placeholder.com/150" alt="Seller Profile Picture">
       </div>
@@ -11,25 +11,26 @@
         <h2 class="seller-name">Seller Name</h2>
         <p class="seller-bio">Seller | Managing Products</p>
       </div>
-    </div>
-
-    <!-- <section>
-      <div *ngIf="productsDisplay$ | async as productsDisplay; else noProductsDisplay">
-          <div class="products">
-          <div *ngFor="let productDisplay of productsDisplay" class="product" (click)="displayProduct(productDisplay)">
-              <img [src]="productDisplay.productImage" alt="{{ productDisplay.productName }}" />
-              <h3>{{ productDisplay.productName }}</h3>
-              <p>{{ productDisplay.productDescription }}</p>
-              <p>Price: {{ productDisplay.productPrice | currency }}</p>
-          </div>
-          </div>
+    </div> -->
+    
+    <div *ngIf="currentUser$ | async as currentUser" class="seller-header">
+      <div *ngIf="currentUser.userImage; else noImage" class="seller-image">
+        <img [src]="currentUser.userImage" alt="Seller Profile Picture">
       </div>
-      <ng-template #noProductsDisplay>
-          <p class="no-products">No products available.</p>
+
+      <ng-template #noImage>
+        <div class="seller-image">
+          <img src="https://via.placeholder.com/150" alt="Seller Profile Picture" class="profile-image">
+        </div>
       </ng-template>
-    </section> -->
+
+      <div class="seller-details">
+        <h2 class="seller-name">{{ currentUser.userName }}</h2>
+        <p class="seller-bio">Seller | Managing Products</p>
+      </div>
+    </div>
   
-    <div class="seller-info">
+    <!-- <div class="seller-info">
       <div class="seller-info-item">
         <h3>Email</h3>
         <p>example.com</p>
@@ -37,6 +38,17 @@
       <div class="seller-info-item">
         <h3>Role</h3>
         <p>Seller</p>
+      </div>
+    </div> -->
+
+    <div *ngIf="currentUser$ | async as currentUser" class="seller-info">
+      <div class="seller-info-item">
+        <h3>Email</h3>
+        <p>{{ currentUser.userEmail }}</p>
+      </div>
+      <div class="seller-info-item">
+        <h3>Role</h3>
+        <p>{{ currentUser.userRole }}</p>
       </div>
     </div>
   

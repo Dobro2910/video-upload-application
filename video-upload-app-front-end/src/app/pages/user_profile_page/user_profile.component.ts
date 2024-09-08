@@ -10,6 +10,6 @@ export class UserProfileComponent implements OnInit {
     constructor(private router: Router) { }
 
     ngOnInit(): void {
-        console.log('User profile component initialized');
+      console.log('User profile component initialized');
     }
 }

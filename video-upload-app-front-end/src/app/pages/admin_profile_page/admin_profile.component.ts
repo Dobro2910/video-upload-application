@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Product, ProductColorVarietyDetail } from '../../store/model/product.model';
+import { User } from '../../store/model/user.model';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { createProductAction } from '../../store/product/product.action';
-import { User, UserWithRole } from '../../store/model/user.model';
 import { createUserWithRoleAction } from '../../store/authentication/authentication.action';
+
+import { AuthenticationService } from '../../service/authentication.service';
+import * as ProfileActions from '../../store/profile/profile.action';
+import { ProfileState } from '../../store/profile/profile.reducer';
 
 @Component({
   selector: 'app-admin-profile',
@@ -11,8 +16,12 @@ import { createUserWithRoleAction } from '../../store/authentication/authenticat
   styleUrls: ['./admin_profile.component.scss'],
 })
 export class AdminProfileComponent implements OnInit {
+  // Observable Variables
+  currentUser$: Observable<User| null>;
+
+  // Normal Variables
   newProduct: Product;
-  newUser: UserWithRole;
+  newUser: User;
   productColorVarietiesDetail: ProductColorVarietyDetail[] = [];
 
   // an unique set of size to store all size when the customer use filter
@@ -24,7 +33,9 @@ export class AdminProfileComponent implements OnInit {
     this.productSizeSet.add(newSize);
   }
 
-  constructor(private store: Store) { 
+  constructor(private store: Store<{ profile: ProfileState }>, private authService: AuthenticationService) { 
+    this.currentUser$ = this.store.select(state => state.profile.currentUser);
+
     this.newUser = {
       userEmail: '',
       userName: '',
@@ -55,6 +66,14 @@ export class AdminProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const userEmail = this.authService.getUserEmailFromToken();
+
+    if (userEmail) {
+      this.store.dispatch(ProfileActions.getProfileAction({userEmail: userEmail}));
+    } else {
+      this.store.dispatch(ProfileActions.getProfileActionFailure({error: "Cannot find current session token"}));
+    }
+
     console.log('Admin profile component initialized');
   }
 

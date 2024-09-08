@@ -1,0 +1,62 @@
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { Router } from '@angular/router';
+
+import { ProfileService } from '../../service/profile.service';
+import * as ProfileActions from '../profile/profile.action';
+
+@Injectable()
+export class ProfileEffects {
+  GetProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.getProfileAction), // Listen for user login action
+      mergeMap(action => this.profileService.GetProfile(action.userEmail).pipe(
+          map(response => {
+            return ProfileActions.getProfileActionSuccess({ user: response.user });
+          }),
+          catchError(error => {
+            // Handle login failure, return error message
+            console.error('Get user profile failed: ', error);
+
+            return of(ProfileActions.getProfileActionFailure({ error: error }));
+          })
+        )
+      )
+    )
+  );
+
+//   createUser$ = createEffect(() =>
+//     this.actions$.pipe(
+//       ofType(AuthActions.createUserAction),
+//         mergeMap(action =>
+//           this.authService.UserRegister(action.user).pipe(
+//             tap(() => {
+//               this.router.navigate(['/login']); // Navigate to home on success
+//             }),
+//             map(() => AuthActions.createUserActionSuccess()),
+//             catchError(error => {
+//               console.error('Register failed:', error);
+
+//               let errorMessage;
+//               if (error.status === 401) {
+//                 errorMessage = "Email Already Exist";
+//               } else {
+//                 errorMessage = "An Error Have Occur When Register";
+//               }
+//               return of(AuthActions.createUserActionFailure({ error: errorMessage }));
+//             })  
+//           )
+//         )
+//     )
+//   );
+
+  constructor(
+    private actions$: Actions,
+    private profileService: ProfileService,
+    private router: Router
+  ) {}
+
+  // Add other effects if needed, such as registration, logout, etc.
+}

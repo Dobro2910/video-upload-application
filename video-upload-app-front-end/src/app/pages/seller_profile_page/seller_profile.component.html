@@ -9,10 +9,25 @@
       </div>
       <div class="seller-details">
         <h2 class="seller-name">Seller Name</h2>
-        <p class="seller-username">Seller User</p>
         <p class="seller-bio">Seller | Managing Products</p>
       </div>
     </div>
+
+    <!-- <section>
+      <div *ngIf="productsDisplay$ | async as productsDisplay; else noProductsDisplay">
+          <div class="products">
+          <div *ngFor="let productDisplay of productsDisplay" class="product" (click)="displayProduct(productDisplay)">
+              <img [src]="productDisplay.productImage" alt="{{ productDisplay.productName }}" />
+              <h3>{{ productDisplay.productName }}</h3>
+              <p>{{ productDisplay.productDescription }}</p>
+              <p>Price: {{ productDisplay.productPrice | currency }}</p>
+          </div>
+          </div>
+      </div>
+      <ng-template #noProductsDisplay>
+          <p class="no-products">No products available.</p>
+      </ng-template>
+    </section> -->
   
     <div class="seller-info">
       <div class="seller-info-item">
@@ -22,10 +37,6 @@
       <div class="seller-info-item">
         <h3>Role</h3>
         <p>Seller</p>
-      </div>
-      <div class="seller-info-item">
-        <h3>Joined</h3>
-        <p>January 2020</p>
       </div>
     </div>
   

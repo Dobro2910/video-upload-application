@@ -24,6 +24,8 @@ import { ProductEffects } from './store/product/product.effect';
 
 // Shopping Cart
 import { shoppingCartReducer, shoppingCartReducerFeatureKey } from './store/shopping_cart/shopping_cart.reducer';
+import { profileReducer, profileReducerFeatureKey } from './store/profile/profile.reducer';
+import { ProfileEffects } from './store/profile/profile.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), 
@@ -32,9 +34,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(), 
     provideHttpClient(withFetch()),
     
-
-    provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer, [paymentReducerFeatureKey]: paymentReducer, [shoppingCartReducerFeatureKey]: shoppingCartReducer}),
-    provideEffects(AuthEffects, ProductEffects, PaymentEffects),
+    provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer, [paymentReducerFeatureKey]: paymentReducer, [shoppingCartReducerFeatureKey]: shoppingCartReducer , [profileReducerFeatureKey]: profileReducer}),
+    provideEffects(AuthEffects, ProductEffects, PaymentEffects, ProfileEffects),
 
     // Provide Redux DevTools
     provideStoreDevtools({

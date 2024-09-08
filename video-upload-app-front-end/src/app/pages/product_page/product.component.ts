@@ -4,7 +4,7 @@ import * as ProductActions from '../../store/product/product.action';
 import { ProductState } from '../../store/product/product.reducer';
 import { ProductDisplay } from '../../store/model/product.model';
 import { Observable } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { FilterService } from '../../service/filter.service';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 export class ProductComponent implements OnInit {
   constructor(private router: Router, 
               private store: Store<{ product: ProductState }>, 
-              private filterSevice: FilterService, 
+              private filterSevice: FilterService,
               private dialog: MatDialog) { 
     this.productsDisplay$ = this.store.select(state => state.product.productsDisplay);
     this.filterCheck$ = this.store.select(state => state.product.filterCheck);
@@ -38,7 +38,6 @@ export class ProductComponent implements OnInit {
     // if we press nextpage and there are no product left to display, go back
     this.productsDisplay$.subscribe(productsDisplay => {
         if (!productsDisplay && this.filterVar.currentPage > 1) {
-          console.log("hello0");
           this.prevPage();
         }
       }
@@ -47,15 +46,12 @@ export class ProductComponent implements OnInit {
     this.filterCheck$.subscribe(filterCheck => {
       // filter to navigate from home page and side bar
       if ((this.filterVar.productBrand || this.filterVar.productCategory || this.filterVar.productGender || this.filterVar.productSize) && !filterCheck) {
-        console.log("hello1");
         console.log(filterCheck);
         this.getPaginatedProductsByFilter();
       } else if (filterCheck) {
-        console.log("hello2");
         console.log(filterCheck);
         this.getPaginatedProductsByFilter();
       } else if (!filterCheck) {
-        console.log("hello3");
         console.log(filterCheck);
         this.loadProducts();
       }

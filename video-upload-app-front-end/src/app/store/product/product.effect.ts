@@ -77,18 +77,6 @@ export class ProductEffects {
   createProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProductActions.createProductAction),
-        // mergeMap(action =>
-        //   this.productService.createProduct(action.newProduct).pipe(
-        //     // tap(() => {
-        //     //   this.router.navigate(['/login']); // Navigate to home on success
-        //     // }),
-        //     map(() => ProductActions.createProductActionSuccess()),
-        //     catchError(error => {
-        //       console.error('Create product failed:', error);
-        //       return of(ProductActions.createProductActionFailure({ error }));
-        //     })  
-        //   )
-        // )
         take(1),
         mergeMap(action =>
           this.productService.createProduct(action.newProduct).pipe(

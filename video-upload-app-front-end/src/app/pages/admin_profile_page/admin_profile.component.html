@@ -3,29 +3,31 @@
   <app-shopping-cart></app-shopping-cart>
   <app-profile></app-profile>
   <div class="admin-container">
-    <div class="admin-header">
-      <div class="admin-image">
-        <img src="https://via.placeholder.com/150" alt="Admin Profile Picture">
+    <div *ngIf="currentUser$ | async as currentUser" class="admin-header">
+      <div *ngIf="currentUser.userImage; else noImage" class="admin-image">
+        <img [src]="currentUser.userImage" alt="Admin Profile Picture">
       </div>
+
+      <ng-template #noImage>
+        <div class="admin-image">
+          <img src="https://via.placeholder.com/150" alt="Admin Profile Picture" class="profile-image">
+        </div>
+      </ng-template>
+
       <div class="admin-details">
-        <h2 class="admin-name">Admin Name</h2>
-        <p class="admin-username">adminuser</p>
+        <h2 class="admin-name">{{ currentUser.userName }}</h2>
         <p class="admin-bio">Administrator | Managing Sellers and Products</p>
       </div>
     </div>
   
-    <div class="admin-info">
+    <div *ngIf="currentUser$ | async as currentUser" class="admin-info">
       <div class="admin-info-item">
         <h3>Email</h3>
-        <p>example.com</p>
+        <p>{{ currentUser.userEmail }}</p>
       </div>
       <div class="admin-info-item">
         <h3>Role</h3>
-        <p>Administrator</p>
-      </div>
-      <div class="admin-info-item">
-        <h3>Joined</h3>
-        <p>January 2020</p>
+        <p>{{ currentUser.userRole }}</p>
       </div>
     </div>
   

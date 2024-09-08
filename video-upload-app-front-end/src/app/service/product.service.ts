@@ -15,7 +15,7 @@ export class ProductService {
 
     getPaginatedProducts(page: number): Observable<any> {
         let params = new HttpParams();
-        params = params.append('page', page);
+        params = params.set('page', page);
         return this.http.get('http://localhost:3000/product/getpaginatedproduct', { params });
     }
 

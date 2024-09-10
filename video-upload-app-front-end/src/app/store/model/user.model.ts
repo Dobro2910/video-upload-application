@@ -9,7 +9,7 @@ export interface User {
 export interface UpdateUser {
     userName?: string;
     userEmail?: string;
-    userImage?: string;
+    userImage?: File;
 }
 
 export interface UserLoginCredential {

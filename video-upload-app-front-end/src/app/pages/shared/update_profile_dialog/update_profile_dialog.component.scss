@@ -1,0 +1,85 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.update-profile-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 101;
+
+    .dialog-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .form-group {
+        display: flex;
+        align-items: center;
+        // justify-content: center;
+        // flex-direction: column;
+
+        margin-bottom: 20px;
+
+        label {
+            flex: 0 0 80px;
+            display: block;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            margin-right: 10px;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+
+        .btn-cancel,
+        .btn-update {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        .btn-update {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        .btn-cancel:hover {
+            background-color: #e53935;
+        }
+
+        .btn-update:hover {
+            background-color: #43a047;
+        }
+    }
+}

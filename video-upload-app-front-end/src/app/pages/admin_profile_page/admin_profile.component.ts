@@ -10,6 +10,9 @@ import { AuthenticationService } from '../../service/authentication.service';
 import * as ProfileActions from '../../store/profile/profile.action';
 import { ProfileState } from '../../store/profile/profile.reducer';
 
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateProfileDialogComponent } from '../shared/update_profile_dialog/update_profile_dialog.component';
+
 @Component({
   selector: 'app-admin-profile',
   templateUrl: './admin_profile.component.html',
@@ -33,7 +36,7 @@ export class AdminProfileComponent implements OnInit {
     this.productSizeSet.add(newSize);
   }
 
-  constructor(private store: Store<{ profile: ProfileState }>, private authService: AuthenticationService) { 
+  constructor(private store: Store<{ profile: ProfileState }>, private authService: AuthenticationService, private dialog: MatDialog) { 
     this.currentUser$ = this.store.select(state => state.profile.currentUser);
 
     this.newUser = {
@@ -96,5 +99,9 @@ export class AdminProfileComponent implements OnInit {
 
   createNewUserWithRole() {
     this.store.dispatch(createUserWithRoleAction({ newUser: this.newUser } ));
+  }
+
+  displayPaymentMethod(): void {
+    this.dialog.open(UpdateProfileDialogComponent);
   }
 }

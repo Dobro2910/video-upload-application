@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogRef } from '@angular/cdk/dialog';
 import { UpdateUser } from '../../../store/model/user.model';
+import { AuthenticationService } from '../../../service/authentication.service';
 
 import { Store } from '@ngrx/store';
 import * as ProfileActions from '../../../store/profile/profile.action';
@@ -13,7 +14,7 @@ import * as ProfileActions from '../../../store/profile/profile.action';
 export class UpdateProfileDialogComponent implements OnInit {
   updateUser: UpdateUser;
 
-  constructor(private dialogRef: DialogRef, private store: Store) { 
+  constructor(private dialogRef: DialogRef, private store: Store, private authService: AuthenticationService) { 
     this.updateUser = {
       userEmail: undefined,
       userName: undefined,
@@ -26,7 +27,13 @@ export class UpdateProfileDialogComponent implements OnInit {
   }
 
   updateProfile(): void {
-    this.store.dispatch(ProfileActions.updateProfileAction({updateUser: this.updateUser}));
+    const userEmail = this.authService.getUserEmailFromToken();
+
+    if (userEmail) {
+      this.store.dispatch(ProfileActions.updateProfileAction({updateUser: this.updateUser, userEmail: userEmail}));
+    } else {
+      this.store.dispatch(ProfileActions.updateProfileActionFailure({error: "Cannot find current session token"}));
+    }
   }
 
   onClose(): void {

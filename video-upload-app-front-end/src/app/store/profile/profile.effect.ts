@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap, take } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -27,30 +27,28 @@ export class ProfileEffects {
     )
   );
 
-//   createUser$ = createEffect(() =>
-//     this.actions$.pipe(
-//       ofType(AuthActions.createUserAction),
-//         mergeMap(action =>
-//           this.authService.UserRegister(action.user).pipe(
-//             tap(() => {
-//               this.router.navigate(['/login']); // Navigate to home on success
-//             }),
-//             map(() => AuthActions.createUserActionSuccess()),
-//             catchError(error => {
-//               console.error('Register failed:', error);
+  updateUserProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.updateProfileAction),
+      take(1),
+      mergeMap(action =>
+        this.profileService.UpdateProfile(action.updateUser, action.userEmail).pipe(
+          map(() => ProfileActions.updateProfileActionSuccess()),
+          catchError(error => {
+            console.error('Update profile failed:', error);
 
-//               let errorMessage;
-//               if (error.status === 401) {
-//                 errorMessage = "Email Already Exist";
-//               } else {
-//                 errorMessage = "An Error Have Occur When Register";
-//               }
-//               return of(AuthActions.createUserActionFailure({ error: errorMessage }));
-//             })  
-//           )
-//         )
-//     )
-//   );
+            let errorMessage;
+            if (error.status === 401) {
+              errorMessage = "Email Already Exist";
+            } else {
+              errorMessage = "An Error Have Occur When Update User Profile";
+            }
+            return of(ProfileActions.updateProfileActionFailure({ error: errorMessage }));
+          })  
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions,

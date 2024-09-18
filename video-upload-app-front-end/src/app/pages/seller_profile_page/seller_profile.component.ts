@@ -9,6 +9,8 @@ import { User } from '../../store/model/user.model';
 import { AuthenticationService } from '../../service/authentication.service';
 import * as ProfileActions from '../../store/profile/profile.action';
 import { ProfileState } from '../../store/profile/profile.reducer';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateProfileDialogComponent } from '../shared/update_profile_dialog/update_profile_dialog.component';
 
 @Component({
   selector: 'app-seller-profile',
@@ -22,9 +24,9 @@ export class SellerProfileComponent implements OnInit {
   // Normal Variables
   newProduct: Product;
   productColorVarietiesDetail: ProductColorVarietyDetail[] = [];
-
   // an unique set of size to store all size when the customer use filter
   productSizeSet: Set<string> = new Set();
+
   updateProductSize(newSize: string, varietyIndex: number, sizeIndex: number): void {
     // Update the product size at the specific index
     this.productColorVarietiesDetail[varietyIndex].productSize[sizeIndex] = newSize;
@@ -32,7 +34,7 @@ export class SellerProfileComponent implements OnInit {
     this.productSizeSet.add(newSize);
   }
 
-  constructor(private store: Store<{ profile: ProfileState }>, private authService: AuthenticationService) { 
+  constructor(private store: Store<{ profile: ProfileState }>, private authService: AuthenticationService, private dialog: MatDialog) { 
     this.currentUser$ = this.store.select(state => state.profile.currentUser);
 
     this.newProduct = {
@@ -84,5 +86,9 @@ export class SellerProfileComponent implements OnInit {
     this.newProduct.productColorVarietyDetail = this.productColorVarietiesDetail;
     this.newProduct.productSize = productSizeArray;
     this.store.dispatch(createProductAction({ newProduct: this.newProduct }));
+  }
+
+  displayProfileUpdateDialog(): void {
+    this.dialog.open(UpdateProfileDialogComponent);
   }
 }

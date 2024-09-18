@@ -4,20 +4,25 @@ import { CommonModule } from '@angular/common';
 import { SideBarComponent } from './side_bar/sidebar.component';
 import { ShoppingCartComponent } from './shopping_cart/shoppingcart.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UpdateProfileDialogComponent } from './update_profile_dialog/update_profile_dialog.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     SideBarComponent,
     ShoppingCartComponent,
-    ProfileComponent
+    ProfileComponent,
+    UpdateProfileDialogComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule 
   ],
   exports: [
     SideBarComponent,
     ShoppingCartComponent,
-    ProfileComponent
+    ProfileComponent,
+    UpdateProfileDialogComponent
   ]
 })
 

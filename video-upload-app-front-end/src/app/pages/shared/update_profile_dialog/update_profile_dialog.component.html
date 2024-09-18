@@ -6,13 +6,15 @@
     <!-- Username Field -->
     <div class="form-group">
       <label for="userName">User Name:</label>
-      <input [(ngModel)]="updateUser.userName" type="text" id="userName" placeholder="Enter your updated username">
+      <!-- Add 'name' attribute to resolve NG01352 error -->
+      <input [(ngModel)]="updateUser.userName" name="userName" type="text" id="userName" placeholder="Enter your updated username">
     </div>
 
     <!-- User Image Upload Field -->
     <div class="form-group">
       <label for="userImage">Profile Image:</label>
-      <input [(ngModel)]="updateUser.userImage" type="file" id="userImage">
+      <!-- Use (change) event to handle file input -->
+      <input type="file" id="userImage" (change)="onFileSelected($event)">
     </div>
 
     <!-- Buttons -->
@@ -22,3 +24,4 @@
     </div>
   </form>
 </div>
+

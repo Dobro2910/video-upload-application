@@ -17,6 +17,10 @@
       <div class="admin-details">
         <h2 class="admin-name">{{ currentUser.userName }}</h2>
         <p class="admin-bio">Administrator | Managing Sellers and Products</p>
+        <div class="admin-actions"> 
+          <button class="btn" (click)="displayProfileUpdateDialog()">Edit Profile</button>
+          <!-- <button class="btn logout-btn">Logout</button> -->
+        </div>
       </div>
     </div>
   
@@ -98,11 +102,6 @@
       </div>
 
       <button class="btn create-product-btn" (click)="createNewProduct()">Create Product</button>
-    </div>
-  
-    <div class="admin-actions"> 
-      <button class="btn" (click)="displayPaymentMethod()">Edit Profile</button>
-      <!-- <button class="btn logout-btn">Logout</button> -->
     </div>
   </div>
 </body>

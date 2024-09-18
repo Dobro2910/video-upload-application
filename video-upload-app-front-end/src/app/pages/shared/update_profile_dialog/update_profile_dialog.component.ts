@@ -36,6 +36,14 @@ export class UpdateProfileDialogComponent implements OnInit {
     }
   }
 
+  // File input must be handle differently, instead of using using Ngmodel, we use this function
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0]; // Get the selected file
+    if (file) {
+      this.updateUser.userImage = file;  // Assign the selected file to updateUser
+    }
+  }
+
   onClose(): void {
     if (this.dialogRef) {
         this.dialogRef.close();

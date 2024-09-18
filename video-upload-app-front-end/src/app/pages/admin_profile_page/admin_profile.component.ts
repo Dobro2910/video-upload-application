@@ -5,11 +5,9 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { createProductAction } from '../../store/product/product.action';
 import { createUserWithRoleAction } from '../../store/authentication/authentication.action';
-
 import { AuthenticationService } from '../../service/authentication.service';
 import * as ProfileActions from '../../store/profile/profile.action';
 import { ProfileState } from '../../store/profile/profile.reducer';
-
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateProfileDialogComponent } from '../shared/update_profile_dialog/update_profile_dialog.component';
 
@@ -26,9 +24,9 @@ export class AdminProfileComponent implements OnInit {
   newProduct: Product;
   newUser: User;
   productColorVarietiesDetail: ProductColorVarietyDetail[] = [];
-
   // an unique set of size to store all size when the customer use filter
   productSizeSet: Set<string> = new Set();
+
   updateProductSize(newSize: string, varietyIndex: number, sizeIndex: number): void {
     // Update the product size at the specific index
     this.productColorVarietiesDetail[varietyIndex].productSize[sizeIndex] = newSize;
@@ -101,7 +99,7 @@ export class AdminProfileComponent implements OnInit {
     this.store.dispatch(createUserWithRoleAction({ newUser: this.newUser } ));
   }
 
-  displayPaymentMethod(): void {
+  displayProfileUpdateDialog(): void {
     this.dialog.open(UpdateProfileDialogComponent);
   }
 }

@@ -1,0 +1,27 @@
+<div class="overlay" (click)="onClose()"></div>
+<div class="update-profile-dialog">
+  <p class="dialog-title">Update Your Profile</p>
+  
+  <form id="update-profile-form">
+    <!-- Username Field -->
+    <div class="form-group">
+      <label for="userName">User Name:</label>
+      <!-- Add 'name' attribute to resolve NG01352 error -->
+      <input [(ngModel)]="updateUser.userName" name="userName" type="text" id="userName" placeholder="Enter your updated username">
+    </div>
+
+    <!-- User Image Upload Field -->
+    <div class="form-group">
+      <label for="userImage">Profile Image:</label>
+      <!-- Use (change) event to handle file input -->
+      <input type="file" id="userImage" (change)="onFileSelected($event)">
+    </div>
+
+    <!-- Buttons -->
+    <div class="form-actions">
+      <button type="button" (click)="onClose()" class="btn-cancel">Cancel</button>
+      <button type="button" (click)="updateProfile()" class="btn-update">Update</button>
+    </div>
+  </form>
+</div>
+

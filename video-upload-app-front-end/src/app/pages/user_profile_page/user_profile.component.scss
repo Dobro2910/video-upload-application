@@ -1,7 +1,7 @@
-/* Base Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+    color: #333;
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,92 +10,84 @@ body {
     height: 100vh;
 }
 
-/* Profile Container */
-    .profile-container {
+.user-container {
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    height: auto;
     padding: 20px;
 }
 
-/* Profile Header */
-.profile-header {
+.user-header {
     display: flex;
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.profile-image {
-    flex-shrink: 0;
-    margin-right: 20px;
-}
-
-.profile-image img {
+.user-image img {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 20px;
+    border: 3px solid #333;
 }
 
-.profile-details {
-    flex-grow: 1;
-}
-
-.profile-name {
-    margin: 0;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.profile-username {
-    margin: 5px 0;
-    color: #777;
-}
-
-.profile-bio {
-    margin: 0;
-    color: #555;
-}
-
-/* Profile Info */
-.profile-info {
+.user-details {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
 }
 
-.profile-info-item h3 {
+.user-name {
+    font-size: 28px;
     margin: 0;
-    font-size: 14px;
-    color: #777;
-}
-
-.profile-info-item p {
-    margin: 5px 0 0;
-    font-size: 16px;
     color: #333;
 }
 
-/* Profile Actions */
-.profile-actions {
+.user-username, .user-bio {
+    margin: 5px 0;
+    color: #555;
+}
+
+.user-info {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.user-info-item {
+    background-color: #f9f9f9;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+    margin: 0 10px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .btn {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.edit-btn {
+    display: inline-block;
     background-color: #333;
     color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-.edit-btn:hover {
+.btn:hover {
     background-color: black;
+}
+
+.user-actions {
+    display: flex;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
 }

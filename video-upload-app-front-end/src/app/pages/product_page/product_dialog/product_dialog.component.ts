@@ -1,11 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductDisplay, ProductInCart } from '../../../store/model/product.model';
-import { Store } from '@ngrx/store';
-import { addProductAction } from '../../../store/shopping_cart/shopping_cart.action';
+import { Store, select } from '@ngrx/store';
+import { addProductAction, addProductActionFailure, resetShoppingCartCommentAction } from '../../../store/shopping_cart/shopping_cart.action';
 import { ShoppingCartState } from '../../../store/shopping_cart/shopping_cart.reducer';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, take, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-dialog',
@@ -15,6 +15,7 @@ import { map, take } from 'rxjs/operators';
 export class ProductDialogComponent {
   // observable
   productsInCart$: Observable<ProductInCart[]>;
+  comment$: Observable<string | null>;
 
   // normal variable
   productInCart: ProductInCart | null = null;
@@ -30,15 +31,16 @@ export class ProductDialogComponent {
     private store: Store<{ shoppingCart: ShoppingCartState }>
   ) {
     this.productsInCart$ = this.store.select(state => state.shoppingCart.productsInCart);
+    this.comment$ = this.store.pipe(select(state => state.shoppingCart.comment));
   }
 
   ngOnInit(): void {
     console.log('Product dialog component initialized');
-
   }
 
   // close the product dialog
   onClose(): void {
+    this.store.dispatch(resetShoppingCartCommentAction());
     this.dialogRef.close();
   }
 
@@ -51,7 +53,7 @@ export class ProductDialogComponent {
                                                   && product.productSize === this.selectedSize))
       ).subscribe(product => {
         if (product) {
-          console.log('Product is already in the cart:');
+          this.store.dispatch(addProductActionFailure({ comment: 'Product Already In Cart' }));
         } else if (!product) {
           this.productInCart = {
             productId: this.data.productId,
@@ -64,7 +66,6 @@ export class ProductDialogComponent {
             productSize: this.selectedSize,
             productQuantity: 1
           };
-          console.log(this.productInCart);
           this.store.dispatch(addProductAction({ product: this.productInCart }));
         }
       });

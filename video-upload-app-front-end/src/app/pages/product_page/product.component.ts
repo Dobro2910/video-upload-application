@@ -17,10 +17,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  constructor(private router: Router, 
-              private store: Store<{ product: ProductState }>, 
+  constructor(private router: Router,
+              private store: Store<{ product: ProductState }>,
               private filterSevice: FilterService,
-              private dialog: MatDialog) { 
+              private dialog: MatDialog) {
     this.productsDisplay$ = this.store.select(state => state.product.productsDisplay);
     this.filterCheck$ = this.store.select(state => state.product.filterCheck);
   }

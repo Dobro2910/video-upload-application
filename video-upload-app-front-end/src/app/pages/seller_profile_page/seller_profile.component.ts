@@ -44,7 +44,7 @@ export class SellerProfileComponent implements OnInit {
       productDescription: '',
       productPrice: 0,
       productGender: '',
-      productImage: '',
+      productImage: undefined,
       productAmountSold: 0,
       productColorVarietyDetail: []
     };
@@ -86,6 +86,14 @@ export class SellerProfileComponent implements OnInit {
     this.newProduct.productColorVarietyDetail = this.productColorVarietiesDetail;
     this.newProduct.productSize = productSizeArray;
     this.store.dispatch(createProductAction({ newProduct: this.newProduct }));
+  }
+
+  // File input must be handle differently, instead of using using Ngmodel, we use this function
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0]; // Get the selected file
+    if (file) {
+      this.newProduct.productImage = file;  // Assign the selected file to updateUser
+    }
   }
 
   displayProfileUpdateDialog(): void {

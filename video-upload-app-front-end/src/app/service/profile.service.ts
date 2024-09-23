@@ -22,18 +22,6 @@ export class ProfileService {
         return this.http.get(`http://localhost:3000/authentication/getprofile/${userEmail}`, { headers });
     }
 
-    // UpdateProfile(updateUser: UpdateUser, userEmail: string): Observable<any> {
-    //     // Create HttpParams for query parameters
-    //     let params = new HttpParams().set('userEmail', userEmail);
-
-    //     // Send the request with both params and body
-    //     return this.http.put(
-    //         'http://localhost:3000/authentication/updateProfile',
-    //         updateUser, // Body of the request (updateUser object)
-    //         { params }  // Query parameters
-    //     );
-    // }
-
     // Method to update user profile with image upload
     UpdateProfile(updateUser: UpdateUser, userEmail: string): Observable<any> {
         const token = this.authService.getToken(); // Get JWT token from auth service

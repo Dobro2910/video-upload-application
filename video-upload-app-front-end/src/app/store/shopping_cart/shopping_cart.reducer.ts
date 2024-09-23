@@ -5,30 +5,48 @@ import { ProductInCart } from '../model/product.model';
 // Define the shape of the shopping cart state
 export interface ShoppingCartState {
   productsInCart: ProductInCart[];
-  error: string | null;
+  comment: string | null;
 }
 
 // Initial state of the shopping cart
 const initialState: ShoppingCartState = {
     productsInCart: [],
-    error: null
+    comment: null
 };
 
 // Reducer function using createReducer from @ngrx/store
 export const shoppingCartReducer = createReducer(
     initialState,
 
-    // Add product to cart success
+    // Add product to cart
     on(ShoppingCartActions.addProductAction, (state, { product }) => ({
         ...state,
-        error: null,
+        comment: null,
         productsInCart: [...state.productsInCart, product], // Always append the new product
+    })),
+
+    // Add product to cart success
+    on(ShoppingCartActions.addProductActionSuccess, (state, { comment }) => ({
+        ...state,
+        comment: comment,
+    })),
+
+    // Add product to cart failure
+    on(ShoppingCartActions.addProductActionFailure, (state, { comment }) => ({
+        ...state,
+        comment: comment,
+    })),
+
+    // Reset shopping cart comment
+    on(ShoppingCartActions.resetShoppingCartCommentAction, (state) => ({
+        ...state,
+        comment: null,
     })),
 
     // Remove product from cart success
     on(ShoppingCartActions.removeProductAction, (state, { product }) => ({
         ...state,
-        error: null,
+        comment: null,
         productsInCart: state.productsInCart.filter(p => 
             !(p.productId === product.productId && 
             p.productColor === product.productColor && 

@@ -38,12 +38,12 @@
             <h3>AmountSold</h3>
             <p>{{ data.productAmountSold }}</p>
         </div>
-
-        <div *ngIf="comment$ | async as comment">
-            <p>{{ comment }}</p>
-        </div>
         
         <button (click)="addToCart()" mat-button class="add-to-bag">Add to Bag</button>
+    </div>
+
+    <div *ngIf="showComment" class="snack-bar">
+        {{ comment }}
     </div>
 </div>
 

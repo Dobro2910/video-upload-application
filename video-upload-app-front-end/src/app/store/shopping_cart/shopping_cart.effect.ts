@@ -13,7 +13,6 @@ export class ShoppingCartEffects {
       ofType(ShoppingCartActions.addProductAction),
       // Simulate a service call or any async operation (optional)
       map(action => {
-        console.log("hello");
         // Here, you could have some logic to verify if the product addition was successful
         return ShoppingCartActions.addProductActionSuccess({ comment: 'Add Product To Cart Success' });
       }),

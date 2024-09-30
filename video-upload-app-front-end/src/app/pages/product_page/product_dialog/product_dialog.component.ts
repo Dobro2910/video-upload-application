@@ -6,6 +6,7 @@ import { addProductAction, addProductActionFailure, resetShoppingCartCommentActi
 import { ShoppingCartState } from '../../../store/shopping_cart/shopping_cart.reducer';
 import { Observable } from 'rxjs';
 import { map, take, filter } from 'rxjs/operators';
+// import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-dialog',
@@ -23,12 +24,15 @@ export class ProductDialogComponent {
   selectedColorDetails: any; // To hold the selected color's details
   selectedColor: string | null = null;
   selectedSize: string | null = null; // To hold the selected size
+  showComment = false;
+  comment: string | null = null;
 
   constructor(
     public dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductDisplay,
     // private store: Store,
-    private store: Store<{ shoppingCart: ShoppingCartState }>
+    private store: Store<{ shoppingCart: ShoppingCartState }>,
+    // private snackBar: MatSnackBar
   ) {
     this.productsInCart$ = this.store.select(state => state.shoppingCart.productsInCart);
     this.comment$ = this.store.pipe(select(state => state.shoppingCart.comment));
@@ -54,6 +58,7 @@ export class ProductDialogComponent {
       ).subscribe(product => {
         if (product) {
           this.store.dispatch(addProductActionFailure({ comment: 'Product Already In Cart' }));
+          this.showCommentWithTimeout('Product Already In Cart');
         } else if (!product) {
           this.productInCart = {
             productId: this.data.productId,
@@ -67,9 +72,20 @@ export class ProductDialogComponent {
             productQuantity: 1
           };
           this.store.dispatch(addProductAction({ product: this.productInCart }));
+          this.showCommentWithTimeout('Product added to cart successfully!');
         }
       });
     }
+  }
+
+  // Method to show comment and hide it after 3 seconds
+  showCommentWithTimeout(comment: string): void {
+    this.comment = comment;
+    this.showComment = true;
+
+    setTimeout(() => {
+      this.showComment = false;
+    }, 3000); // Hide after 3 seconds
   }
 
   selectColor(colorDetail: any): void {

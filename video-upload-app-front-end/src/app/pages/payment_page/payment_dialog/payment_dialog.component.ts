@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadStripe, Stripe, StripeElements, StripeCardElement } from '@stripe/stripe-js';
-import { initiatePaymentAction, savePaymentOrderAction } from '../../../store/payment/payment.action';
+import { initiatePaymentAction, savePaymentOrderAction, savePaymentOrderActionFailure } from '../../../store/payment/payment.action';
 import { DialogRef } from '@angular/cdk/dialog';
 import { PaymentState } from '../../../store/payment/payment.reducer';
 import { Observable } from 'rxjs';
@@ -15,16 +15,12 @@ import { ShoppingCartState } from '../../../store/shopping_cart/shopping_cart.re
 })
 
 export class PaymentDialogComponent implements OnInit {
-  // observable variable
-  errorMessage$: Observable<string | null>;
-
   // normal variable
   stripe: Stripe | null = null;
   elements: StripeElements | null = null;
   card: StripeCardElement | null = null;
 
   constructor(private store: Store<{ payment: PaymentState, shoppingCart: ShoppingCartState }>, private dialogRef: DialogRef, private ngZone: NgZone) {
-    this.errorMessage$ = this.store.select(state => state.payment.errorMessage);
   }
 
   async ngOnInit(): Promise<void> {
@@ -73,8 +69,8 @@ export class PaymentDialogComponent implements OnInit {
                         },
                     });
 
-                    if (error) {
-                        console.log("Error during payment process: ", error);
+                    if (error && error.message) {
+                        this.store.dispatch(savePaymentOrderActionFailure({ error: error.message }));
                     } else if (paymentIntent?.id && paymentIntent.status === 'succeeded') {
                         const productsInCart = await firstValueFrom(this.store.select(state => state.shoppingCart.productsInCart).pipe(take(1)));
                         console.log('Dispatching savePaymentOrderAction:', productsInCart);
@@ -83,12 +79,12 @@ export class PaymentDialogComponent implements OnInit {
                         this.store.dispatch(savePaymentOrderAction({ productsInCart: productsInCart }));
                     } 
                 } 
+
+                this.onClose();
             } catch (error) {
-                console.error("Error during payment process:", error);
+                this.store.dispatch(savePaymentOrderActionFailure({ error: "Error during payment process" }));
             }
         }
-
-        this.onClose();
     }
 
   onClose(): void {

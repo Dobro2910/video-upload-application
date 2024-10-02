@@ -20,22 +20,19 @@ import { UpdateProfileDialogComponent } from '../shared/update_profile_dialog/up
 export class SellerProfileComponent implements OnInit {
   // Observable Variables
   currentUser$: Observable<User| null>;
+  profileComment$: Observable<string | null>;
 
   // Normal Variables
   newProduct: Product;
   productColorVarietiesDetail: ProductColorVarietyDetail[] = [];
   // an unique set of size to store all size when the customer use filter
   productSizeSet: Set<string> = new Set();
-
-  updateProductSize(newSize: string, varietyIndex: number, sizeIndex: number): void {
-    // Update the product size at the specific index
-    this.productColorVarietiesDetail[varietyIndex].productSize[sizeIndex] = newSize;
-    // Add the new size to the Set (automatically handles uniqueness)
-    this.productSizeSet.add(newSize);
-  }
+  showProfileComment = false;
+  profileComment: string | null = null;
 
   constructor(private store: Store<{ profile: ProfileState }>, private authService: AuthenticationService, private dialog: MatDialog) { 
     this.currentUser$ = this.store.select(state => state.profile.currentUser);
+    this.profileComment$ = this.store.select(state => state.profile.comment);
 
     this.newProduct = {
       productCategory: '',
@@ -48,15 +45,12 @@ export class SellerProfileComponent implements OnInit {
       productAmountSold: 0,
       productColorVarietyDetail: []
     };
-  }
 
-  closeVariety(varietyIndex: number) {
-    this.productColorVarietiesDetail.splice(varietyIndex, 1);
-  }
-
-  closeSizeAndStock(varietyIndex: number, sizeAndStockIndex: number) {
-    this.productColorVarietiesDetail[varietyIndex].productSize.splice(sizeAndStockIndex, 1);
-    this.productColorVarietiesDetail[varietyIndex].productStock.splice(sizeAndStockIndex, 1);
+    this.profileComment$.pipe().subscribe(profileComment => {
+      if (profileComment) {
+        this.showCommentWithTimeout(profileComment);
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -69,6 +63,32 @@ export class SellerProfileComponent implements OnInit {
     }
 
     console.log('Seller profile component initialized');
+  }
+
+  // Method to show comment and hide it after 3 seconds
+  showCommentWithTimeout(profileComment: string): void {
+    this.profileComment = profileComment;
+    this.showProfileComment = true;
+
+    setTimeout(() => {
+      this.showProfileComment = false;
+    }, 5000); // Hide after 3 seconds
+  }
+
+  updateProductSize(newSize: string, varietyIndex: number, sizeIndex: number): void {
+    // Update the product size at the specific index
+    this.productColorVarietiesDetail[varietyIndex].productSize[sizeIndex] = newSize;
+    // Add the new size to the Set (automatically handles uniqueness)
+    this.productSizeSet.add(newSize);
+  }
+
+  closeVariety(varietyIndex: number) {
+    this.productColorVarietiesDetail.splice(varietyIndex, 1);
+  }
+
+  closeSizeAndStock(varietyIndex: number, sizeAndStockIndex: number) {
+    this.productColorVarietiesDetail[varietyIndex].productSize.splice(sizeAndStockIndex, 1);
+    this.productColorVarietiesDetail[varietyIndex].productStock.splice(sizeAndStockIndex, 1);
   }
 
   addVariety(): void {

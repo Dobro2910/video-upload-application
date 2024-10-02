@@ -1,5 +1,5 @@
 .snack-bar {
-    position: absolute;
+    position: fixed; /* Changed from absolute to fixed */
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -9,6 +9,7 @@
     border-radius: 5px;
     text-align: center;
     font-size: 1em;
+    z-index: 1000; /* Added to ensure it appears above other elements */
 }
 
 /* Overlay */

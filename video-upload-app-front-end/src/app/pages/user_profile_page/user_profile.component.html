@@ -33,5 +33,9 @@
         <p>{{ currentUser.userRole }}</p>
       </div>
     </div>
+
+    <div *ngIf="showComment" class="snack-bar">
+      {{ comment }}
+    </div>
   </div>
 </body>

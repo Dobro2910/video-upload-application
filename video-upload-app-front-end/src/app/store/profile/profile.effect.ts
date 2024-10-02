@@ -30,10 +30,10 @@ export class ProfileEffects {
   updateUserProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProfileActions.updateProfileAction),
-      take(1),
+      // take(1),
       mergeMap(action =>
         this.profileService.UpdateProfile(action.updateUser, action.userEmail).pipe(
-          map(() => ProfileActions.updateProfileActionSuccess()),
+          map(() => ProfileActions.updateProfileActionSuccess({ comment: 'Update User Successful' })),
           catchError(error => {
             console.error('Update profile failed:', error);
 

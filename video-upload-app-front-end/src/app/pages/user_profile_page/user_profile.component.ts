@@ -17,9 +17,14 @@ import { UpdateProfileDialogComponent } from '../shared/update_profile_dialog/up
 export class UserProfileComponent implements OnInit {
   // Observable Variables
   currentUser$: Observable<User| null>;
+  comment$: Observable<string | null>;
+
+  showComment = false;
+  comment: string | null = null;
 
   constructor(private store: Store<{ profile: ProfileState }>, private authService: AuthenticationService, private dialog: MatDialog) { 
     this.currentUser$ = this.store.select(state => state.profile.currentUser);
+    this.comment$ = this.store.select(state => state.profile.comment);
   }
 
   ngOnInit(): void {
@@ -31,7 +36,23 @@ export class UserProfileComponent implements OnInit {
       this.store.dispatch(ProfileActions.getProfileActionFailure({error: "Cannot find current session token"}));
     }
 
+    this.comment$.pipe().subscribe(comment => {
+      if (comment) {
+        this.showCommentWithTimeout(comment);
+      }
+    });
+
     console.log('User profile component initialized');
+  }
+
+  // Method to show comment and hide it after 3 seconds
+  showCommentWithTimeout(comment: string): void {
+    this.comment = comment;
+    this.showComment = true;
+
+    setTimeout(() => {
+      this.showComment = false;
+    }, 5000); // Hide after 3 seconds
   }
 
   displayProfileUpdateDialog(): void {

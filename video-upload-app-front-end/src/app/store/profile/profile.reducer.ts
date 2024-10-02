@@ -5,13 +5,13 @@ import { User } from '../model/user.model';
 // Define the shape of the shopping cart state
 export interface ProfileState {
   currentUser: User | null;
-  error: string | null;
+  comment: string | null;
 }
 
 // Initial state of the shopping cart
 const initialState: ProfileState = {
     currentUser: null,
-    error: null
+    comment: null
 };
 
 // Reducer function using createReducer from @ngrx/store
@@ -20,13 +20,8 @@ export const profileReducer = createReducer(
 
     on(ProfileActions.getProfileActionFailure, (state, { error }) => ({
         ...state,
-        error: error
+        comment: error
     })),
-
-    // on(ProfileActions.getProfileActionSuccess, (state, { user }) => ({
-    //     ...state,
-    //     currentUser: user
-    // })),
 
     on(ProfileActions.getProfileActionSuccess, (state, { user }) => {
         const updatedState = {
@@ -34,14 +29,17 @@ export const profileReducer = createReducer(
             currentUser: user
         };
     
-        console.log('Updated Current User:', updatedState.currentUser);  // Log the currentUser after updating state
-    
         return updatedState;
     }),
 
     on(ProfileActions.updateProfileActionFailure, (state, { error }) => ({
         ...state,
-        error: error
+        comment: error
+    })),
+
+    on(ProfileActions.updateProfileActionSuccess, (state, { comment }) => ({
+        ...state,
+        comment: comment
     })),
 );
 

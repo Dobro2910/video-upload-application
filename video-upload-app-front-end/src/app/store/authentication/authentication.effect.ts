@@ -5,7 +5,6 @@ import { of } from 'rxjs';
 import { AuthenticationService } from '../../service/authentication.service';
 import * as AuthActions from '../authentication/authentication.action';
 import { tap } from 'rxjs/operators';
-
 import { Router } from '@angular/router';
 
 @Injectable()

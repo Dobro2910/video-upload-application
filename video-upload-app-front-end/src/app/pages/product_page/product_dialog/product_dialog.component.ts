@@ -1,12 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductDisplay, ProductInCart } from '../../../store/model/product.model';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { addProductAction, addProductActionFailure, resetShoppingCartCommentAction } from '../../../store/shopping_cart/shopping_cart.action';
 import { ShoppingCartState } from '../../../store/shopping_cart/shopping_cart.reducer';
 import { Observable } from 'rxjs';
-import { map, take, filter } from 'rxjs/operators';
-// import { MatSnackBar } from '@angular/material/snack-bar';
+import { map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-dialog',
@@ -35,7 +34,7 @@ export class ProductDialogComponent {
     // private snackBar: MatSnackBar
   ) {
     this.productsInCart$ = this.store.select(state => state.shoppingCart.productsInCart);
-    this.comment$ = this.store.pipe(select(state => state.shoppingCart.comment));
+    this.comment$ = this.store.select(state => state.shoppingCart.comment);
   }
 
   ngOnInit(): void {
@@ -52,14 +51,19 @@ export class ProductDialogComponent {
     if (this.selectedColorDetails && this.selectedSize) {
       this.productsInCart$.pipe(
         take(1),
-        map(productsInCart => productsInCart.find(product => product.productId === this.selectedProductId
-                                                  && product.productColor === this.selectedColor 
-                                                  && product.productSize === this.selectedSize))
+        map(productsInCart => productsInCart.find(product => 
+          product.productId === this.selectedProductId && 
+          product.productColor === this.selectedColor && 
+          product.productSize === this.selectedSize))
       ).subscribe(product => {
         if (product) {
           this.store.dispatch(addProductActionFailure({ comment: 'Product Already In Cart' }));
-          this.showCommentWithTimeout('Product Already In Cart');
-        } else if (!product) {
+          this.comment$.pipe(take(1)).subscribe(comment => {
+            if (comment) {
+              this.showCommentWithTimeout(comment);
+            }
+          });
+        } else {
           this.productInCart = {
             productId: this.data.productId,
             productName: this.data.productName,
@@ -72,7 +76,11 @@ export class ProductDialogComponent {
             productQuantity: 1
           };
           this.store.dispatch(addProductAction({ product: this.productInCart }));
-          this.showCommentWithTimeout('Product added to cart successfully!');
+          this.comment$.pipe(take(1)).subscribe(comment => {
+            if (comment) {
+              this.showCommentWithTimeout(comment);
+            }
+          });
         }
       });
     }

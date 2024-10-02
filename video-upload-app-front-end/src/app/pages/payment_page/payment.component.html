@@ -40,6 +40,10 @@
             
             <!-- Payment Button -->
             <button (click)="displayPaymentMethod()">Complete Payment</button>
+
+            <div *ngIf="showComment" class="snack-bar">
+                {{ comment }}
+            </div>
         </div>
     </div> 
 </main>

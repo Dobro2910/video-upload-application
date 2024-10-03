@@ -4,7 +4,6 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools'; // Import for Redux DevTools
@@ -24,8 +23,12 @@ import { ProductEffects } from './store/product/product.effect';
 
 // Shopping Cart
 import { shoppingCartReducer, shoppingCartReducerFeatureKey } from './store/shopping_cart/shopping_cart.reducer';
+import { ShoppingCartEffects } from './store/shopping_cart/shopping_cart.effect';
+
+// Profile
 import { profileReducer, profileReducerFeatureKey } from './store/profile/profile.reducer';
 import { ProfileEffects } from './store/profile/profile.effect';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), 
@@ -35,7 +38,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     
     provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer, [paymentReducerFeatureKey]: paymentReducer, [shoppingCartReducerFeatureKey]: shoppingCartReducer , [profileReducerFeatureKey]: profileReducer}),
-    provideEffects(AuthEffects, ProductEffects, PaymentEffects, ProfileEffects),
+    provideEffects(AuthEffects, ProductEffects, PaymentEffects, ProfileEffects, ShoppingCartEffects),
 
     // Provide Redux DevTools
     provideStoreDevtools({

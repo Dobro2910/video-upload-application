@@ -65,7 +65,8 @@
       <label for="productBrand">Product Brand</label>
       <input type="text" [(ngModel)]="newProduct.productBrand" placeholder="Enter product brand" required>
       <label for="productImage">Product Image</label>
-      <input type="text" [(ngModel)]="newProduct.productImage" placeholder="Enter product image" required>
+      <input type="file" id="userImage" (change)="onFileSelected($event)">
+      <!-- <input type="text" [(ngModel)]="newProduct.productImage" placeholder="Enter product image" required> -->
       
       <div *ngFor="let productColorVarietyDetail of productColorVarietiesDetail; let i = index" class="color-size-stock">
         <div class="add-title-container">
@@ -102,6 +103,10 @@
       </div>
 
       <button class="btn create-product-btn" (click)="createNewProduct()">Create Product</button>
+    </div>
+
+    <div *ngIf="showComment" class="snack-bar">
+      {{ comment }}
     </div>
   </div>
 </body>

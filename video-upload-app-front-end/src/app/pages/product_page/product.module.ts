@@ -4,10 +4,10 @@ import { ProductRoutingModule } from "./product.routing";
 import { ProductComponent } from "./product.component";
 import { SharedModule } from "../shared/shared.module";
 import { FormsModule } from '@angular/forms';
-
 import { ProductDialogComponent } from "./product_dialog/product_dialog.component";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+// import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [ProductComponent, ProductDialogComponent],

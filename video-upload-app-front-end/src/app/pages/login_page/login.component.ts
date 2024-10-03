@@ -12,10 +12,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  errorMessage$: Observable<string | null>;
+  authMessage$: Observable<string | null>;
 
   constructor(private router: Router, private store: Store<{ auth: AuthState }>) {
-    this.errorMessage$ = this.store.select(state => state.auth.error);
+    this.authMessage$ = this.store.select(state => state.auth.comment);
   }
 
   ngOnInit(): void {

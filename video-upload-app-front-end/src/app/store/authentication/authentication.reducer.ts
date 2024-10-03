@@ -3,12 +3,12 @@ import * as AuthActions from './authentication.action';
 
 // Define the shape of the authentication state
 export interface AuthState {
-  error: string | null;
+  comment: string | null;
 }
 
 // Initial state of the authentication feature
 const initialState: AuthState = {
-  error: null
+  comment: null
 };
 
 // Reducer function using createReducer from @ngrx/store
@@ -17,17 +17,27 @@ export const authReducer = createReducer(
 
   on(AuthActions.userLoginActionFailure, (state, { error }) => ({
     ...state, // Spread operator to create a shallow copy of current state
-    error: error
+    comment: error
   })),
 
   on(AuthActions.createUserActionFailure, (state, { error }) => ({
     ...state, // Spread operator to create a shallow copy of current state
-    error: error
+    comment: error
+  })),
+
+  on(AuthActions.createUserActionSuccess, (state, { comment }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    comment: comment
   })),
 
   on(AuthActions.createUserWithRoleActionFailure, (state, { error }) => ({
     ...state, // Spread operator to create a shallow copy of current state
-    error: error
+    comment: error
+  })),
+
+  on(AuthActions.createUserWithRoleActionSuccess, (state, { comment }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    comment: comment
   })),
 
   on(AuthActions.resetAuthError, (state) => ({

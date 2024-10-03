@@ -11,7 +11,6 @@ import {
   savePaymentOrderActionFailure,
   savePaymentOrderActionSuccess
 } from './payment.action';
-import { Action } from '@ngrx/store';
 
 @Injectable()
 export class PaymentEffects {
@@ -25,7 +24,6 @@ export class PaymentEffects {
     this.actions$.pipe(
       ofType(initiatePaymentAction),
       switchMap(action => {
-        console.log('Initiate Payment Action:', action);
         return this.paymentService.initiatePayment(action.paymentDetail).pipe(
           map(response => {
             console.log('Payment Initiation Response:', response);
@@ -52,15 +50,11 @@ export class PaymentEffects {
   savePaymentOrder$ = createEffect(() =>
     this.actions$.pipe(
       ofType(savePaymentOrderAction),
-      take(1),
       mergeMap(action =>
         this.paymentService.savePaymentOrder(action.productsInCart).pipe(
-          tap((response: any) => {
-            console.log('Finalizing after save');
-          }),
           map(() => {
             console.log('Saving Payment Order Success');
-            return savePaymentOrderActionSuccess();
+            return savePaymentOrderActionSuccess({ paymentSuccess: 'Payment Success' });
           }),
           catchError(error => {
             console.error('Saving Payment Order Failed:', error);

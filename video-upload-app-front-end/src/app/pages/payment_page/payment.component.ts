@@ -20,13 +20,18 @@ import { updatePaymentDetailAction } from '../../store/payment/payment.action';
 })
 export class PaymentComponent implements OnInit {
   productsInCart$: Observable<ProductInCart[]>;
+  comment$: Observable<string | null>;
+
   selectedPaymentMethod: string | null = null;
   totalPrice: number | undefined = 0 ;
+  showComment = false;
+  comment: string | null = null;
 
   constructor(private router: Router, 
               private store: Store<{ shoppingCart: ShoppingCartState, payment: PaymentState }>, 
               private dialog: MatDialog) {
     this.productsInCart$ = this.store.select(state => state.shoppingCart.productsInCart);
+    this.comment$ = this.store.select(state => state.payment.comment);
   }
 
   ngOnInit(): void {
@@ -44,6 +49,22 @@ export class PaymentComponent implements OnInit {
         console.log('Updated Payment Total:', updatedTotal);
       });
     });
+
+    this.comment$.pipe().subscribe(comment => {
+      if (comment) {
+        this.showCommentWithTimeout(comment);
+      }
+    });
+  }
+
+  // Method to show comment and hide it after 3 seconds
+  showCommentWithTimeout(comment: string): void {
+    this.comment = comment;
+    this.showComment = true;
+
+    setTimeout(() => {
+      this.showComment = false;
+    }, 5000); // Hide after 3 seconds
   }
 
   removeItemFromCart(removeProduct: ProductInCart): void {
@@ -55,8 +76,7 @@ export class PaymentComponent implements OnInit {
     ).subscribe(filteredProducts  => {
       if (filteredProducts) {
         this.store.dispatch(removeProductAction({ product: filteredProducts }));
-      } else if (!filteredProducts) {
-        console.log('Product is already remove');
+        this.showCommentWithTimeout('Product successfully remove!');
       }
     });
   }

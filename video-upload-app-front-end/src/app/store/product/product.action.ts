@@ -29,7 +29,7 @@ export const CREATE_PRODUCT_FAILURE ='[product] create product fail';
 export const CREATE_PRODUCT_SUCCESS ='[product] create product success';
 export const createProductAction = createAction(CREATE_PRODUCT, props<{ newProduct: Product }>());
 export const createProductActionFailure = createAction(CREATE_PRODUCT_FAILURE, props<{error: any}>());
-export const createProductActionSuccess = createAction(CREATE_PRODUCT_SUCCESS);
+export const createProductActionSuccess = createAction(CREATE_PRODUCT_SUCCESS, props<{comment: any}>());
 
 // get Individual product actions
 // export const PRODUCT_LOAD ='[product] product load'

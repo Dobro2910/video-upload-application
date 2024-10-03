@@ -17,4 +17,4 @@ export const UPDATE_PROFILE_ACTION_FAILURE = '[profile] update profile fail';
 export const updateProfileActionFailure = createAction(UPDATE_PROFILE_ACTION_FAILURE, props<{ error: any }>());
 
 export const UPDATE_PROFILE_ACTION_SUCCESS = '[profile] update profile success';
-export const updateProfileActionSuccess = createAction(UPDATE_PROFILE_ACTION_SUCCESS);
+export const updateProfileActionSuccess = createAction(UPDATE_PROFILE_ACTION_SUCCESS, props<{ comment: string }>());

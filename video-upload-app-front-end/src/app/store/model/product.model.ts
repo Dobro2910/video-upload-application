@@ -12,7 +12,7 @@ export interface Product {
     productDescription: string;
     productPrice: number;
     productGender: string;
-    productImage: string;
+    productImage?: File;
     productAmountSold: number;
     productColorVarietyDetail?: ProductColorVarietyDetail[];
 }

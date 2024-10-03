@@ -1,3 +1,17 @@
+.snack-bar {
+    position: fixed; /* Changed from absolute to fixed */
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1em;
+    z-index: 1000; /* Added to ensure it appears above other elements */
+}
+
 /* Overlay */
 .overlay {
     position: fixed;
@@ -205,16 +219,6 @@
     .product-size-stock-display select {
         width: 100%;
     }
-
-    // .product-dialog-detail h3 {
-    //     font-size: 1.1em;
-    //     color: #333;
-    // }
-
-    // .product-size-stock-display p {
-    //     font-size: 1.1em;
-    //     color: #333;
-    // }
 }
 
 @media (max-width: 480px) {
@@ -260,14 +264,4 @@
         padding: 12px;
         font-size: 1em;
     }
-
-    // .product-size-stock-display p {
-    //     font-size: 0.9em;
-    //     color: #333;
-    // }
-
-    // .product-dialog-detail h3 {
-    //     font-size: 1em;
-    //     color: #333;
-    // }
 }

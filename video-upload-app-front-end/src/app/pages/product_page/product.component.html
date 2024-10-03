@@ -10,12 +10,14 @@
             <div class="filter">
                 <input type="text" id="search" placeholder="Search for clothes...">
                 <select id="gender" [(ngModel)]="filterVar.productGender">
+                    <option value="">Gender</option>
                     <option value="">All</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Unisex">Unisex</option>
                 </select>
                 <select id="category" [(ngModel)]="filterVar.productCategory">
+                    <option value="">Category</option>
                     <option value="">All</option>
                     <option value="Shoes">Shoes</option>
                     <option value="Shirt">Shirt</option>
@@ -23,6 +25,7 @@
                     <option value="Hat">Hat</option>
                 </select>
                 <select id="size" [(ngModel)]="filterVar.productSize">
+                    <option value="">Size</option>
                     <option value="">All</option>
                     <option value="S">S</option>
                     <option value="M">M</option>
@@ -30,6 +33,7 @@
                     <option value="XL">XL</option>
                 </select>
                 <select id="brand" [(ngModel)]="filterVar.productBrand">
+                    <option value="">Brand</option>
                     <option value="">All</option>
                     <option value="Nike">Nike</option>
                     <option value="Adidas">Adidas</option>

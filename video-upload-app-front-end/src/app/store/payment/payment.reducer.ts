@@ -10,14 +10,14 @@ import { PaymentDetail } from '../model/payment.model';
 
 export interface PaymentState {
   clientSecret: string | null;
-  errorMessage: string | null;
+  comment: string | null;
   paymentIntentId: string | null;
   paymentDetail: PaymentDetail | null;
 }
 
 const initialState: PaymentState = {
   clientSecret: null,
-  errorMessage: null,
+  comment: null,
   paymentIntentId: null,
   paymentDetail: null
 };
@@ -32,21 +32,21 @@ export const paymentReducer = createReducer(
 
   on(initiatePaymentActionFailure, (state, { error }) => ({
     ...state,
-    errorMessage: error
+    comment: error
   })),
 
   // save the product order into the database
-  on(savePaymentOrderActionSuccess, (state) => ({
+  on(savePaymentOrderActionSuccess, (state, { paymentSuccess }) => ({
     ...state,
     clientSecret: null,
-    errorMessage: null,
+    comment: paymentSuccess,
     paymentIntentId: null,
     paymentDetail: null
   })),
 
   on(savePaymentOrderActionFailure, (state, { error }) => ({
     ...state,
-    errorMessage: error
+    comment: error
   })),
 
   // update the payment detail (calculate total price) action everytime new 
@@ -54,9 +54,9 @@ export const paymentReducer = createReducer(
   on(updatePaymentDetailAction, (state, { total }) => ({
     ...state,
     paymentDetail: {
-        ...state.paymentDetail, // Maintain other details (if any) in paymentDetail
-        amount: total,
-        currency: 'aud'
+      ...state.paymentDetail, // Maintain other details (if any) in paymentDetail
+      amount: total,
+      currency: 'aud'
     },
   })),
 );

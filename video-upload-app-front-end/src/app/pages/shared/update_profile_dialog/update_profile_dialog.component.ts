@@ -34,6 +34,8 @@ export class UpdateProfileDialogComponent implements OnInit {
     } else {
       this.store.dispatch(ProfileActions.updateProfileActionFailure({error: "Cannot find current session token"}));
     }
+
+    this.onClose();
   }
 
   // File input must be handle differently, instead of using using Ngmodel, we use this function

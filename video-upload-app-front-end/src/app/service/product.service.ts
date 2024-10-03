@@ -31,11 +31,36 @@ export class ProductService {
 
     createProduct(product: Product): Observable<any> {
         const token = this.authService.getToken(); // Adjust this if you store the token elsewhere
-
-        // Create the headers object and include the Authorization header with the JWT token
-        const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
-
-        return this.http.post('http://localhost:3000/product/createproduct', product, { headers });
+    
+        // Create FormData to handle file upload and other form fields
+        const formData = new FormData();
+    
+        // Append all fields except the productImage file to FormData
+        formData.append('productName', product.productName);
+        formData.append('productDescription', product.productDescription);
+        formData.append('productPrice', product.productPrice.toString());
+        formData.append('productGender', product.productGender);
+        formData.append('productCategory', product.productCategory);
+        formData.append('productBrand', product.productBrand);
+        formData.append('productAmountSold', product.productAmountSold.toString());
+    
+        // Append productColorVarietyDetail as a JSON string (since FormData can't handle complex objects directly)
+        if (product.productColorVarietyDetail) {
+            formData.append('productColorVarietyDetail', JSON.stringify(product.productColorVarietyDetail));
+        }
+    
+        // Append the productImage file if it exists
+        if (product.productImage) {
+            formData.append('productImage', product.productImage);
+        }
+    
+        // Create headers with the Authorization token
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+    
+        // Send the POST request with FormData and headers
+        return this.http.post('http://localhost:3000/product/createproduct', formData, { headers });
     }
 
     updateproductColorVarietyDetail(productId: string, productStock: number): Observable<any> {

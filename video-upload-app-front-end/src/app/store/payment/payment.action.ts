@@ -29,8 +29,8 @@ export const initiatePaymentActionFailure = createAction(
 export const SAVE_PAYMENT_ORDER ='[payment] save payment order';
 export const savePaymentOrderAction = createAction(SAVE_PAYMENT_ORDER, props<{ productsInCart: ProductInCart[] }>());
 
-export const SAVE_PAYMENT_ORDER_SUCCESS ='[payment] save payment order';
-export const savePaymentOrderActionSuccess = createAction(SAVE_PAYMENT_ORDER_SUCCESS);
+export const SAVE_PAYMENT_ORDER_SUCCESS ='[payment] save payment order success';
+export const savePaymentOrderActionSuccess = createAction(SAVE_PAYMENT_ORDER_SUCCESS, props<{ paymentSuccess: string }>());
 
-export const SAVE_PAYMENT_ORDER_FAILURE ='[payment] save payment order';
+export const SAVE_PAYMENT_ORDER_FAILURE ='[payment] save payment order failure';
 export const savePaymentOrderActionFailure = createAction(SAVE_PAYMENT_ORDER_FAILURE, props<{ error: string }>());

@@ -17,8 +17,8 @@
 
     <p class="create-new-account" (click)="navigateToRegister()">Create new account?</p>
     
-    <div *ngIf="errorMessage$ | async as errorMessage" class="error-message">
-      <p>{{ errorMessage }}</p>
+    <div *ngIf="authMessage$ | async as authMessage" class="error-message">
+      <p>{{ authMessage }}</p>
     </div>
   </div>
 </main>

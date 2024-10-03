@@ -19,7 +19,7 @@ export const NEW_USER_REGISTER_FAILURE ='[auth] register fail';
 export const NEW_USER_REGISTER_SUCCESS ='[auth] register success';
 export const createUserAction = createAction(NEW_USER_REGISTER, props<{user:User}>());
 export const createUserActionFailure = createAction(NEW_USER_REGISTER_FAILURE, props<{error: any}>());
-export const createUserActionSuccess = createAction(NEW_USER_REGISTER_SUCCESS);
+export const createUserActionSuccess = createAction(NEW_USER_REGISTER_SUCCESS, props<{comment: any}>());
 
 // create user with roles actions
 export const CREATE_USER_WITH_ROLE ='[auth] create user with role';
@@ -27,5 +27,5 @@ export const CREATE_USER_WITH_ROLE_FAILURE ='[auth] create user with role fail';
 export const CREATE_USER_WITH_ROLE_SUCCESS ='[auth] create user with role success';
 export const createUserWithRoleAction = createAction(CREATE_USER_WITH_ROLE, props<{newUser: User}>());
 export const createUserWithRoleActionFailure = createAction(CREATE_USER_WITH_ROLE_FAILURE, props<{error: any}>());
-export const createUserWithRoleActionSuccess = createAction(CREATE_USER_WITH_ROLE_SUCCESS);
+export const createUserWithRoleActionSuccess = createAction(CREATE_USER_WITH_ROLE_SUCCESS, props<{comment: any}>());
 

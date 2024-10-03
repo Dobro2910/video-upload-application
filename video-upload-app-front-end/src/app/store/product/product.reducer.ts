@@ -5,14 +5,14 @@ import { ProductDisplay } from '../model/product.model';
 // Define the shape of the product state
 export interface ProductState {
   productsDisplay: ProductDisplay[] | null;
-  error: string | null;
+  comment: string | null;
   filterCheck: boolean;
 }
 
 // Initial state of the product feature
 const initialState: ProductState = {
     productsDisplay: null,
-    error: null,
+    comment: null,
     filterCheck: false
 };
 
@@ -23,7 +23,7 @@ export const productReducer = createReducer(
   // get pagination product state
   on(ProductActions.getPaginatedProductsFailure, (state, { error }) => ({
     ...state, // Spread operator to create a shallow copy of current state
-    error: error,
+    comment: error,
     productsDisplay: null
   })),
 
@@ -36,7 +36,7 @@ export const productReducer = createReducer(
   // get product by filter state
   on(ProductActions.getPaginatedProductsByFilterActionFailure, (state, { error }) => ({
     ...state, // Spread operator to create a shallow copy of current state
-    error: error,
+    comment: error,
     productsDisplay: null
   })),
 
@@ -49,7 +49,12 @@ export const productReducer = createReducer(
   // create new product
   on(ProductActions.createProductActionFailure, (state, { error }) => ({
     ...state, // Spread operator to create a shallow copy of current state
-    error: error,
+    comment: error,
+  })),
+
+  on(ProductActions.createProductActionSuccess, (state, { comment }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    comment: comment,
   })),
 
   // // get all product state

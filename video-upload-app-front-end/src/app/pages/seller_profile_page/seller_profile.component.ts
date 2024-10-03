@@ -11,6 +11,7 @@ import * as ProfileActions from '../../store/profile/profile.action';
 import { ProfileState } from '../../store/profile/profile.reducer';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateProfileDialogComponent } from '../shared/update_profile_dialog/update_profile_dialog.component';
+import { ProductState } from '../../store/product/product.reducer';
 
 @Component({
   selector: 'app-seller-profile',
@@ -21,18 +22,20 @@ export class SellerProfileComponent implements OnInit {
   // Observable Variables
   currentUser$: Observable<User| null>;
   profileComment$: Observable<string | null>;
+  productComment$: Observable<string | null>;
 
   // Normal Variables
   newProduct: Product;
   productColorVarietiesDetail: ProductColorVarietyDetail[] = [];
   // an unique set of size to store all size when the customer use filter
   productSizeSet: Set<string> = new Set();
-  showProfileComment = false;
-  profileComment: string | null = null;
+  showComment = false;
+  comment: string | null = null;
 
-  constructor(private store: Store<{ profile: ProfileState }>, private authService: AuthenticationService, private dialog: MatDialog) { 
+  constructor(private store: Store<{ profile: ProfileState, product: ProductState }>, private authService: AuthenticationService, private dialog: MatDialog) { 
     this.currentUser$ = this.store.select(state => state.profile.currentUser);
     this.profileComment$ = this.store.select(state => state.profile.comment);
+    this.productComment$ = this.store.select(state => state.product.comment);
 
     this.newProduct = {
       productCategory: '',
@@ -45,12 +48,6 @@ export class SellerProfileComponent implements OnInit {
       productAmountSold: 0,
       productColorVarietyDetail: []
     };
-
-    this.profileComment$.pipe().subscribe(profileComment => {
-      if (profileComment) {
-        this.showCommentWithTimeout(profileComment);
-      }
-    });
   }
 
   ngOnInit(): void {
@@ -62,16 +59,28 @@ export class SellerProfileComponent implements OnInit {
       this.store.dispatch(ProfileActions.getProfileActionFailure({error: "Cannot find current session token"}));
     }
 
+    this.productComment$.pipe().subscribe(productComment => {
+      if (productComment) {
+        this.showCommentWithTimeout(productComment);
+      }
+    });
+
+    this.profileComment$.pipe().subscribe(profileComment => {
+      if (profileComment) {
+        this.showCommentWithTimeout(profileComment);
+      }
+    });
+
     console.log('Seller profile component initialized');
   }
 
   // Method to show comment and hide it after 3 seconds
-  showCommentWithTimeout(profileComment: string): void {
-    this.profileComment = profileComment;
-    this.showProfileComment = true;
+  showCommentWithTimeout(comment: string): void {
+    this.comment = comment;
+    this.showComment = true;
 
     setTimeout(() => {
-      this.showProfileComment = false;
+      this.showComment = false;
     }, 5000); // Hide after 3 seconds
   }
 

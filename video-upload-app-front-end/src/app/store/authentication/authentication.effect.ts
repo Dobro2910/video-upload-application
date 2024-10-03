@@ -46,7 +46,7 @@ export class AuthEffects {
             tap(() => {
               this.router.navigate(['/login']); // Navigate to home on success
             }),
-            map(() => AuthActions.createUserActionSuccess()),
+            map(() => AuthActions.createUserActionSuccess({ comment: 'User Created Successfully' })),
             catchError(error => {
               console.error('Register failed:', error);
 
@@ -68,10 +68,7 @@ export class AuthEffects {
       ofType(AuthActions.createUserWithRoleAction),
         mergeMap(action =>
           this.authService.CreateUserWithRole(action.newUser).pipe(
-            // tap(() => {
-            //   this.router.navigate(['/login']); // Navigate to home on success
-            // }),
-            map(() => AuthActions.createUserWithRoleActionSuccess()),
+            map(() => AuthActions.createUserWithRoleActionSuccess({ comment: 'Create User Successfully' })),
             catchError(error => {
               console.error('Register failed:', error);
 

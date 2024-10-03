@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   errorMessage$: Observable<string | null>;
 
   constructor(private router: Router, private fb: FormBuilder, private store: Store<{ auth: AuthState }>) {
-    this.errorMessage$ = this.store.select(state => state.auth.error);
+    this.errorMessage$ = this.store.select(state => state.auth.comment);
 
     this.registerForm = this.fb.group({
       userName: ['', [Validators.required]],

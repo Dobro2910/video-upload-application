@@ -10,6 +10,8 @@ import * as ProfileActions from '../../store/profile/profile.action';
 import { ProfileState } from '../../store/profile/profile.reducer';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateProfileDialogComponent } from '../shared/update_profile_dialog/update_profile_dialog.component';
+import { ProductState } from '../../store/product/product.reducer';
+import { AuthState } from '../../store/authentication/authentication.reducer';
 
 @Component({
   selector: 'app-admin-profile',
@@ -19,7 +21,9 @@ import { UpdateProfileDialogComponent } from '../shared/update_profile_dialog/up
 export class AdminProfileComponent implements OnInit {
   // Observable Variables
   currentUser$: Observable<User| null>;
-  comment$: Observable<string | null>;
+  profileComment$: Observable<string | null>;
+  productComment$: Observable<string | null>;
+  authComment$: Observable<string | null>;
 
   // Normal Variables
   newProduct: Product;
@@ -30,9 +34,11 @@ export class AdminProfileComponent implements OnInit {
   showComment = false;
   comment: string | null = null;
 
-  constructor(private store: Store<{ profile: ProfileState }>, private authService: AuthenticationService, private dialog: MatDialog) { 
+  constructor(private store: Store<{ profile: ProfileState, product: ProductState, auth: AuthState }>, private authService: AuthenticationService, private dialog: MatDialog) { 
     this.currentUser$ = this.store.select(state => state.profile.currentUser);
-    this.comment$ = this.store.select(state => state.profile.comment);
+    this.profileComment$ = this.store.select(state => state.profile.comment);
+    this.productComment$ = this.store.select(state => state.product.comment);
+    this.authComment$ = this.store.select(state => state.auth.comment);
 
     this.newUser = {
       userEmail: '',
@@ -52,12 +58,6 @@ export class AdminProfileComponent implements OnInit {
       productAmountSold: 0,
       productColorVarietyDetail: []
     };
-
-    this.comment$.pipe().subscribe(comment => {
-      if (comment) {
-        this.showCommentWithTimeout(comment);
-      }
-    });
   }
 
   ngOnInit(): void {
@@ -68,6 +68,24 @@ export class AdminProfileComponent implements OnInit {
     } else {
       this.store.dispatch(ProfileActions.getProfileActionFailure({error: "Cannot find current session token"}));
     }
+
+    this.authComment$.pipe().subscribe(authComment => {
+      if (authComment) {
+        this.showCommentWithTimeout(authComment);
+      }
+    });
+
+    this.productComment$.pipe().subscribe(productComment => {
+      if (productComment) {
+        this.showCommentWithTimeout(productComment);
+      }
+    });
+
+    this.profileComment$.pipe().subscribe(profileComment => {
+      if (profileComment) {
+        this.showCommentWithTimeout(profileComment);
+      }
+    });
 
     console.log('Admin profile component initialized');
   }

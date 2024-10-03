@@ -80,10 +80,10 @@ export class ProductEffects {
         take(1),
         mergeMap(action =>
           this.productService.createProduct(action.newProduct).pipe(
-            tap((response: any) => {
+            tap((response: any) => { 
               console.log('Create Product Success');
             }),
-            map(() => ProductActions.createProductActionSuccess()),
+            map(() => ProductActions.createProductActionSuccess({ comment: 'Product Created Successfully'})),
             catchError(error => {
               console.error('Create Product Failed:', error);
               return of(ProductActions.createProductActionFailure({ error: error.message }));

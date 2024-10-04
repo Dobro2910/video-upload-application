@@ -3,8 +3,8 @@ import { ProductColorVarietyDetail } from '../../store/model/product.model';
 import { Store } from '@ngrx/store';
 import { Product } from '../../store/model/product.model';
 import { createProductAction } from '../../store/product/product.action';
-
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { User } from '../../store/model/user.model';
 import { AuthenticationService } from '../../service/authentication.service';
 import * as ProfileActions from '../../store/profile/profile.action';
@@ -46,7 +46,8 @@ export class SellerProfileComponent implements OnInit {
       productGender: '',
       productImage: undefined,
       productAmountSold: 0,
-      productColorVarietyDetail: []
+      productColorVarietyDetail: [],
+      sellerEmail: ''
     };
   }
 
@@ -114,6 +115,11 @@ export class SellerProfileComponent implements OnInit {
     const productSizeArray: string[] = Array.from(this.productSizeSet);
     this.newProduct.productColorVarietyDetail = this.productColorVarietiesDetail;
     this.newProduct.productSize = productSizeArray;
+    this.currentUser$.pipe(take(1)).subscribe(user => {
+      if (user) {
+        this.newProduct.sellerEmail = user.userEmail;
+      }
+    });
     this.store.dispatch(createProductAction({ newProduct: this.newProduct }));
   }
 

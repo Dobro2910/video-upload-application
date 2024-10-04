@@ -43,10 +43,16 @@ export class ProductService {
         formData.append('productCategory', product.productCategory);
         formData.append('productBrand', product.productBrand);
         formData.append('productAmountSold', product.productAmountSold.toString());
+        formData.append('sellerEmail', product.sellerEmail);
     
         // Append productColorVarietyDetail as a JSON string (since FormData can't handle complex objects directly)
         if (product.productColorVarietyDetail) {
             formData.append('productColorVarietyDetail', JSON.stringify(product.productColorVarietyDetail));
+        }
+
+        // Append productSize as a JSON string (assuming it's an array)
+        if (product.productSize && product.productSize.length > 0) {
+            formData.append('productSize', JSON.stringify(product.productSize));
         }
     
         // Append the productImage file if it exists

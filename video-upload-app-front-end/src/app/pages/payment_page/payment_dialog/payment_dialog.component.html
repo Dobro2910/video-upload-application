@@ -1,5 +1,11 @@
 <div (click)="onClose()" class="overlay"></div>
 <div class="payment-dialog">
+    <p>Please Enter The Delivery Location</p>
+
+    <div class="location">
+        <input type="text" [(ngModel)]="paymentOrder.deliveryLocation" placeholder="Input Your Delivery Location Here...">
+    </div>
+
     <p>Please Enter Your Card Information Below</p>
 
     <div id="payment-form">

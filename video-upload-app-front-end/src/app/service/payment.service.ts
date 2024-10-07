@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PaymentDetail } from '../store/model/payment.model';
-import { ProductInCart } from '../store/model/product.model';
+import { PaymentDetail, PaymentOrder } from '../store/model/payment.model';
 
 import { HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
@@ -17,7 +16,7 @@ export class PaymentService {
     return this.http.post('http://localhost:3000/create-payment-intent', paymentDetail);
   }
 
-  savePaymentOrder(productsInCart: ProductInCart[]): Observable<any> {
+  savePaymentOrder(paymentOrder: PaymentOrder): Observable<any> {
     const token = this.authService.getToken(); // Adjust this if you store the token elsewhere
 
     // Create the headers object and include the Authorization header with the JWT token
@@ -26,6 +25,6 @@ export class PaymentService {
     });
 
     // return this.http.post('http://localhost:3000/payment/saveorder', productsInCart);
-    return this.http.post('http://localhost:3000/payment/saveorder', productsInCart, { headers });
+    return this.http.post('http://localhost:3000/payment/saveorder', paymentOrder, { headers });
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product, ProductColorVarietyDetail } from '../../store/model/product.model';
 import { User } from '../../store/model/user.model';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { createProductAction } from '../../store/product/product.action';
 import { createUserWithRoleAction } from '../../store/authentication/authentication.action';
@@ -56,7 +57,8 @@ export class AdminProfileComponent implements OnInit {
       productGender: '',
       productImage: undefined,
       productAmountSold: 0,
-      productColorVarietyDetail: []
+      productColorVarietyDetail: [],
+      sellerEmail: ''
     };
   }
 
@@ -128,8 +130,14 @@ export class AdminProfileComponent implements OnInit {
 
   createNewProduct() {
     const productSizeArray: string[] = Array.from(this.productSizeSet);
+    
     this.newProduct.productColorVarietyDetail = this.productColorVarietiesDetail;
     this.newProduct.productSize = productSizeArray;
+    this.currentUser$.pipe(take(1)).subscribe(user => {
+      if (user) {
+        this.newProduct.sellerEmail = user.userEmail;
+      }
+    });
     this.store.dispatch(createProductAction({ newProduct: this.newProduct }));
   }
 

@@ -73,7 +73,8 @@ export class ProductDialogComponent {
             productImage: this.data.productImage,
             productColor: this.selectedColor,
             productSize: this.selectedSize,
-            productQuantity: 1
+            productQuantity: 1,
+            sellerEmail: this.data.sellerEmail
           };
           this.store.dispatch(addProductAction({ product: this.productInCart }));
           this.comment$.pipe(take(1)).subscribe(comment => {

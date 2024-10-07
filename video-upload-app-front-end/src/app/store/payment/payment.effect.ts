@@ -51,7 +51,7 @@ export class PaymentEffects {
     this.actions$.pipe(
       ofType(savePaymentOrderAction),
       mergeMap(action =>
-        this.paymentService.savePaymentOrder(action.productsInCart).pipe(
+        this.paymentService.savePaymentOrder(action.paymentOrder).pipe(
           map(() => {
             console.log('Saving Payment Order Success');
             return savePaymentOrderActionSuccess({ paymentSuccess: 'Payment Success' });

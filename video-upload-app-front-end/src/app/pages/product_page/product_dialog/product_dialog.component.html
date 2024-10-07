@@ -12,7 +12,7 @@
             <div class="color-swatch-container">
                 <div 
                     *ngFor="let colorDetail of data.productColorVarietyDetail"
-                    class="color-swatch" 
+                    class="color-swatch"
                     [style.backgroundColor]="colorDetail.productColor"
                     (click)="selectColor(colorDetail)"
                 >
@@ -37,6 +37,8 @@
             <p>{{ data.productGender }}</p>
             <h3>AmountSold</h3>
             <p>{{ data.productAmountSold }}</p>
+            <!-- <h3>SellerEmail</h3>
+            <p>{{ data.sellerEmail }}</p> -->
         </div>
         
         <button (click)="addToCart()" mat-button class="add-to-bag">Add to Bag</button>

@@ -20,6 +20,10 @@ const initialState: PaymentState = {
   comment: null,
   paymentIntentId: null,
   paymentDetail: null
+  // paymentDetail: {
+  //   amount: 0,
+  //   currency: ''
+  // }
 };
 
 export const paymentReducer = createReducer(
@@ -41,6 +45,10 @@ export const paymentReducer = createReducer(
     clientSecret: null,
     comment: paymentSuccess,
     paymentIntentId: null,
+    // paymentDetail: {
+    //   amount: 0,
+    //   currency: ''
+    // }
     paymentDetail: null
   })),
 

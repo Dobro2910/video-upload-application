@@ -166,27 +166,6 @@ h3 {
     }
 }
 
-.location {
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-.location input {
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.2s ease;
-}
-
-.location input:focus {
-    border-color: #333;
-    outline: none;
-}
-
 .total-price {
     width: 100%;
 }

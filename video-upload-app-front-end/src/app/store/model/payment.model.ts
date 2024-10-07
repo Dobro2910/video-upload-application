@@ -7,6 +7,9 @@ export interface PaymentDetail {
 
 export interface PaymentOrder {
     productsInCart: ProductInCart[];
+
     deliveryLocation: string;
     buyerEmail: string;
+    orderDelivered: boolean;
+    totalPrice: number;
 }

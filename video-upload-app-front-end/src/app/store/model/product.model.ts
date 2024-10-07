@@ -15,7 +15,6 @@ export interface Product {
     productImage?: File;
     productAmountSold: number;
     productColorVarietyDetail?: ProductColorVarietyDetail[];
-
     sellerEmail: string;
 }
 
@@ -35,7 +34,6 @@ export interface ProductInCart {
     productColor: string | null;
     productSize: string | null;
     productQuantity: number;
-
     sellerEmail: string;
 }
 
@@ -48,6 +46,5 @@ export interface ProductDisplay {
     productImage: string;
     productAmountSold: number;
     productColorVarietyDetail?: ProductColorVarietyDetail[];
-
     sellerEmail: string;
 }

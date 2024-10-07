@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { PaymentDetail } from '../model/payment.model';
-import { ProductInCart } from "../model/product.model";
+import { PaymentOrder } from '../model/payment.model';
 
 // update the total cost of all the products in the cart
 export const UPDATE_PAYMENT_DETAIL = '[payment] update payment detail';
@@ -27,7 +27,7 @@ export const initiatePaymentActionFailure = createAction(
 
 // save payment order into the database
 export const SAVE_PAYMENT_ORDER ='[payment] save payment order';
-export const savePaymentOrderAction = createAction(SAVE_PAYMENT_ORDER, props<{ productsInCart: ProductInCart[] }>());
+export const savePaymentOrderAction = createAction(SAVE_PAYMENT_ORDER, props<{ paymentOrder: PaymentOrder }>());
 
 export const SAVE_PAYMENT_ORDER_SUCCESS ='[payment] save payment order success';
 export const savePaymentOrderActionSuccess = createAction(SAVE_PAYMENT_ORDER_SUCCESS, props<{ paymentSuccess: string }>());

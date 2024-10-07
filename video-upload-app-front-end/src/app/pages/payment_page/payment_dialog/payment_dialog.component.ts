@@ -1,12 +1,16 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadStripe, Stripe, StripeElements, StripeCardElement } from '@stripe/stripe-js';
 import { initiatePaymentAction, savePaymentOrderAction, savePaymentOrderActionFailure } from '../../../store/payment/payment.action';
 import { DialogRef } from '@angular/cdk/dialog';
 import { PaymentState } from '../../../store/payment/payment.reducer';
-import { Observable } from 'rxjs';
 import { take, firstValueFrom, filter } from 'rxjs';
 import { ShoppingCartState } from '../../../store/shopping_cart/shopping_cart.reducer';
+import { PaymentOrder } from '../../../store/model/payment.model';
+import { Observable } from 'rxjs';
+import { ProductInCart } from '../../../store/model/product.model';
+import { ProfileState } from '../../../store/profile/profile.reducer';
+import { AuthenticationService } from '../../../service/authentication.service';
 
 @Component({
   selector: 'app-payment-dialog',
@@ -15,16 +19,40 @@ import { ShoppingCartState } from '../../../store/shopping_cart/shopping_cart.re
 })
 
 export class PaymentDialogComponent implements OnInit {
+  productsInCart$: Observable<ProductInCart[]>;
+
   // normal variable
   stripe: Stripe | null = null;
   elements: StripeElements | null = null;
   card: StripeCardElement | null = null;
+  paymentOrder: PaymentOrder;
 
-  constructor(private store: Store<{ payment: PaymentState, shoppingCart: ShoppingCartState }>, private dialogRef: DialogRef, private ngZone: NgZone) {
+  constructor(private store: Store<{ payment: PaymentState, shoppingCart: ShoppingCartState, profile: ProfileState }>, private dialogRef: DialogRef, private authService: AuthenticationService) {
+    this.paymentOrder = {
+        productsInCart: [],
+        deliveryLocation: '',
+        buyerEmail: '',
+        orderDelivered: false,
+        totalPrice: 0
+    }
+
+    // Subscribe to the total price in the constructor
+    this.store.select(state => state.payment.paymentDetail?.amount).pipe(
+        take(1) // Automatically unsubscribe after the first emission
+    ).subscribe(totalPrice => {
+        if (totalPrice) {
+            this.paymentOrder.totalPrice = totalPrice;
+        }
+    });
+
+    // Subscribe to the current user in the constructor
+    this.productsInCart$ = this.store.select(state => state.shoppingCart.productsInCart);
   }
 
   async ngOnInit(): Promise<void> {
     this.stripe = await loadStripe('pk_test_51PoJkJP0Ue7wbXrR1N3sPDND86Iki9FK2rnOhYu9zrZXVuYLSxwTM0rVOv9tkQrMIetjIX63pEpIL5E5RKOZg4jE00vre9pt3l');
+
+    console.log('Hello:', this.paymentOrder.buyerEmail);
 
     if (this.stripe) {
         this.elements = this.stripe.elements();
@@ -72,11 +100,19 @@ export class PaymentDialogComponent implements OnInit {
                     if (error && error.message) {
                         this.store.dispatch(savePaymentOrderActionFailure({ error: error.message }));
                     } else if (paymentIntent?.id && paymentIntent.status === 'succeeded') {
-                        const productsInCart = await firstValueFrom(this.store.select(state => state.shoppingCart.productsInCart).pipe(take(1)));
-                        console.log('Dispatching savePaymentOrderAction:', productsInCart);
+                        this.productsInCart$.subscribe(products => {
+                            this.paymentOrder.productsInCart = products; // Assign the emitted value to a local variable
+                        });
+
+                        const userEmail = this.authService.getUserEmailFromToken();
+                        if (userEmail) {
+                            this.paymentOrder.buyerEmail = userEmail;
+                        }
+                        
+                        console.log('Dispatching savePaymentOrderAction:', this.paymentOrder);
 
                         // Step 6: Save product order into the database
-                        this.store.dispatch(savePaymentOrderAction({ productsInCart: productsInCart }));
+                        this.store.dispatch(savePaymentOrderAction({ paymentOrder: this.paymentOrder }));
                     } 
                 } 
 

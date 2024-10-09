@@ -29,6 +29,10 @@ import { ShoppingCartEffects } from './store/shopping_cart/shopping_cart.effect'
 import { profileReducer, profileReducerFeatureKey } from './store/profile/profile.reducer';
 import { ProfileEffects } from './store/profile/profile.effect';
 
+// Order
+import { OrderEffects } from './store/order/order.effect';
+import { orderReducer, orderReducerFeatureKey } from './store/order/order.reducer';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), 
@@ -37,8 +41,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(), 
     provideHttpClient(withFetch()),
     
-    provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer, [paymentReducerFeatureKey]: paymentReducer, [shoppingCartReducerFeatureKey]: shoppingCartReducer , [profileReducerFeatureKey]: profileReducer}),
-    provideEffects(AuthEffects, ProductEffects, PaymentEffects, ProfileEffects, ShoppingCartEffects),
+    provideStore({[authReducerFeatureKey]: authReducer, [productReducerFeatureKey]: productReducer, [paymentReducerFeatureKey]: paymentReducer, [shoppingCartReducerFeatureKey]: shoppingCartReducer , [profileReducerFeatureKey]: profileReducer, [orderReducerFeatureKey]: orderReducer}),
+    provideEffects(AuthEffects, ProductEffects, PaymentEffects, ProfileEffects, ShoppingCartEffects, OrderEffects),
 
     // Provide Redux DevTools
     provideStoreDevtools({

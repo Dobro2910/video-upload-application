@@ -40,6 +40,10 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/admin_profile_page/admin_profile.module').then((m) => m.AdminProfileModule),
   },
   {
+    path: 'dashboard',
+    loadChildren: () => import('./pages/seller_dashboard_page/seller_dashboard.module').then((m) => m.SellerDashboardModule),
+  },
+  {
     path: '**', redirectTo: ''
   }, // Default redirect to landing page if no route matches
 ];

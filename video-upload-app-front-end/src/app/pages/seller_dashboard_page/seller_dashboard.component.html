@@ -1,0 +1,99 @@
+<!-- <body>
+    <app-sidebar></app-sidebar>
+    <app-shopping-cart></app-shopping-cart>
+    <app-profile></app-profile>
+    <app-seller-dashboard-icon></app-seller-dashboard-icon>
+
+    <div class="dashboard-container">
+        <header>
+            <h1>Seller Dashboard</h1>
+            <p>Here you can see the products that have been purchased and where to deliver them.</p>
+        </header>
+
+        <div class="dashboard-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Buyer Email</th>
+                        <th>Delivery Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nike Sneakers</td>
+                        <td>2</td>
+                        <td>john.doe&#64;example.com</td>
+                        <td>Sydney, NSW</td>
+                    </tr>
+                    <tr>
+                        <td>Adidas Hoodie</td>
+                        <td>1</td>
+                        <td>jane.smith&#64;example.com</td>
+                        <td>Melbourne, VIC</td>
+                    </tr>
+                    <tr>
+                        <td>Puma Sports Bag</td>
+                        <td>3</td>
+                        <td>alex.jones&#64;example.com</td>
+                        <td>Brisbane, QLD</td>
+                    </tr>
+                    <tr>
+                        <td>Reebok T-Shirt</td>
+                        <td>4</td>
+                        <td>emma.brown&#64;example.com</td>
+                        <td>Perth, WA</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body> -->
+
+<body>
+    <app-sidebar></app-sidebar>
+    <app-shopping-cart></app-shopping-cart>
+    <app-profile></app-profile>
+    <app-seller-dashboard-icon></app-seller-dashboard-icon>
+
+    <div class="dashboard-container">
+        <header>
+            <h1>Seller Dashboard</h1>
+            <p>Here you can see the products that have been purchased and where to deliver them.</p>
+        </header>
+
+        <div class="dashboard-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order Id</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Buyer Email</th>
+                        <th>Delivery Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through the orders and display the details dynamically -->
+                    <tr *ngFor="let order of orders$ | async; let i = index">
+                        <td>{{ order.orderId }}</td>
+                        <td>{{ order.buyerEmail }}</td>
+                        <td>{{ order.deliveryLocation }}</td>
+                    
+                        <!-- Loop through the products array in the current order -->
+                        <!-- <td>
+                            <table>
+                                <tr *ngFor="let product of order.productId; let j = index">
+                                    <td>{{ product.productName }}</td>
+                                    <td>{{ product.productQuantity }}</td>
+                                </tr>
+                            </table>
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+

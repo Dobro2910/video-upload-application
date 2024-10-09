@@ -6,13 +6,15 @@ import { ShoppingCartComponent } from './shopping_cart/shoppingcart.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UpdateProfileDialogComponent } from './update_profile_dialog/update_profile_dialog.component';
 import { FormsModule } from '@angular/forms';
+import { SellerDashboardIconComponent } from './seller_dashboard/seller_dashboard_icon.component';
 
 @NgModule({
   declarations: [
     SideBarComponent,
     ShoppingCartComponent,
     ProfileComponent,
-    UpdateProfileDialogComponent
+    UpdateProfileDialogComponent,
+    SellerDashboardIconComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     SideBarComponent,
     ShoppingCartComponent,
     ProfileComponent,
-    UpdateProfileDialogComponent
+    UpdateProfileDialogComponent,
+    SellerDashboardIconComponent
   ]
 })
 

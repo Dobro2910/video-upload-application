@@ -2,6 +2,7 @@
   <app-sidebar></app-sidebar>
   <app-shopping-cart></app-shopping-cart>
   <app-profile></app-profile>
+  <app-seller-dashboard-icon></app-seller-dashboard-icon>
   <div class="admin-container">
     <div *ngIf="currentUser$ | async as currentUser" class="admin-header">
       <div *ngIf="currentUser.userImage; else noImage" class="admin-image">

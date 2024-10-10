@@ -34,4 +34,18 @@ export class OrderEffects {
       )
     )
   );
+
+  completeOrder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(OrderActions.completeOrderAction),
+      mergeMap(action =>
+        this.orderService.completeOrder(action.orderId).pipe(
+          map(response => OrderActions.completeOrderActionSuccess({ comment: response.message })),
+          catchError(error => {
+            return of(OrderActions.completeOrderActionFailure({ error: error }));
+          })
+        )
+      )
+    )
+  );
 }

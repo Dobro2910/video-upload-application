@@ -69,13 +69,13 @@ export class ProductService {
         return this.http.post('http://localhost:3000/product/createproduct', formData, { headers });
     }
 
-    updateproductColorVarietyDetail(productId: string, productStock: number): Observable<any> {
-        return this.http.put('http://localhost:3000/product/updateproductcolorvarietydetail/${productId}', productStock);
-    }
+    // updateproductColorVarietyDetail(productId: string, productStock: number): Observable<any> {
+    //     return this.http.put('http://localhost:3000/product/updateproductcolorvarietydetail/${productId}', productStock);
+    // }
 
-    deleteProduct(productId: string): Observable<any> {
-        return this.http.delete('http://localhost:3000/product/delete/${productId}')
-    }
+    // deleteProduct(productId: string): Observable<any> {
+    //     return this.http.delete('http://localhost:3000/product/delete/${productId}')
+    // }
 
     // getAllProduct(): Observable<any> {
     //     return this.http.get('http://localhost:3000/product/allproduct');

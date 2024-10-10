@@ -1,0 +1,42 @@
+<div (click)="onClose()" class="overlay"></div>
+<div class="dialog-container">
+    <h1>Order Details</h1>
+
+    <div class="order-details">
+        <h2>Order ID: {{ data.orderId }}</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Color</th>
+                    <th>Price</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through products in the order -->
+                <tr *ngFor="let product of data.productName; let i = index">
+                    <td>{{ data.productName[i] }}</td>
+                    <td>{{ data.productQuantity[i] }}</td>
+                    <td>{{ data.productColor[i] }}</td>
+                    <td>{{ data.productPrice[i] | currency }}</td>
+                    <td>{{ data.productSize ? data.productSize[i] : 'N/A' }}</td> <!-- Optional check if size exists -->
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="summary">
+            <p><strong>Buyer Email:</strong> {{ data.buyerEmail }}</p>
+            <p><strong>Delivery Location:</strong> {{ data.deliveryLocation }}</p>
+            <p><strong>Total Price:</strong> {{ data.totalPrice | currency }}</p>
+            <!-- <p><strong>Order Status:</strong> {{ data.orderDelivered }}</p> -->
+        </div>
+    </div>
+
+    <div class="actions">
+        <button mat-button (click)="onClose()">Close</button>
+        <button mat-button (click)="completeOrder(data.orderId)">Complete</button>
+    </div>
+</div>

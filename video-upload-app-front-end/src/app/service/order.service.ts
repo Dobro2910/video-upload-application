@@ -27,17 +27,17 @@ export class OrderService {
         return this.http.get('http://localhost:3000/order/getpaginatedorders', { headers, params });
     }
 
-    // getPaginatedOrders(page: number, sellerEmail: string): Observable<any> {
-    //     let params = new HttpParams();
-    //     params = params.set('page', page.toString()); // Ensure page is a string
-    //     params = params.set('sellerEmail', sellerEmail);  // Add userEmail to the parameters
+    completeOrder(orderId: string): Observable<any> {
+        const token = this.authService.getToken(); // Adjust this if you store the token elsewhere
+    
+        // Create the headers object and include the Authorization header with the JWT token
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
 
-    //     const token = this.authService.getToken(); // Adjust this if you store the token elsewhere
+        const body = { orderId };
 
-    //     // Create the headers object and include the Authorization header with the JWT token
-    //     const headers = new HttpHeaders({
-    //     'Authorization': `Bearer ${token}`
-    //     });
-    //     return this.http.get('http://localhost:3000/order/getpaginatedorders', { params });
-    // }
+        // Pass both headers and params in the HTTP GET request
+        return this.http.put('http://localhost:3000/order/completeorder', body, { headers });
+    }
 }

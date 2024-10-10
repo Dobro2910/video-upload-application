@@ -29,6 +29,17 @@ export const orderReducer = createReducer(
     ...state, // Spread operator to create a shallow copy of current state
     orders: orders
   })),
+
+  // get pagination product state
+  on(OrderActions.completeOrderActionFailure, (state, { error }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    comment: error,
+  })),
+
+  on(OrderActions.completeOrderActionSuccess, (state, { comment }) => ({
+    ...state, // Spread operator to create a shallow copy of current state
+    comment: comment
+  })),
 );
 
 export const orderReducerFeatureKey = 'order';

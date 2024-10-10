@@ -6,6 +6,8 @@ import { OrderState } from '../../store/order/order.reducer';
 import * as OrderActions from '../../store/order/order.action';
 import { FilterService } from '../../service/filter.service';
 import { AuthenticationService } from '../../service/authentication.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SellerDashboardDialogComponent } from './seller_dashboard_dialog/seller_dashboard_dialog.component';
 
 @Component({
   selector: 'app-seller-dashboard',
@@ -13,9 +15,11 @@ import { AuthenticationService } from '../../service/authentication.service';
   styleUrls: ['./seller_dashboard.component.scss'],
 })
 export class SellerDashboardComponent implements OnInit {
-  constructor(private store: Store<{ order: OrderState }>, private filterSevice: FilterService, private authService: AuthenticationService) { 
+  constructor(private store: Store<{ order: OrderState }>, 
+              private filterSevice: FilterService, 
+              private authService: AuthenticationService, 
+              private dialog: MatDialog) { 
     this.sellerEmail = '';
-
     this.orders$ = this.store.select(state => state.order.orders);
   }
 
@@ -63,5 +67,11 @@ export class SellerDashboardComponent implements OnInit {
       this.filterVar.currentPage--;
       this.loadOrders();
     }
+  }
+
+  displayOrder(order: Order): void {
+    this.dialog.open(SellerDashboardDialogComponent, {
+      data: order
+    });
   }
 }

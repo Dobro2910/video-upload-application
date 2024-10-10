@@ -29,9 +29,7 @@ export class ProductDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductDisplay,
-    // private store: Store,
     private store: Store<{ shoppingCart: ShoppingCartState }>,
-    // private snackBar: MatSnackBar
   ) {
     this.productsInCart$ = this.store.select(state => state.shoppingCart.productsInCart);
     this.comment$ = this.store.select(state => state.shoppingCart.comment);

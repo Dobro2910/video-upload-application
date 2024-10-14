@@ -27,7 +27,7 @@ export class OrderService {
         return this.http.get('http://localhost:3000/order/getpaginatedorders', { headers, params });
     }
 
-    completeOrder(orderId: string): Observable<any> {
+    completeOrder(orderId: string, productIndex: number): Observable<any> {
         const token = this.authService.getToken(); // Adjust this if you store the token elsewhere
     
         // Create the headers object and include the Authorization header with the JWT token
@@ -35,7 +35,7 @@ export class OrderService {
             'Authorization': `Bearer ${token}`
         });
 
-        const body = { orderId };
+        const body = { orderId, productIndex };
 
         // Pass both headers and params in the HTTP GET request
         return this.http.put('http://localhost:3000/order/completeorder', body, { headers });

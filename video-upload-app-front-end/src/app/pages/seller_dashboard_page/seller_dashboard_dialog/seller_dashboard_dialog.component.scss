@@ -66,6 +66,20 @@ td {
     background-color: #fff;
 }
 
+button {
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+
+    &:hover {
+        background-color: black;
+    }
+}
+
 .summary {
     display: flex;
     flex-direction: column;

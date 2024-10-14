@@ -71,7 +71,12 @@ export class SellerDashboardComponent implements OnInit {
 
   displayOrder(order: Order): void {
     this.dialog.open(SellerDashboardDialogComponent, {
-      data: order
+      // data: order
+      data: { 
+        order: order,  // existing data you're passing
+        page: this.filterVar.currentPage,     // include your custom data inside 'data'
+        sellerEmail: this.sellerEmail
+      }
     });
   }
 }

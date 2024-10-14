@@ -13,6 +13,6 @@ export const getPaginatedOrdersSuccess = createAction(GET_PAGINATED_ORDER_SUCCES
 export const COMPLETE_ORDER ='[order] complete order';
 export const COMPLETE_ORDER_FAILURE ='[order] complete order fail';
 export const COMPLETE_ORDER_SUCCESS ='[order] complete order success';
-export const completeOrderAction = createAction(COMPLETE_ORDER, props<{orderId: string}>());
+export const completeOrderAction = createAction(COMPLETE_ORDER, props<{orderId: string, productIndex: number}>());
 export const completeOrderActionFailure = createAction(COMPLETE_ORDER_FAILURE, props<{error: any}>());
 export const completeOrderActionSuccess = createAction(COMPLETE_ORDER_SUCCESS, props<{comment: string}>());

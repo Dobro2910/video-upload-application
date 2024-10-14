@@ -13,7 +13,7 @@ import { OrderState } from '../../../store/order/order.reducer';
 })
 
 export class SellerDashboardDialogComponent {
-    constructor(public dialogRef: MatDialogRef<SellerDashboardDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: Order, private store: Store<{ order: OrderState }>) {}
+    constructor(public dialogRef: MatDialogRef<SellerDashboardDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { order: Order, page: number, sellerEmail: string }, private store: Store<{ order: OrderState }>) {}
 
     ngOnInit(): void {
         console.log('Seller dashboard dialog component initialized');
@@ -23,8 +23,11 @@ export class SellerDashboardDialogComponent {
         this.dialogRef.close();
     }
 
-    completeOrder(orderId: string): void {
-        this.store.dispatch(OrderActions.completeOrderAction({ orderId: orderId }));
+    completeOrder(orderId: string, productIndex: number): void {
+        this.store.dispatch(OrderActions.completeOrderAction({ orderId: orderId, productIndex: productIndex }));
         this.onClose();
+        // setTimeout(() => {
+        //     this.store.dispatch(OrderActions.getPaginatedOrdersAction({ page: this.data.page, sellerEmail: this.data.sellerEmail }));
+        // }, 10000); 
     }
 }

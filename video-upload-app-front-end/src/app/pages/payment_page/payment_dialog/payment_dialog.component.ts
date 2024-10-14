@@ -32,7 +32,7 @@ export class PaymentDialogComponent implements OnInit {
         productsInCart: [],
         deliveryLocation: '',
         buyerEmail: '',
-        orderDelivered: false,
+        // orderDelivered: false,
         totalPrice: 0
     }
 
